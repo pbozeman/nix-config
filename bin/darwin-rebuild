@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+# Navigate to the directory of this script
+cd $(dirname $(readlink -f $0))
+cd ..
+
+darwin-rebuild switch --flake . $@
