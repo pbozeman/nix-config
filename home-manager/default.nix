@@ -32,7 +32,15 @@
       # misc shortcuts
       e = "\${EDITOR}";
       c = "clear";
-      rebuild = "~/src/nix-config/bin/darwin-rebuild";
+
+      # rebuilds
+      darwin-rebuild = "~/src/nix-config/bin/darwin-rebuild";
+      home-rebuild = "~/src/nix-config/bin/home-build";
+
+      # ssh
+      # https://sw.kovidgoyal.net/kitty/kittens/ssh/
+      kssh = "kitty +kitten ssh";
+      s = "kitty +kitten ssh";
 
       # ls
       ls = "ls --color=auto -F";
