@@ -125,6 +125,7 @@
       extraConfig = {
         init.defaultBranch = "main";
         color.ui = true;
+        pull.rebase = true;
         core = {
           editor = "nvim";
           autocrlf = "input";
