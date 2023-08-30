@@ -20,6 +20,6 @@
       --add "/System/Applications/System Settings.app" \
       --add "~/Downloads" --view list --display folder \
       --add "~/src" --view list --display folder \
-      --list ~${user}
+      --list ~${user} > /dev/null
   '';
 }

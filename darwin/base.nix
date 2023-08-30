@@ -62,6 +62,7 @@
         autohide = true;
         show-recents = false;
         launchanim = true;
+        mru-spaces = false;
         orientation = "bottom";
         tilesize = 48;
       };
@@ -179,6 +180,10 @@
       # Close any open System Preferences panes, to prevent them from overriding
       # settings we’re about to change
       osascript -e 'tell application "System Preferences" to quit'
+
+      # control cetner
+      # Note: this requires a full reboot, not just logout/login
+      /usr/libexec/PlistBuddy -c "clear dict" -c "add :Siri integer 8" -c "add :Bluetooth integer 18" -c "add :WiFi integer 2" -c "add :ScreenMirroring integer 18" -c "add :Display integer 18" -c "add :FocusModes integer 2" -c "add :BatteryShowPercentage bool true" -c "add :StageManager integer 8" -c "add :NowPlaing integer 2" -c "add :Sound integer 18" -c "add :KeyboardBrightness integer 8" -c "add :AirDrop integer 8" -c "add :UserSwitcher integer 2" ~${user}/Library/Preferences/ByHost/com.apple.controlcenter.$(system_profiler SPHardwareDataType | awk '/UUID/ { print $3; }').plist
 
       # Better Snap Tool
       /usr/libexec/PlistBuddy -c "delete :registeredHotkeys" ~${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist || true
