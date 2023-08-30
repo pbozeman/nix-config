@@ -39,6 +39,20 @@
         KeyRepeat = 1;
         InitialKeyRepeat = 14;
 
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = false;
+
+        NSNavPanelExpandedStateForSaveMode = true;
+        NSNavPanelExpandedStateForSaveMode2 = true;
+        NSDocumentSaveNewDocumentsToCloud = false;
+        # speed up animation on open/save boxes (default:0.2)
+        NSWindowResizeTime = 0.001;
+        PMPrintingExpandedStateForPrint = true;
+        PMPrintingExpandedStateForPrint2 = true;
+
         "com.apple.swipescrolldirection" = false;
         "com.apple.sound.beep.volume" = 0.0;
         "com.apple.sound.beep.feedback" = 0;
@@ -59,9 +73,6 @@
         ShowPathbar = true;
         ShowStatusBar = true;
       };
-
-      # don't quarantine downloads
-      LaunchServices.LSQuarantine = false;
 
       CustomUserPreferences = {
         NSGlobalDomain = {
@@ -142,6 +153,23 @@
         "com.apple.ImageCapture".disableHotPlug = true;
         # Turn on app auto-update
         "com.apple.commerce".AutoUpdate = true;
+      };
+
+      # These security settings should already be set, but lets make sure.
+      # quarantine downloads
+      LaunchServices.LSQuarantine = true;
+
+      loginwindow = {
+        GuestEnabled = false;
+        DisableConsoleAccess = true;
+      };
+
+      # firewall settings
+      alf = {
+        # 0 = disabled 1 = enabled 2 = blocks all connections except for essential services
+        globalstate = 1;
+        loggingenabled = 0;
+        stealthenabled = 1;
       };
     };
 
