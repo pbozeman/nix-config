@@ -45,7 +45,9 @@
         useUserPackages = true;
         backupFileExtension = "bak";
         extraSpecialArgs = {inherit inputs user fullname email;};
-        users."${user}".imports = modules;
+        users."${user}" = {lib, ...}: {
+          imports = modules;
+        };
       };
     };
   in {
@@ -61,6 +63,7 @@
           home-manager.darwinModules.home-manager
           (mkHome user fullname email [
             ./home-manager
+            ./home-manager/darwin.nix
           ])
         ];
       };
