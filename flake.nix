@@ -51,6 +51,23 @@
       };
     };
   in {
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        pkgs = mkPkgs "x86_64-linux";
+        specialArgs = {
+          inherit inputs nixpkgs user fullname;
+        };
+        modules = [
+          ./hardware/parallels.nix
+          ./nixos
+          home-manager.nixosModules.home-manager
+          (mkHome user fullname email [
+            ./home-manager
+          ])
+        ];
+      };
+    };
+
     homeConfigurations = {
       "parallels" = home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs "x86_64-linux";

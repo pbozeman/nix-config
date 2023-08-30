@@ -1,0 +1,63 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running `nixos-help`).
+{
+  config,
+  pkgs,
+  user,
+  fullname,
+  ...
+}: {
+  system.stateVersion = "23.05";
+
+  # Move to HW
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+
+  networking.hostName = "nixos";
+  time.timeZone = "America/Los_Angeles";
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableBashCompletion = true;
+  };
+
+  environment = {
+    shells = [pkgs.bashInteractive pkgs.zsh];
+
+    # Note: these vars are pam environment so set on login globally
+    # as part of parent to shells. Starting new shells doesn't get the
+    # new env. You have to logout first. Or use home-manager vars instead.
+    sessionVariables = {
+      LANGUAGE = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
+    };
+
+    systemPackages = with pkgs; [
+      vim
+      wget
+      curl
+      git
+      binutils
+      pciutils
+      coreutils
+      psmisc
+      usbutils
+      dnsutils
+    ];
+  };
+
+  users.mutableUsers = true;
+  users.defaultUserShell = pkgs.zsh;
+
+  users.users.${user} = {
+    home = "/home/${user}";
+    shell = pkgs.zsh;
+    description = "${fullname}";
+    isNormalUser = true;
+    extraGroups = ["wheel"];
+  };
+
+  services.openssh.enable = true;
+}
