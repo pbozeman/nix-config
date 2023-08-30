@@ -7,7 +7,11 @@
 }: {
   home = {
     stateVersion = "23.05";
-    homeDirectory = "/Users/${user}";
+    username = "${user}";
+    homeDirectory =
+      if pkgs.stdenvNoCC.isDarwin
+      then "/Users/${user}"
+      else "/home/${user}";
     packages = pkgs.callPackage ./packages.nix {};
 
     sessionVariables = {

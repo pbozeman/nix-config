@@ -51,6 +51,16 @@
       };
     };
   in {
+    homeConfigurations = {
+      "parallels" = home-manager.lib.homeManagerConfiguration {
+        pkgs = mkPkgs "x86_64-linux";
+        extraSpecialArgs = {inherit inputs user fullname email;};
+        modules = [
+          ./home-manager
+        ];
+      };
+    };
+
     darwinConfigurations = {
       "Miless-Air" = nix-darwin.lib.darwinSystem {
         system = "x86_64-darwin";
