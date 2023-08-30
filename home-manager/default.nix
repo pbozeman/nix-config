@@ -104,6 +104,19 @@
       enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
 
+      # homemanager on ubuntu created "insecure"
+      # compinit dirs.  Skip global setup and
+      # then explicitly run compinit, ignoring "insecure"
+      # directories.
+      envExtra = ''
+        skip_global_compinit=1
+      '';
+
+      completionInit = ''
+        autoload -Uz compinit
+        compinit -i # ignore unsecure dirs
+      '';
+
       initExtra = ''
         # Setup preferred key bindings that emulate emacs.
         bindkey '^P' up-history
