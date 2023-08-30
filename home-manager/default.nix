@@ -130,7 +130,7 @@
         co = "checkout";
       };
       difftastic = {
-        enable = true;
+        enable = false;
         background = "dark";
       };
     };
