@@ -10,7 +10,6 @@
   home.activation.dockutil = lib.hm.dag.entryAfter ["writeBoundary"] ''
     ${pkgs.dockutil}/bin/dockutil \
       --remove all \
-      --add /System/Cryptexes/App/System/Applications/Safari.app \
       --add /Applications/Firefox.app \
       --add /Applications/Kitty.app \
       --add /Applications/NotePlan.app \
