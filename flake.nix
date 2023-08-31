@@ -46,7 +46,7 @@
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "bak";
-        extraSpecialArgs = {inherit inputs user fullname email;};
+        extraSpecialArgs = {inherit inputs secrets user fullname email;};
         users."${user}" = {lib, ...}: {
           imports = modules;
         };
@@ -57,7 +57,7 @@
       nixos = nixpkgs.lib.nixosSystem {
         pkgs = mkPkgs "x86_64-linux";
         specialArgs = {
-          inherit inputs nixpkgs user fullname;
+          inherit inputs nixpkgs secrets user fullname;
         };
         modules = [
           ./hardware/parallels.nix
@@ -73,7 +73,7 @@
     homeConfigurations = {
       "parallels" = home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs "x86_64-linux";
-        extraSpecialArgs = {inherit inputs user fullname email;};
+        extraSpecialArgs = {inherit inputs secrets user fullname email;};
         modules = [
           ./home-manager
         ];
@@ -85,7 +85,7 @@
         system = "x86_64-darwin";
         pkgs = mkPkgs "x86_64-darwin";
         specialArgs = {
-          inherit inputs nixpkgs user;
+          inherit inputs nixpkgs secrets user;
         };
         modules = [
           ./darwin

@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  secrets,
   user,
   fullname,
   ...
@@ -41,10 +42,14 @@
     ];
   };
 
-  users.mutableUsers = true;
-  users.defaultUserShell = pkgs.zsh;
+  users.mutableUsers = false;
+
+  users.users.root = {
+    hashedPassword = secrets.root.hashedPassword;
+  };
 
   users.users.${user} = {
+    hashedPassword = secrets.${user}.hashedPassword;
     home = "/home/${user}";
     shell = pkgs.zsh;
     description = "${fullname}";
