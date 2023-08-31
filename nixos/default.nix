@@ -46,6 +46,7 @@
 
   users.users.root = {
     hashedPassword = secrets.root.hashedPassword;
+    openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
   users.users.${user} = {
@@ -55,6 +56,7 @@
     description = "${fullname}";
     isNormalUser = true;
     extraGroups = ["wheel"];
+    openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
   services.openssh.enable = true;

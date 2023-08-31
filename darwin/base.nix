@@ -1,5 +1,6 @@
 {
   pkgs,
+  secrets,
   user,
   ...
 }: {
@@ -17,10 +18,11 @@
 
   environment.shells = [pkgs.bashInteractive pkgs.zsh];
 
-  # See https://github.com/nix-community/home-manager/issues/4026
   users.users.${user} = {
+    # See https://github.com/nix-community/home-manager/issues/4026
     home = "/Users/${user}";
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
   fonts = {
