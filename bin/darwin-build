@@ -1,11 +1,5 @@
 #!/bin/sh -e
 
-VERSION=1.0
-
-GREEN='\033[1;32m'
-RED='\033[1;31m'
-CLEAR='\033[0m'
-
 FLAKE=$(hostname -s)
 SYSTEM="darwinConfigurations.$FLAKE.system"
 
@@ -13,13 +7,12 @@ SYSTEM="darwinConfigurations.$FLAKE.system"
 cd $(dirname $(readlink -f $0))
 cd ..
 
-echo "${GREEN}Starting...${CLEAR}"
+echo "Starting..."
 nix --experimental-features 'nix-command flakes' build .#$SYSTEM $@
 
-echo "${GREEN}Switching to new generation...${CLEAR}"
+echo "Switching to new generation..."
 ./result/sw/bin/darwin-rebuild switch --flake .#$FLAKE $@
 
-echo "${GREEN}Cleaning up...${CLEAR}"
+echo "Cleaning up..."
 unlink ./result
-
-echo "${GREEN}Done${CLEAR}"
+echo "Done"
