@@ -22,6 +22,8 @@
     home-manager,
     ...
   } @ inputs: let
+    secrets = import ./secrets;
+
     user = "pbozeman";
     fullname = "Patrick Bozeman";
     email = "pbozeman@gmail.com";
