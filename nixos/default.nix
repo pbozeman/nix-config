@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running `nixos-help`).
 {
   config,
   pkgs,
@@ -9,10 +6,6 @@
   ...
 }: {
   system.stateVersion = "23.05";
-
-  # Move to HW
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   networking.hostName = "nixos";
   time.timeZone = "America/Los_Angeles";
