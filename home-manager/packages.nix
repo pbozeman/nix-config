@@ -11,20 +11,19 @@ with pkgs; [
   fd
   duf
   gcc
-  git-filter-repo
   killall
   openssh
   pandoc
   wget
   zip
 
-  # Encryption and security tools
-  #_1password
-
-  # Media-related packages
+  # Fonts
   meslo-lgs-nf
 
   # Source code management, Git, GitHub tools
+  git
+  git-crypt
+  git-filter-repo
   gh
 
   # Text and terminal utilities
@@ -35,7 +34,6 @@ with pkgs; [
   ripgrep
   tree
   tmux
-  #unrar
   unzip
 
   # Python packages
@@ -43,14 +41,16 @@ with pkgs; [
   python39Packages.virtualenv
 
   # base vim - configured with lazyvim still
+  # and linters etc
   neovim
+  alejandra
+  black
   clang-tools
   nodejs
-  alejandra
-  statix
   mypy
   ruff
-  black
+  statix
 
+  # platformio
   platformio
 ]
