@@ -118,6 +118,10 @@
       '';
 
       initExtra = ''
+        # this should not be necessary, but homeManager isn't addding this to
+        # the path when running stand alone (i.e. without nixos or darwin)
+        export PATH="$HOME/.nix-profile/bin:$PATH"
+
         # Setup preferred key bindings that emulate emacs.
         bindkey '^P' up-history
         bindkey '^N' down-history
