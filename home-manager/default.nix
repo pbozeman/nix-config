@@ -151,6 +151,19 @@ in {
         # the path when running stand alone (i.e. without nixos or darwin)
         export PATH="$HOME/.nix-profile/bin:$PATH"
 
+        # vi cmd line editing
+        set -o vi
+        bindkey -v
+
+        # disable the weird zsh command edit, because I sometimes try
+        # to enter it out of habbit
+        bindkey -rM vicmd :
+
+        # setup vim command line editing
+        autoload -z edit-command-line
+        zle -N edit-command-line
+        bindkey -M vicmd v edit-command-line
+
         # Setup preferred key bindings that emulate emacs.
         bindkey '^P' up-history
         bindkey '^N' down-history
