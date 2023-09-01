@@ -29,6 +29,9 @@
       # TODO: this was a raw port of my aliases. These should likely not really
       # just al be dumped into the common alias set.  Consider refactoring later.
 
+      # don't add a newline at the top of a clear
+      clear = "precmd() {precmd() {echo }} && clear";
+
       # misc shortcuts
       e = "\${EDITOR}";
       c = "clear";
@@ -156,6 +159,14 @@
         setopt list_ambiguous
         zmodload -a autocomplete
         zmodload -a complist
+
+        # print a newline between the last program's output,
+        # but only the first time.
+        precmd() {
+          precmd() {
+            echo
+          }
+        }
       '';
     };
 
@@ -295,7 +306,7 @@
     starship = {
       enable = true;
       settings = {
-        add_newline = true;
+        add_newline = false;
         format = "$username$hostname$localip$shlvl$directory$fossil_branch$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$nix_shell$conda$meson$spack$memory_usage$cmd_duration$line_break$jobs$battery$time$status$os$container$shell$character";
         battery = {
           full_symbol = "";
