@@ -183,6 +183,30 @@
 
     exa.enable = true;
 
+    tmux = {
+      enable = true;
+      prefix = "C-Space";
+      sensibleOnTop = true;
+      mouse = true;
+      keyMode = "vi";
+      shell = "${pkgs.zsh}/bin/zsh";
+      extraConfig = ''
+        set -s set-clipboard on
+        set-option -g focus-events on
+
+        # use better mnemonics for horizontal/vertical splits
+        bind - split-window -v -c "#{pane_current_path}"
+        bind _ split-window -v -c "#{pane_current_path}"
+        bind | split-window -h -c "#{pane_current_path}"
+
+        # navigate panes with vi like movement
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
+      '';
+    };
+
     kitty = {
       enable = true;
       theme = "One Half Dark";
