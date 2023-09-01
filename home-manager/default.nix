@@ -229,6 +229,14 @@
         bind-key -T copy-mode-vi 'C-j' if-shell -F '#{pane_at_bottom}' {} { select-pane -D }
         bind-key -T copy-mode-vi 'C-l' if-shell -F '#{pane_at_right}'  {} { select-pane -R }
         bind-key -T copy-mode-vi 'C-k' if-shell -F '#{pane_at_top}'    {} { select-pane -U }
+
+        # dim inactive panes
+        # Note: these have to be coordinated with the kitty style.
+        # TODO: someday use kitty escape codes to remap the entire palette
+        set -g window-style 'fg=#939cac,bg=#111111'
+        set -g window-active-style 'fg=#dcdfe4,bg=#000000'
+        set -g pane-border-style 'fg=#666666,bg=#111111'
+        set -g pane-active-border-style 'fg=#666666,bg=#111111'
       '';
     };
 
@@ -245,10 +253,6 @@
         "super+0" = "restore_font_size";
         "cmd+c" = "copy_to_clipboard";
         "cmd+v" = "paste_from_clipboard";
-        # cmd-[ and cmd-] switch tmux windows
-        # \x02 is ctrl-b so sequence below is ctrl-b, h
-        #"cmd+[" = "send_text all \\x02h";
-        #"cmd+]" = "send_text all \\x02l";
         "ctrl+super+h" = "neighboring_window left";
         "ctrl+super+j" = "neighboring_window down";
         "ctrl+super+k" = "neighboring_window up";
@@ -290,6 +294,7 @@
         enabled_layouts = "Tall";
       };
       extraConfig = ''
+        mouse_hide_wait 1.0
         inactive_text_alpha 0.4
         active_border_color #888888
         inactive_border_color #888888
