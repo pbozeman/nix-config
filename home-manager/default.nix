@@ -4,7 +4,21 @@
   fullname,
   email,
   ...
-}: {
+}: let
+  # TODO: this is probably a sign that some parts of these should
+  # start getting refactored int separate files.
+  tmux-tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-tokyo-night";
+    rtpFilePath = "tmux-tokyo-night.tmux";
+    version = "unstable-2023-09-01";
+    src = pkgs.fetchFromGitHub {
+      owner = "fabioluciano";
+      repo = "tmux-tokyo-night";
+      rev = "cc3013cca97fcaacdba4ab8c3c4be72131c57490";
+      sha256 = "sha256-YtW74ju+myyMfyCdH6Oj5fPXhK0PsIuVUnFAMzJ7fjM=";
+    };
+  };
+in {
   home = {
     stateVersion = "23.05";
     username = "${user}";
@@ -203,6 +217,7 @@
       keyMode = "vi";
       shell = "${pkgs.zsh}/bin/zsh";
       terminal = "screen-256color";
+      plugins = with pkgs; [tmux-tokyo-night];
       extraConfig = ''
         set -s set-clipboard on
         set-option -g focus-events on
@@ -231,7 +246,7 @@
         bind-key -T copy-mode-vi 'C-k' if-shell -F '#{pane_at_top}'    {} { select-pane -U }
 
         # dim inactive panes
-        # Note: these have to be coordinated with the kitty style.
+        # Note: these have to be coordinated with the kitty and tmux style.
         # TODO: someday use kitty escape codes to remap the entire palette
         set -g window-style 'fg=#939cac,bg=#111111'
         set -g window-active-style 'fg=#dcdfe4,bg=#000000'
