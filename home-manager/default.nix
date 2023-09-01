@@ -232,6 +232,9 @@ in {
       extraConfig = ''
         set -s set-clipboard on
         set-option -g focus-events on
+        set-option -g automatic-rename on
+        set -g base-index 1
+        setw -g pane-base-index 1
 
         # use better mnemonics for horizontal/vertical splits
         bind - split-window -v -c "#{pane_current_path}"
