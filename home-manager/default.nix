@@ -295,8 +295,9 @@
         format = "$username$hostname$localip$shlvl$directory$fossil_branch$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$nix_shell$conda$meson$spack$memory_usage$cmd_duration$line_break$jobs$battery$time$status$os$container$shell$character";
         battery = {
           full_symbol = "";
-          charging_symbol = "";
-          discharging_symbol = "⚡";
+          charging_symbol = "⚡";
+          discharging_symbol = "󰁽 ";
+          unknown_symbol = "󰁽 ";
           display = [
             {
               threshold = 30;
