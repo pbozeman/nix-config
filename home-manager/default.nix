@@ -66,6 +66,17 @@ in {
       lt = "exa --icons --git-ignore --git -F --extended -T";
       llt = "exa --icons --git-ignore --git -F --extended -l -T";
 
+      # movement
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+
+      # tmux
+      tm = "tmux";
+      tma = "tmux a -t";
+      tmls = "tmux ls";
+      tmn = "tmux new -t";
+
       # utils
       calc = "kalker";
       df = "duf";
