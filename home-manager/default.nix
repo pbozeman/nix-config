@@ -263,8 +263,12 @@
 
         # Window layout
         hide_window_decorations = "titlebar-and-corners";
-        #window_padding_width = "5";
+        window_padding_width = "0 2";
         macos_show_window_title_in = "window";
+
+        remember_window_size = "no";
+        initial_window_width = "80c";
+        initial_window_height = "25c";
 
         # Tab bar
         tab_bar_style = "hidden";
