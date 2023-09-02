@@ -79,7 +79,8 @@ in {
       tm = "tmux";
       tma = "tmux a -t";
       tmls = "tmux ls";
-      tmn = "tmux new -t";
+      tmn = "tmux new -s";
+      tmd = "tmux new-session -A -s dev";
 
       # utils
       calc = "kalker";
@@ -143,6 +144,26 @@ in {
       # directories.
       envExtra = ''
         skip_global_compinit=1
+      '';
+
+      initExtraFirst = ''
+        tmux_start() {
+          tmux has-session -t "dev" 2>/dev/null
+          if [ $? -eq 0 ]; then
+            tmux ls | grep "^dev:" | grep attached > /dev/null
+            if [ $? -ne 0 ]; then
+              exec tmux new-session -A -s "dev"
+            fi
+          else
+            exec tmux new-session -A -s "dev"
+          fi
+        }
+
+        # if an interative shell, and not nested in tmux,
+        # start a new dev session, or attach if no one else is.
+        if [ -n "$PS1" ] && [ -z "$TMUX" ]; then
+          tmux_start
+        fi
       '';
 
       completionInit = ''
@@ -341,7 +362,6 @@ in {
       };
       extraConfig = ''
         mouse_hide_wait 1.0
-        inactive_text_alpha 0.4
         active_border_color #888888
         inactive_border_color #888888
         background #000000
