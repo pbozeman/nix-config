@@ -7,7 +7,12 @@
   system.stateVersion = 4;
 
   services.nix-daemon.enable = true;
-  security.pam.enableSudoTouchIdAuth = true;
+
+  # ideally we would enable touch sudo using:
+  #   security.pam.enableSudoTouchIdAuth = true;
+  # but this doesn't work in tmux.  See pam.nix for more info.  This is
+  # a work around.
+  security.pam.enableCustomSudoTouchIdAuth = true;
 
   # shells
   programs.bash.enable = true;
