@@ -350,6 +350,11 @@ in {
     };
 
     autojump = {
+      enable = false;
+      enableZshIntegration = true;
+    };
+
+    zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
