@@ -54,6 +54,10 @@ in {
       darwin-rebuild = "~/src/nix-config/bin/darwin-rebuild";
       home-rebuild = "~/src/nix-config/bin/home-build";
 
+      # This is a hack to quickly disable the lazyvim startup screen
+      # TODO: figure out how to do this via the lazyvim config
+      nvim = "nvim -";
+
       # ssh
       # https://sw.kovidgoyal.net/kitty/kittens/ssh/
       kssh = "kitty +kitten ssh";
