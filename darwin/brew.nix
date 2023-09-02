@@ -22,7 +22,14 @@
     };
 
     # TODO: move to homemanager version of kitty once it installs into the apps dir
-    casks = ["kitty" "firefox" "google-chrome" "spotify" "zoom"];
+    casks = [
+      "arduino-ide"
+      "kitty"
+      "firefox"
+      "google-chrome"
+      "spotify"
+      "zoom"
+    ];
     taps = [];
     brews = ["pam-reattach"];
   };
