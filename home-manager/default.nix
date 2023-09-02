@@ -125,7 +125,7 @@ in {
     file = {
       ".config/nvim" = {
         # disable to develop/debug nvim config
-        enable = true;
+        enable = false;
         source = ./nvim;
       };
     };
@@ -229,6 +229,13 @@ in {
           precmd() {
             echo
           }
+        }
+
+        # refresh the prompt every 1 second
+        # https://www.zsh.org/mla/users/2007/msg00944.html
+        TMOUT=1
+        TRAPALRM() {
+          zle reset-prompt
         }
       '';
     };
