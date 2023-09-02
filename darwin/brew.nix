@@ -30,7 +30,13 @@
       "spotify"
       "zoom"
     ];
-    taps = [];
-    brews = ["pam-reattach"];
+    taps = ["dimentium/autoraise"];
+    brews = [
+      {
+        name = "autoraise";
+        start_service = true;
+      }
+      "pam-reattach"
+    ];
   };
 }
