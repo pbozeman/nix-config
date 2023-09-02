@@ -81,7 +81,7 @@
     };
 
     darwinConfigurations = {
-      "Miless-Air" = nix-darwin.lib.darwinSystem {
+      "miles-mba" = nix-darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         pkgs = mkPkgs "x86_64-darwin";
         specialArgs = {
