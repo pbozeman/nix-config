@@ -16,6 +16,7 @@ return {
           formatting.clang_format,
           formatting.eslint,
           formatting.lua_format,
+          formatting.prettier,
         },
         diagnostics.statix,
         diagnostics.mypy,
