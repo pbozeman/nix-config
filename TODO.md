@@ -8,4 +8,8 @@
   - Package prettier-plugin-astro. Installed it directly with npm.
 
 - Fix brittle code
+
   - the sudo pam code is pretty dangerous. Fix it.
+
+- Linters
+  - validate eslint
