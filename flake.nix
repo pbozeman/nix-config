@@ -97,5 +97,23 @@
         ];
       };
     };
+
+    darwinConfigurations = {
+      "mba" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        pkgs = mkPkgs "aarch64-darwin";
+        specialArgs = {
+          inherit inputs nixpkgs secrets user;
+        };
+        modules = [
+          ./darwin
+          home-manager.darwinModules.home-manager
+          (mkHome user fullname email [
+            ./home-manager
+            ./home-manager/darwin.nix
+          ])
+        ];
+      };
+    };
   };
 }

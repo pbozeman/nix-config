@@ -125,7 +125,7 @@ in {
     file = {
       ".config/nvim" = {
         # disable to develop/debug nvim config
-        enable = false;
+        enable = true;
         source = ./nvim;
       };
     };

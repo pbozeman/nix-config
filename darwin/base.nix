@@ -12,7 +12,7 @@
   #   security.pam.enableSudoTouchIdAuth = true;
   # but this doesn't work in tmux.  See pam.nix for more info.  This is
   # a work around.
-  security.pam.enableCustomSudoTouchIdAuth = true;
+  security.pam.enableCustomSudoTouchIdAuth = false;
 
   # shells
   programs.bash.enable = true;
