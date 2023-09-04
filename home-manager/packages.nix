@@ -51,8 +51,8 @@ with pkgs; [
   ruff
   statix
 
+  # Brew's version is much newer
   # platformio
-  platformio
 
   # node
   nodePackages."@astrojs/language-server"

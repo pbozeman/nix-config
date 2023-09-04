@@ -37,6 +37,7 @@
         start_service = true;
       }
       "pam-reattach"
+      "platformio"
     ];
   };
 }
