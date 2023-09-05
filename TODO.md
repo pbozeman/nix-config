@@ -12,4 +12,9 @@
   - the sudo pam code is pretty dangerous. Fix it.
 
 - Linters
+
   - validate eslint
+
+- tmux
+  - the tokyonight plugin doesn't easily allow you to set the contents of
+    the status bar. Fix it and undo the tmux_start and alias hack.

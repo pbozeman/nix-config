@@ -79,7 +79,7 @@ in {
       tm = "tmux";
       tma = "tmux new-session -A -s";
       tmls = "tmux ls";
-      tmd = "tmux new-session -A -s dev";
+      tmd = "tmux new-session -A -s dev@$(hostname -s)";
 
       # utils
       calc = "kalker";
@@ -147,14 +147,15 @@ in {
 
       initExtraFirst = ''
         tmux_start() {
-          tmux has-session -t "dev" 2>/dev/null
+          name="dev@$(hostname -s)"
+          tmux has-session -t "$name" 2>/dev/null
           if [ $? -eq 0 ]; then
             tmux ls | grep "^dev:" | grep attached > /dev/null
             if [ $? -ne 0 ]; then
-              tmux new-session -A -s "dev"
+              tmux new-session -A -s "$name"
             fi
           else
-            tmux new-session -A -s "dev"
+            tmux new-session -A -s "$name"
           fi
         }
 
