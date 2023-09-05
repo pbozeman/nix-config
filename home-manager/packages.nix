@@ -8,9 +8,9 @@ with pkgs; [
   bat
   btop
   coreutils
+  clang
   fd
   duf
-  gcc
   killall
   openssh
   pandoc
