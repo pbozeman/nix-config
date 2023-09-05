@@ -77,9 +77,8 @@ in {
 
       # tmux
       tm = "tmux";
-      tma = "tmux a -t";
+      tma = "tmux new-session -A -s";
       tmls = "tmux ls";
-      tmn = "tmux new -s";
       tmd = "tmux new-session -A -s dev";
 
       # utils
