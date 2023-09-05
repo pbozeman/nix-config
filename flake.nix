@@ -54,20 +54,41 @@
     };
   in {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        pkgs = mkPkgs "x86_64-linux";
-        specialArgs = {
-          inherit inputs nixpkgs secrets user fullname;
+      nixos-parallels = let
+        hostname = "nixos-parallels";
+      in
+        nixpkgs.lib.nixosSystem {
+          pkgs = mkPkgs "x86_64-linux";
+          specialArgs = {
+            inherit inputs nixpkgs secrets hostname user fullname;
+          };
+          modules = [
+            ./hardware/parallels.nix
+            ./nixos
+            home-manager.nixosModules.home-manager
+            (mkHome user fullname email [
+              ./home-manager
+            ])
+          ];
         };
-        modules = [
-          ./hardware/parallels.nix
-          ./nixos
-          home-manager.nixosModules.home-manager
-          (mkHome user fullname email [
-            ./home-manager
-          ])
-        ];
-      };
+
+      nixos-pve = let
+        hostname = "nixos-pve";
+      in
+        nixpkgs.lib.nixosSystem {
+          pkgs = mkPkgs "x86_64-linux";
+          specialArgs = {
+            inherit inputs nixpkgs secrets hostname user fullname;
+          };
+          modules = [
+            ./hardware/proxmox.nix
+            ./nixos
+            home-manager.nixosModules.home-manager
+            (mkHome user fullname email [
+              ./home-manager
+            ])
+          ];
+        };
     };
 
     homeConfigurations = {

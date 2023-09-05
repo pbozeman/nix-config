@@ -2,13 +2,14 @@
   config,
   pkgs,
   secrets,
+  hostname,
   user,
   fullname,
   ...
 }: {
   system.stateVersion = "23.05";
 
-  networking.hostName = "nixos";
+  networking.hostName = "${hostname}";
   time.timeZone = "America/Los_Angeles";
 
   programs.zsh = {
