@@ -18,12 +18,14 @@
       "Noteplan" = 1505432629;
       "Parallels" = 1085114709;
       "PdfScanner" = 410968114;
+      "Tailscale" = 1475387142;
       "Xcode" = 497799835;
     };
 
     # TODO: move to homemanager version of kitty once it installs into the apps dir
     casks = [
       "arduino-ide"
+      "itsycal"
       "kitty"
       "firefox"
       "google-chrome"
