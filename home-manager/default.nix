@@ -151,16 +151,16 @@ in {
           if [ $? -eq 0 ]; then
             tmux ls | grep "^dev:" | grep attached > /dev/null
             if [ $? -ne 0 ]; then
-              exec tmux new-session -A -s "dev"
+              tmux new-session -A -s "dev"
             fi
           else
-            exec tmux new-session -A -s "dev"
+            tmux new-session -A -s "dev"
           fi
         }
 
         # if an interative shell, and not nested in tmux,
         # start a new dev session, or attach if no one else is.
-        if [ -n "$PS1" ] && [ -z "$TMUX" ]; then
+        if [ -n "$SSH_CLIENT" ] && [ -n "$PS1" ] && [ -z "$TMUX" ]; then
           tmux_start
         fi
       '';
