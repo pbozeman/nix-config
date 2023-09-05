@@ -343,6 +343,7 @@ in {
         "cmd+7" = "goto_tab 7";
         "cmd+8" = "goto_tab 8";
         "cmd+9" = "goto_tab 9";
+        "cmd+enter" = "toggle_fullscreen";
       };
       settings = {
         scrollback_lines = 10000;
