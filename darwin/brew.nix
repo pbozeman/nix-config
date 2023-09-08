@@ -31,6 +31,7 @@
       "firefox"
       "google-chrome"
       "spotify"
+      "wireshark"
       "zoom"
     ];
     taps = ["dimentium/autoraise"];
