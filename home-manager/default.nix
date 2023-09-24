@@ -127,6 +127,11 @@ in {
         enable = true;
         source = ./nvim;
       };
+
+      ".config/Autoraise/config" = {
+        enable = true;
+        source = ./Autoraise/config;
+      };
     };
   };
 
