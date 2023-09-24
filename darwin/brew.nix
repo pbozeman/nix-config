@@ -26,6 +26,7 @@
     # TODO: move to homemanager version of kitty once it installs into the apps dir
     casks = [
       "arduino-ide"
+      "brave-browser"
       "itsycal"
       "kitty"
       "firefox"

@@ -10,7 +10,7 @@
   home.activation.dockutil = lib.hm.dag.entryAfter ["writeBoundary"] ''
     ${pkgs.dockutil}/bin/dockutil \
       --remove all \
-      --add /Applications/Firefox.app \
+      --add "/Applications/Brave Browser.app" \
       --add /Applications/Kitty.app \
       --add /Applications/NotePlan.app \
       --add /Applications/Spotify.app \
