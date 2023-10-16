@@ -360,7 +360,7 @@ in {
         shell_integration = "enabled";
 
         # Window layout
-        hide_window_decorations = "titlebar-and-corners";
+        hide_window_decorations = "titlebar-only";
         window_padding_width = "0 2";
         macos_show_window_title_in = "window";
 
