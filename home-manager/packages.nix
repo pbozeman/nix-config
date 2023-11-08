@@ -60,4 +60,7 @@ with pkgs; [
   nodePackages.eslint_d # js/ts code formatter and linter
   nodePackages.prettier # ditto
   # nodePackages.prettier-plugin-astro # does not exist :(
+
+  # iac
+  terraform
 ]
