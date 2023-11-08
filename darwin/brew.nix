@@ -32,6 +32,7 @@
       "firefox"
       "google-chrome"
       "spotify"
+      "qlmarkdown"
       "wireshark"
       "zoom"
     ];
