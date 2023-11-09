@@ -13,6 +13,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -20,6 +25,7 @@
     nixpkgs,
     nix-darwin,
     home-manager,
+    nixos-generators,
     ...
   } @ inputs: let
     secrets = import ./secrets;
@@ -135,6 +141,26 @@
           ])
         ];
       };
+    };
+
+    packages.x86_64-linux = {
+      proxmox = let
+        hostname = "nixos-pve";
+      in
+        nixos-generators.nixosGenerate {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs nixpkgs secrets hostname user fullname;
+          };
+          modules = [
+            ./nixos
+            home-manager.nixosModules.home-manager
+            (mkHome user fullname email [
+              ./home-manager
+            ])
+          ];
+          format = "proxmox";
+        };
     };
   };
 }
