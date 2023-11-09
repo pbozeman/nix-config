@@ -12,6 +12,7 @@ with pkgs; [
   fd
   duf
   killall
+  mosh
   openssh
   pandoc
   wget
