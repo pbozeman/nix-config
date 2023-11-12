@@ -12,6 +12,10 @@
   networking.hostName = "${hostname}";
   time.timeZone = "America/Los_Angeles";
 
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
