@@ -8,6 +8,10 @@
 
   services.nix-daemon.enable = true;
 
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   # ideally we would enable touch sudo using:
   #   security.pam.enableSudoTouchIdAuth = true;
   # but this doesn't work in tmux.  See pam.nix for more info.  This is
