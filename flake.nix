@@ -98,7 +98,7 @@
     };
 
     homeConfigurations = {
-      "ununtu-dev" = home-manager.lib.homeManagerConfiguration {
+      "ubuntu-dev" = home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs "x86_64-linux";
         extraSpecialArgs = {inherit inputs secrets user fullname email;};
         modules = [
