@@ -19,11 +19,6 @@
     };
   };
 in {
-  nix = {
-    package = pkgs.nix;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
-
   home = {
     stateVersion = "23.05";
     username = "${user}";
