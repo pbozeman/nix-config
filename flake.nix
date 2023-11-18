@@ -72,8 +72,8 @@
           ];
         };
 
-      nixos-pve = let
-        hostname = "nixos-pve";
+      dev = let
+        hostname = "dev";
       in
         nixpkgs.lib.nixosSystem {
           pkgs = mkPkgs "x86_64-linux";
@@ -117,9 +117,7 @@
           ])
         ];
       };
-    };
 
-    darwinConfigurations = {
       "mba" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         pkgs = mkPkgs "aarch64-darwin";

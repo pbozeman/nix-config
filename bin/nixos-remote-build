@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+# Navigate to the directory of this script
+cd $(dirname $(readlink -f $0))
+cd ..
+
+nix-shell -p nixos-rebuild --command "nixos-rebuild switch --fast --flake .#$1 --target-host root@$1 --build-host root@$1"
