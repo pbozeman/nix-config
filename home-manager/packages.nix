@@ -8,7 +8,6 @@ with pkgs; [
   bat
   btop
   coreutils
-  clang
   fd
   duf
   killall
@@ -17,6 +16,10 @@ with pkgs; [
   pandoc
   wget
   zip
+
+  # c/c++
+  gnumake
+  gcc
 
   # Fonts
   meslo-lgs-nf
