@@ -119,6 +119,12 @@ in {
       grep = "grep --color=auto";
       fgrep = "fgrep --color=auto";
       egrep = "egrep --color=auto";
+
+      # terraform
+      tf = "terraform";
+      tff = "terraform fmt";
+      tfp = "terraform plan";
+      tfa = "terraform apply";
     };
 
     file = {
