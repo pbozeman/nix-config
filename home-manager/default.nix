@@ -125,6 +125,9 @@ in {
       tff = "terraform fmt";
       tfp = "terraform plan";
       tfa = "terraform apply";
+
+      # k8s
+      k = "kubecolor";
     };
 
     file = {

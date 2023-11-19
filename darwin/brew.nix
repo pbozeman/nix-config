@@ -42,7 +42,6 @@
         name = "autoraise";
         start_service = true;
       }
-      "kubernetes-cli"
       "pam-reattach"
       "platformio"
     ];

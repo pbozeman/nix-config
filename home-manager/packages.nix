@@ -67,4 +67,10 @@ with pkgs; [
 
   # iac
   terraform
+
+  # k8s
+  k9s
+  kubectl
+  kubecolor
+  kubernetes-helm
 ]
