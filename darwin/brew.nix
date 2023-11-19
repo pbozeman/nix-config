@@ -31,6 +31,7 @@
       "kitty"
       "firefox"
       "google-chrome"
+      "openlens"
       "spotify"
       "qlmarkdown"
       "wireshark"
