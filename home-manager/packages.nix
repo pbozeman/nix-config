@@ -69,8 +69,10 @@ with pkgs; [
   terraform
 
   # k8s
+  helmfile
   k9s
   kubectl
   kubecolor
-  kubernetes-helm
+  # https://discourse.nixos.org/t/helm-plugin-install/20705
+  (pkgs.wrapHelm pkgs.kubernetes-helm { plugins = [ pkgs.kubernetes-helmPlugins.helm-diff ]; })
 ]
