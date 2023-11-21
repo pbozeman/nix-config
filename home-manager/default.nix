@@ -128,6 +128,12 @@ in {
 
       # k8s
       k = "kubecolor";
+
+      # remote copy
+      rpbcopy = "ssh $(echo $SSH_CLIENT | cut -f1 -d ' ') 'pbcopy'";
+      tpbcopy = "tmux show-buffer | rpbcopy";
+      rpb = "rpbcopy";
+      tpb = "tpbcopy";
     };
 
     file = {
