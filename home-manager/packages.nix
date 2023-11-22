@@ -30,6 +30,10 @@ with pkgs; [
   git-filter-repo
   gh
 
+  # git tuis
+  lazygit
+  tig
+
   # Text and terminal utilities
   htop
   ipcalc
