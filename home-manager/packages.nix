@@ -1,4 +1,18 @@
 {pkgs}:
+let
+ # https://nixos.wiki/wiki/Helm_and_Helmfile
+ my-kubernetes-helm = with pkgs; wrapHelm kubernetes-helm {
+    plugins = with pkgs.kubernetes-helmPlugins; [
+      helm-secrets
+      helm-diff
+    ];
+  };
+
+  my-helmfile = with pkgs; helmfile-wrapped.override {
+    inherit (my-kubernetes-helm.passthru) pluginsDir;
+  };
+in
+
 with pkgs; [
   # General packages for development and system management
   aspell
@@ -76,15 +90,9 @@ with pkgs; [
   sops
 
   # k8s
-  helmfile
   k9s
   kubectl
   kubecolor
-  # https://discourse.nixos.org/t/helm-plugin-install/20705
-  (pkgs.wrapHelm pkgs.kubernetes-helm {
-    plugins = [
-      pkgs.kubernetes-helmPlugins.helm-diff
-      pkgs.kubernetes-helmPlugins.helm-secrets
-    ];
-  })
+  my-kubernetes-helm
+  my-helmfile
 ]
