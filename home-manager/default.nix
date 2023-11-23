@@ -155,7 +155,7 @@ in {
       enable = true;
       enableCompletion = true;
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
 
       # homemanager on ubuntu created "insecure"
       # compinit dirs.  Skip global setup and
