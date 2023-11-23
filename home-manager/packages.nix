@@ -78,5 +78,10 @@ with pkgs; [
   kubectl
   kubecolor
   # https://discourse.nixos.org/t/helm-plugin-install/20705
-  (pkgs.wrapHelm pkgs.kubernetes-helm { plugins = [ pkgs.kubernetes-helmPlugins.helm-diff ]; })
+  (pkgs.wrapHelm pkgs.kubernetes-helm {
+    plugins = [
+      pkgs.kubernetes-helmPlugins.helm-diff
+      pkgs.kubernetes-helmPlugins.helm-secrets
+    ];
+  })
 ]
