@@ -72,6 +72,9 @@ with pkgs; [
   # iac
   terraform
 
+  # secrets management
+  sops
+
   # k8s
   helmfile
   k9s
