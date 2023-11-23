@@ -20,6 +20,10 @@
   };
 in {
   home = {
+    # FIXME: take this out once possible.
+    # See: https://github.com/nix-community/home-manager/issues/4483
+    enableNixpkgsReleaseCheck = false;
+
     stateVersion = "23.05";
     username = "${user}";
     homeDirectory =
@@ -65,10 +69,6 @@ in {
 
       # ls
       ls = "ls --color=auto -F";
-      l = "exa --icons --git-ignore --git -F --extended";
-      ll = "exa --icons --git-ignore --git -F --extended -l";
-      lt = "exa --icons --git-ignore --git -F --extended -T";
-      llt = "exa --icons --git-ignore --git -F --extended -l -T";
 
       # movement
       ".." = "cd ..";
@@ -155,7 +155,7 @@ in {
       enable = true;
       enableCompletion = true;
       enableAutosuggestions = true;
-      syntaxHighlighting.enable = true;
+      enableSyntaxHighlighting = true;
 
       # homemanager on ubuntu created "insecure"
       # compinit dirs.  Skip global setup and
@@ -282,8 +282,6 @@ in {
         background = "dark";
       };
     };
-
-    exa.enable = true;
 
     tmux = {
       enable = true;
