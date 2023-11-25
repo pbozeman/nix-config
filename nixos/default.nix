@@ -55,13 +55,18 @@
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
+  virtualisation.docker.enable = true;
+
   users.users.${user} = {
     hashedPassword = secrets.${user}.hashedPassword;
     home = "/home/${user}";
     shell = pkgs.zsh;
     description = "${fullname}";
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [
+      "docker"
+      "wheel"
+    ];
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
