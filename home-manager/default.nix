@@ -318,6 +318,8 @@ in {
         bind-key , command-prompt "rename-window '%%'"
         bind-key $ command-prompt "rename-session '%%'"
 
+        bind-key R move-window -r
+
         # vim/tmux integration
         is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$'"
         bind-key -n 'C-h' if-shell "$is_vim" { send-keys C-h } { if-shell -F '#{pane_at_left}'   {} { select-pane -L } }
