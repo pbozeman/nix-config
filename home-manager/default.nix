@@ -115,6 +115,8 @@ in {
       gco = "git checkout";
       grs = "git restore --staged";
 
+      lazygit = "lazygit -ucd ~/.config/lazygit";
+
       # Always enable colored `grep` output
       grep = "grep --color=auto";
       fgrep = "fgrep --color=auto";
