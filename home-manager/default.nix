@@ -147,6 +147,11 @@ in {
         enable = true;
         source = ./Autoraise/config;
       };
+
+      ".config/lazygit/config.yml" = {
+        enable = true;
+        source = ./lazygit/config.yml;
+      };
     };
   };
 
