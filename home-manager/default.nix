@@ -212,6 +212,8 @@ in {
         # the path when running stand alone (i.e. without nixos or darwin)
         export PATH="$HOME/.nix-profile/bin:$PATH"
 
+        export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
+
         # vi cmd line editing
         set -o vi
         bindkey -v

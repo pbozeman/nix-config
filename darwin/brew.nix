@@ -43,6 +43,7 @@
         name = "autoraise";
         start_service = true;
       }
+      "docker"
       "pam-reattach"
       "platformio"
     ];
