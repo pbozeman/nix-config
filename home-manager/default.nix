@@ -125,9 +125,13 @@ in {
       tff = "terraform fmt";
       tfp = "terraform plan";
       tfa = "terraform apply";
+      tfd = "terraform apply";
 
       # k8s
       k = "kubecolor";
+      hf = "helmfile";
+      hfa = "helmfile apply";
+      hfd = "helmfile diff";
 
       # remote copy
       rpbcopy = "ssh $(echo $SSH_CLIENT | cut -f1 -d ' ') 'pbcopy'";
@@ -319,6 +323,7 @@ in {
         bind-key $ command-prompt "rename-session '%%'"
 
         bind-key R move-window -r
+        bind-key K send-key C-k
 
         # vim/tmux integration
         is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$'"
