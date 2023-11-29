@@ -95,4 +95,5 @@ with pkgs; [
   kubecolor
   my-kubernetes-helm
   my-helmfile
+  velero
 ]
