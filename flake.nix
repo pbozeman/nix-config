@@ -41,6 +41,7 @@
         };
       };
 
+
     mkHome = user: fullname: email: modules: {
       home-manager = {
         useGlobalPkgs = true;
