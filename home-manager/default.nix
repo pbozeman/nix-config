@@ -142,6 +142,11 @@ in {
       # run and log
       rl = "run_and_log";
       lr = "less_run_log";
+
+      dnc = "rg -U '#.*DNC.*(\n# .*)*'";
+      fixme = "rg -U '#.*FIXME.*(\n# .*)*'";
+      todo = "rg -U '#.*TODO.*(\n# .*)*'";
+      wut = "rg -U '(#.*TODO|#.*FIXME|#.*DNC).*((\n# ).*)*'";
     };
 
     file = {
