@@ -121,17 +121,15 @@ in {
       egrep = "egrep --color=auto";
 
       # terraform
-      tf = "terraform";
-      tff = "terraform fmt";
-      tfp = "terraform plan";
-      tfa = "terraform apply";
-      tfd = "terraform apply";
+      tff = "tf fmt";
+      tfp = "tf plan";
+      tfa = "tf apply";
+      tfd = "tf apply";
 
       # k8s
       k = "kubecolor";
-      hf = "helmfile";
-      hfa = "helmfile apply";
-      hfd = "helmfile diff";
+      hfa = "hf apply";
+      hfd = "hf diff";
 
       # remote copy
       rpbcopy = "ssh $(echo $SSH_CLIENT | cut -f1 -d ' ') 'pbcopy'";
@@ -309,6 +307,45 @@ in {
           else
             echo "No matching run-log files found."
           fi
+        }
+
+        # TODO: refactor hf and tf into som common updo function.
+        # I tried once, but dealing with aray arguments in bash was too much of a
+        # a pita.
+        hf() {
+          local current_dir=$(pwd)
+          while true; do
+            if [ -f "helmfile.yaml" ] || [ -d "helmfile.d" ]; then
+              helmfile "$@"
+              break
+            else
+              if [ "$(pwd)" = "/" ]; then
+                echo "No helmfile.yaml or helmfile.d found in any parent directories."
+                break
+              else
+                cd ..
+              fi
+            fi
+          done
+          cd "$current_dir"
+        }
+
+        tf() {
+          local current_dir=$(pwd)
+          while true; do
+            if [ -f .terraform ]; then
+              terraform "$@"
+              break
+            else
+              if [ "$(pwd)" = "/" ]; then
+                echo "No .terraform found in any parent directories."
+                break
+              else
+                cd ..
+              fi
+            fi
+          done
+          cd "$current_dir"
         }
       '';
     };
