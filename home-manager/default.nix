@@ -383,7 +383,10 @@ in {
       terminal = "screen-256color";
       plugins = with pkgs; [tmux-tokyo-night];
       extraConfig = ''
+        # https://github.com/mobile-shell/mosh/pull/1054
         set -s set-clipboard on
+        set-option -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
+
         set-option -g focus-events on
         set-option -g automatic-rename on
         set -g base-index 1
