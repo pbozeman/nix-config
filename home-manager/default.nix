@@ -132,6 +132,7 @@ in {
       k = "kubecolor";
       hfa = "hf apply";
       hfd = "hf diff";
+      hfaa = "hf apply -f helmfile.d/30-home-automation.yaml";
 
       # remote copy
       rpbcopy = "ssh $(echo $SSH_CLIENT | cut -f1 -d ' ') 'pbcopy'";
