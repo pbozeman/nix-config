@@ -83,7 +83,7 @@
   # FIXME: This isn't the best place for this, but as of now, all my nixos
   # machines are backend servers, not laptops. I would not want to enable
   # this on a laptop.
-  programs.mosh.enable = true;
+  services.eternal-terminal.enable = true;
 
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
