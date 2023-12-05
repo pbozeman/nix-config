@@ -472,6 +472,7 @@ in {
         adjust_line_height = "105%";
         disable_ligatures = "cursor"; # disable ligatures when cursor is on them
         shell_integration = "enabled";
+        strip_trailing_newline = "yes";
 
         # Window layout
         hide_window_decorations = "titlebar-only";
