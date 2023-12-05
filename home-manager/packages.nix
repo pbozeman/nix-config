@@ -96,4 +96,7 @@ with pkgs; [
   my-kubernetes-helm
   my-helmfile
   velero
+
+  # go
+  go
 ]
