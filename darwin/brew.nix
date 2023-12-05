@@ -37,13 +37,17 @@
       "wireshark"
       "zoom"
     ];
-    taps = ["dimentium/autoraise"];
+    taps = [
+      "dimentium/autoraise"
+      "MisterTea/et"
+    ];
     brews = [
       {
         name = "autoraise";
         start_service = true;
       }
       "docker"
+      "et"
       "pam-reattach"
       "platformio"
     ];
