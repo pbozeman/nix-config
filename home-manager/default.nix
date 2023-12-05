@@ -338,7 +338,7 @@ in {
         tf() {
           local current_dir=$(pwd)
           while true; do
-            if [ -f .terraform ]; then
+            if [ -d .terraform ]; then
               terraform "$@"
               break
             else
