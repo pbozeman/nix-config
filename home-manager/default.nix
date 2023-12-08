@@ -126,7 +126,7 @@ in {
       tff = "tf fmt";
       tfp = "tf plan";
       tfa = "tf apply";
-      tfd = "tf apply";
+      tfd = "tf plan";
 
       # k8s
       k = "kubecolor";
@@ -339,7 +339,7 @@ in {
           local current_dir=$(pwd)
           while true; do
             if [ -d .terraform ]; then
-              terraform "$@"
+              scripts/terraform-sops.sh "$@"
               break
             else
               if [ "$(pwd)" = "/" ]; then
