@@ -49,7 +49,6 @@
       "docker"
       "et"
       "pam-reattach"
-      "platformio"
     ];
   };
 }
