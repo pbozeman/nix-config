@@ -211,6 +211,8 @@ in {
       '';
 
       initExtra = ''
+        eval "$(direnv hook zsh)"
+
         # this should not be necessary, but homeManager isn't addding this to
         # the path when running stand alone (i.e. without nixos or darwin)
         export PATH="$HOME/.nix-profile/bin:$PATH"
@@ -550,8 +552,9 @@ in {
 
         nix_shell = {
           style = "fg:#DEE2FF";
-          symbol = "";
-          format = "\\[[$symbol$state(\($name\))]($style)\\]";
+          symbol = "❄️";
+          format = " $symbol($style)";
+          #format = "\\[[$symbol$state(\($name\))]($style)\\]";
         };
 
         git_branch = {

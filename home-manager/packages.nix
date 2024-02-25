@@ -22,6 +22,8 @@ with pkgs; [
   bat
   btop
   coreutils
+  direnv
+  nix-direnv
   fd
   duf
   killall
