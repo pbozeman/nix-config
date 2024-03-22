@@ -28,6 +28,7 @@
       "arduino-ide"
       "brave-browser"
       "itsycal"
+      "kicad"
       "kitty"
       "firefox"
       "google-chrome"
