@@ -5,6 +5,8 @@
 -- Set additional filetypes
 vim.filetype.add({
   extension = {
-    tfvars = "terraform"
-  }
+    tfvars = "terraform",
+  },
 })
+
+vim.g.root_spec = { ".git" }
