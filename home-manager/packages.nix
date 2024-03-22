@@ -100,4 +100,8 @@ with pkgs; [
 
   # go
   go
+
+  # rust
+  cargo
+  rustc
 ]
