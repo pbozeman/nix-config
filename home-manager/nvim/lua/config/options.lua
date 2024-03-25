@@ -10,3 +10,6 @@ vim.filetype.add({
 })
 
 vim.g.root_spec = { ".git" }
+
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }
