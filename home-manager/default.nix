@@ -1,10 +1,10 @@
-{
-  pkgs,
-  user,
-  fullname,
-  email,
-  ...
-}: let
+{ pkgs
+, user
+, fullname
+, email
+, ...
+}:
+let
   # TODO: this is probably a sign that some parts of these should
   # start getting refactored int separate files.
   tmux-tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
@@ -18,7 +18,8 @@
       sha256 = "sha256-YtW74ju+myyMfyCdH6Oj5fPXhK0PsIuVUnFAMzJ7fjM=";
     };
   };
-in {
+in
+{
   home = {
     # FIXME: take this out once possible.
     # See: https://github.com/nix-community/home-manager/issues/4483
@@ -30,7 +31,7 @@ in {
       if pkgs.stdenvNoCC.isDarwin
       then "/Users/${user}"
       else "/home/${user}";
-    packages = pkgs.callPackage ./packages.nix {};
+    packages = pkgs.callPackage ./packages.nix { };
 
     sessionVariables = {
       EDITOR = "nvim";
@@ -359,7 +360,7 @@ in {
 
     git = {
       enable = true;
-      ignores = ["*.swp"];
+      ignores = [ "*.swp" ];
       userName = fullname;
       userEmail = email;
       extraConfig = {
@@ -388,7 +389,7 @@ in {
       keyMode = "vi";
       shell = "${pkgs.zsh}/bin/zsh";
       terminal = "screen-256color";
-      plugins = with pkgs; [tmux-tokyo-night];
+      plugins = with pkgs; [ tmux-tokyo-night ];
       extraConfig = ''
         # https://github.com/mobile-shell/mosh/pull/1054
         set -s set-clipboard on
