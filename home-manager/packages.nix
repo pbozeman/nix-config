@@ -1,7 +1,7 @@
-{pkgs}:
+{ pkgs }:
 let
- # https://nixos.wiki/wiki/Helm_and_Helmfile
- my-kubernetes-helm = with pkgs; wrapHelm kubernetes-helm {
+  # https://nixos.wiki/wiki/Helm_and_Helmfile
+  my-kubernetes-helm = with pkgs; wrapHelm kubernetes-helm {
     plugins = with pkgs.kubernetes-helmPlugins; [
       helm-secrets
       helm-diff
