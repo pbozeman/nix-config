@@ -13,6 +13,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lazyvim-nix = {
+      url = "github:pbozeman/lazyvim-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,6 +25,7 @@
     , nixpkgs
     , nix-darwin
     , home-manager
+    , lazyvim-nix
     , ...
     } @ inputs:
     let

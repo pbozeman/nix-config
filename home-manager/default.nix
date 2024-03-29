@@ -1,4 +1,5 @@
-{ pkgs
+{ inputs
+, pkgs
 , user
 , fullname
 , email
@@ -31,7 +32,15 @@ in
       if pkgs.stdenvNoCC.isDarwin
       then "/Users/${user}"
       else "/home/${user}";
-    packages = pkgs.callPackage ./packages.nix { };
+
+    # TODO: make lazyvim-nix show up in packages (with an overlay? )
+    packages = with pkgs; let
+      additionalPackages = [
+        # Add your additional packages here
+        inputs.lazyvim-nix.packages.x86_64-linux.nvim
+      ];
+    in
+    (import ./packages.nix { inherit pkgs; }) ++ additionalPackages;
 
     sessionVariables = {
       EDITOR = "nvim";
