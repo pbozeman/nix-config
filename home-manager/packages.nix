@@ -65,14 +65,14 @@ with pkgs; [
 
   # base vim - configured with lazyvim still
   # and linters etc
-  neovim
-  alejandra
-  black
-  clang-tools
-  nodejs
-  mypy
-  ruff
-  statix
+  #neovim
+  #alejandra
+  #black
+  #clang-tools
+  #nodejs
+  #mypy
+  #ruff
+  #statix
 
   # Platformio
   platformio

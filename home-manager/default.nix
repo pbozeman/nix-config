@@ -152,11 +152,11 @@ in
     };
 
     file = {
-      ".config/nvim" = {
-        # disable to develop/debug nvim config
-        enable = true;
-        source = ./nvim;
-      };
+      #  ".config/nvim" = {
+      #    # disable to develop/debug nvim config
+      #    enable = true;
+      #    source = ./nvim;
+      #  };
 
       ".config/Autoraise/config" = {
         enable = true;
@@ -168,8 +168,8 @@ in
         source = ./lazygit/config.yml;
       };
     };
-  };
 
+  };
   programs = {
     zsh = {
       enable = true;
