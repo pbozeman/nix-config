@@ -63,26 +63,8 @@ with pkgs; [
   python39
   python39Packages.virtualenv
 
-  # base vim - configured with lazyvim still
-  # and linters etc
-  #neovim
-  #alejandra
-  #black
-  #clang-tools
-  #nodejs
-  #mypy
-  #ruff
-  #statix
-
   # Platformio
   platformio
-
-  # node
-  nodePackages."@astrojs/language-server"
-  nodePackages.pyright # python lsp
-  nodePackages.eslint_d # js/ts code formatter and linter
-  nodePackages.prettier # ditto
-  # nodePackages.prettier-plugin-astro # does not exist :(
 
   # iac
   terraform
@@ -104,4 +86,7 @@ with pkgs; [
   # rust
   cargo
   rustc
+
+  # FIXME: this should be coming from lazyvim-nix
+  markdownlint-cli
 ]
