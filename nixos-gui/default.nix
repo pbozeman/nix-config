@@ -55,5 +55,14 @@
       gnome.gnome-tweaks
       gnomeExtensions.gtile
     ];
+
+    etc = {
+        "1password/custom_allowed_browsers" = {
+        text = ''
+          brave
+        '';
+        mode = "0755";
+      };
+    };
   };
 }
