@@ -52,6 +52,8 @@
   environment = {
     systemPackages = with pkgs; [
       brave
+      gnome.gnome-tweaks
+      gnomeExtensions.gtile
     ];
   };
 }
