@@ -21,6 +21,9 @@
     options = "ctrl:nocaps";
   };
 
+  services.xserver.autoRepeatDelay = 200;
+  services.xserver.autoRepeatInterval = 15;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
