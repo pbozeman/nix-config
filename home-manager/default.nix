@@ -479,7 +479,8 @@ in {
         strip_trailing_newline = "yes";
 
         # Window layout
-        hide_window_decorations = "titlebar-only";
+        # hide_window_decorations = "titlebar-only";
+        hide_window_decorations = "yes";
         window_padding_width = "0 2";
         macos_show_window_title_in = "window";
 
