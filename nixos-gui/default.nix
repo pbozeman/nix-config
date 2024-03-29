@@ -54,6 +54,7 @@
       brave
       gnome.gnome-tweaks
       gnomeExtensions.gtile
+      kicad
     ];
 
     etc = {
