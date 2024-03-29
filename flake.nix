@@ -73,6 +73,25 @@
           ];
         };
 
+      fw = let
+        hostname = "fw";
+      in
+        nixpkgs.lib.nixosSystem {
+          pkgs = mkPkgs "x86_64-linux";
+          specialArgs = {
+            inherit inputs nixpkgs secrets hostname user fullname;
+          };
+          modules = [
+            ./hardware/fw.nix
+            ./nixos
+	    ./nixos-gui
+            home-manager.nixosModules.home-manager
+            (mkHome user fullname email [
+              ./home-manager
+            ])
+          ];
+        };
+
       dev = let
         hostname = "dev";
       in
