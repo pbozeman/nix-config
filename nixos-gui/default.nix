@@ -18,7 +18,7 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
-    options = "ctrl:swapcaps";
+    options = "ctrl:nocaps";
   };
 
   # Enable CUPS to print documents.
