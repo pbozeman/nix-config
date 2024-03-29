@@ -465,8 +465,8 @@ in {
         "cmd+8" = "goto_tab 8";
         "cmd+9" = "goto_tab 9";
         "cmd+enter" = "toggle_fullscreen";
-        "ctrl+c" = "copy_to_clipboard";
-        "ctrl+v" = "paste_from_clipboard";
+        "alt+v" = "paste_from_clipboard";
+        "alt+c" = "copy_to_clipboard";
       };
       settings = {
         scrollback_lines = 10000;
