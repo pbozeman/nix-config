@@ -400,6 +400,10 @@ in
       terminal = "screen-256color";
       plugins = with pkgs; [ tmux-tokyo-night ];
       extraConfig = ''
+        # https://github.com/LazyVim/LazyVim/discussions/163
+        set -sg escape-time 0
+        set -g status-interval 0
+
         # https://github.com/mobile-shell/mosh/pull/1054
         set -s set-clipboard on
         set-option -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
