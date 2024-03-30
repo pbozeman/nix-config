@@ -37,7 +37,7 @@ in
     packages = with pkgs; let
       additionalPackages = [
         # Add your additional packages here
-        inputs.lazyvim-nix.packages.x86_64-linux.nvim
+        inputs.lazyvim-nix.packages.${system}.nvim
       ];
     in
     (import ./packages.nix { inherit pkgs; }) ++ additionalPackages;
