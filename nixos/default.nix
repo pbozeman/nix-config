@@ -1,11 +1,10 @@
-{
-  config,
-  pkgs,
-  secrets,
-  hostname,
-  user,
-  fullname,
-  ...
+{ config
+, pkgs
+, secrets
+, hostname
+, user
+, fullname
+, ...
 }: {
   system.stateVersion = "23.05";
 
@@ -44,7 +43,7 @@
   };
 
   environment = {
-    shells = [pkgs.bashInteractive pkgs.zsh];
+    shells = [ pkgs.bashInteractive pkgs.zsh ];
 
     # Note: these vars are pam environment so set on login globally
     # as part of parent to shells. Starting new shells doesn't get the
@@ -99,21 +98,22 @@
     };
   };
 
-  services.tailscale.enable = true;
-
   # FIXME: This isn't the best place for this, but as of now, all my nixos
   # machines are backend servers, not laptops. I would not want to enable
   # this on a laptop.
   services.eternal-terminal.enable = true;
+
+  # tailscale
+  services.tailscale.enable = true;
 
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
     description = "Automatic connection to Tailscale";
 
     # make sure tailscale is running before trying to connect to tailscale
-    after = ["network-pre.target" "tailscale.service"];
-    wants = ["network-pre.target" "tailscale.service"];
-    wantedBy = ["multi-user.target"];
+    after = [ "network-pre.target" "tailscale.service" ];
+    wants = [ "network-pre.target" "tailscale.service" ];
+    wantedBy = [ "multi-user.target" ];
 
     # set this service as a oneshot job
     serviceConfig.Type = "oneshot";
