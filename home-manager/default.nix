@@ -161,12 +161,6 @@ in
     };
 
     file = {
-      #  ".config/nvim" = {
-      #    # disable to develop/debug nvim config
-      #    enable = true;
-      #    source = ./nvim;
-      #  };
-
       ".config/Autoraise/config" = {
         enable = true;
         source = ./Autoraise/config;
