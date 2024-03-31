@@ -98,6 +98,7 @@
               home-manager.nixosModules.home-manager
               (mkHome user fullname email [
                 ./home-manager
+                ./home-manager/nixos-gui.nix
               ])
             ];
           };
