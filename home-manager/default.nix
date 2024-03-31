@@ -279,10 +279,15 @@ in
         }
 
         # refresh the prompt every 1 second
-        # https://www.zsh.org/mla/users/2007/msg00944.html
+        #   https://www.zsh.org/mla/users/2007/msg00944.html
+        # and
+        #   https://stackoverflow.com/questions/26526175/zsh-menu-completion-causes-problems-after-zle-reset-prompt
         TMOUT=1
         TRAPALRM() {
-          zle reset-prompt
+          if [[ "$WIDGET" != "expand-or-complete" ]] && \
+             [[ ! "$_lastcomp[insert]" =~ "^automenu$|^menu:" ]]; then
+            zle reset-prompt
+          fi
         }
 
         run_and_log() {
