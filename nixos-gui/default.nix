@@ -15,6 +15,25 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gedit
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    epiphany # web browser
+    geary # email reader
+    gnome-characters
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+    yelp # Help view
+    gnome-contacts
+    gnome-initial-setup
+  ]);
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -50,13 +69,6 @@
   # system.stateVersion = "23.11"; # Did you read the comment?
 
   environment = {
-    systemPackages = with pkgs; [
-      brave
-      gnome.gnome-tweaks
-      gnomeExtensions.gtile
-      kicad
-    ];
-
     etc = {
       "1password/custom_allowed_browsers" = {
         text = ''
