@@ -14,12 +14,12 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Adwaita";
-      # package = pkgs.adwaita-icon-theme;
+      name = "Nordzy";
+      package = pkgs.nordzy-icon-theme;
     };
     theme = {
-      name = "Adwaita";
-      # package = pkgs.adwaita-theme;
+      name = "Nordic";
+      package = pkgs.nordic;
     };
     cursorTheme = {
       name = "Adwaita";
