@@ -73,7 +73,12 @@
     };
 
     "org/gnome/shell" = {
-      favorite-apps = [ "brave-browser.desktop" "kitty.desktop" ];
+      favorite-apps = [
+        "brave-browser.desktop"
+        "kitty.desktop"
+        "1password.desktop"
+        "org.gnome.Nautilus.desktop"
+      ];
     };
   };
 }
