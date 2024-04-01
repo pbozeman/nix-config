@@ -8,6 +8,7 @@
     brave
     gnome.gnome-tweaks
     kicad
+    wl-clipboard
   ];
 
   gtk = {
