@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     brave
     gnome.gnome-tweaks
-    gnomeExtensions.gtile
     kicad
   ];
 
