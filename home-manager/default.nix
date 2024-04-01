@@ -453,7 +453,7 @@ in
 
     kitty = {
       enable = true;
-      theme = "One Half Dark";
+      theme = "Nord";
       font = {
         name = "MesloLGS Nerd Font Mono";
         size = 12;
