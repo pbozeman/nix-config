@@ -5,9 +5,17 @@
 , ...
 }: {
   home.packages = with pkgs; [
+    # browsers
     brave
-    gnome.gnome-tweaks
+    chromium
+    firefox
+
+    # apps
     kicad
+    zoom-us
+
+    # x/gnome support apps
+    gnome.gnome-tweaks
     wl-clipboard
   ];
 
