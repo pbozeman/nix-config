@@ -5,6 +5,15 @@
 { config, pkgs, ... }:
 
 {
+  # enable gpu
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  # enable thunderbolt daemon
+  services.hardware.bolt.enable = true;
+
+  # enable fingerprint reader
+  services.fprintd.enable = true;
+
   # Enable networking
   networking.networkmanager.enable = true;
 

@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    hardware.url = "github:nixos/nixos-hardware";
+
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +25,7 @@
   outputs =
     { self
     , nixpkgs
+    , hardware
     , nix-darwin
     , home-manager
     , lazyvim-nix
@@ -92,6 +95,7 @@
               inherit inputs nixpkgs secrets hostname user fullname;
             };
             modules = [
+              hardware.nixosModules.framework-13-7040-amd
               ./hardware/fw.nix
               ./nixos
               ./nixos-gui
