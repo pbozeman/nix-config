@@ -68,6 +68,9 @@
 
   # system.stateVersion = "23.11"; # Did you read the comment?
 
+  # Open ports for spotify device discovery
+  networking.firewall.allowedUDPPorts = [ 5353 ];
+
   environment = {
     etc = {
       "1password/custom_allowed_browsers" = {

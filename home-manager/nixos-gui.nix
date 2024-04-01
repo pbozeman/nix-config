@@ -12,6 +12,7 @@
 
     # apps
     kicad
+    spotify
     zoom-us
 
     # x/gnome support apps
@@ -84,6 +85,7 @@
       favorite-apps = [
         "brave-browser.desktop"
         "kitty.desktop"
+        "spotify.desktop"
         "1password.desktop"
         "org.gnome.Nautilus.desktop"
       ];
