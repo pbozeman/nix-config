@@ -43,6 +43,9 @@
   services.xserver.autoRepeatDelay = 200;
   services.xserver.autoRepeatInterval = 15;
 
+  # steam
+  programs.steam.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
