@@ -58,9 +58,13 @@
     };
 
     "org/gnome/desktop/wm/keybindings" = {
+      # application
       switch-application = [ "<Alt>Tab" ];
+      # system
       toggle-overview = [ "<Super>Tab" ];
+      # window
       begin-move = [ "<Super>w" ];
+      begin-resize = [ "<Super>r" ];
       toggle-fullscreen = [ "<Super>Return" ];
     };
 
