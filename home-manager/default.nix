@@ -464,10 +464,6 @@ in
         "super+0" = "restore_font_size";
         "cmd+c" = "copy_to_clipboard";
         "cmd+v" = "paste_from_clipboard";
-        "ctrl+super+h" = "neighboring_window left";
-        "ctrl+super+j" = "neighboring_window down";
-        "ctrl+super+k" = "neighboring_window up";
-        "ctrl+super+l" = "neighboring_window right";
         "cmd+1" = "goto_tab 1";
         "cmd+2" = "goto_tab 2";
         "cmd+3" = "goto_tab 3";
@@ -480,6 +476,17 @@ in
         "cmd+enter" = "toggle_fullscreen";
         "alt+v" = "paste_from_clipboard";
         "alt+c" = "copy_to_clipboard";
+        "alt+n" = "new_os_window";
+        "alt+t" = "new_tab";
+        "alt+1" = "goto_tab 1";
+        "alt+2" = "goto_tab 2";
+        "alt+3" = "goto_tab 3";
+        "alt+4" = "goto_tab 4";
+        "alt+5" = "goto_tab 5";
+        "alt+6" = "goto_tab 6";
+        "alt+7" = "goto_tab 7";
+        "alt+8" = "goto_tab 8";
+        "alt+9" = "goto_tab 9";
       };
       settings = {
         scrollback_lines = 10000;
