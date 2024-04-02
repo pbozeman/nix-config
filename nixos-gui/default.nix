@@ -17,6 +17,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # keep the laptop on when the lid is closed if on ac
+  services.logind.lidSwitchExternalPower = "ignore";
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
