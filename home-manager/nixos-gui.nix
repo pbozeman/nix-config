@@ -43,6 +43,12 @@
 
   # Use `dconf watch /` to track
   dconf.settings = {
+    "org/gnome/desktop/background" = {
+      picture-options = "none";
+      primary-color = "#2E3440";
+      secondary-color = "#2E3440";
+    };
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
