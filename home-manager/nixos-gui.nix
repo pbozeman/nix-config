@@ -12,6 +12,7 @@
 
     # apps
     kicad
+    obsidian
     spotify
     zoom-us
 
@@ -91,6 +92,7 @@
       favorite-apps = [
         "kitty.desktop"
         "brave-browser.desktop"
+        "obsidian.desktop"
         "1password.desktop"
         "spotify.desktop"
         "org.gnome.Nautilus.desktop"
