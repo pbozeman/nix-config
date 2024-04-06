@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
   ];
 
@@ -32,6 +32,7 @@
       "kitty"
       "firefox"
       "google-chrome"
+      "obsidian"
       "openlens"
       "spotify"
       "qlmarkdown"
