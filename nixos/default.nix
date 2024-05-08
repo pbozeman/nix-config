@@ -84,11 +84,18 @@
     description = "${fullname}";
     isNormalUser = true;
     extraGroups = [
+      "dialout"
       "docker"
       "wheel"
     ];
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
+
+  services.udev.enable = true;
+  services.udev.packages = with pkgs; [
+    platformio-core.udev
+    # openocd
+  ];
 
   services.openssh = {
     enable = true;
