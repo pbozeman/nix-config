@@ -87,6 +87,7 @@
       "dialout"
       "docker"
       "wheel"
+      "vboxusers"
     ];
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };

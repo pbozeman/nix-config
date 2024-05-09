@@ -86,6 +86,8 @@
   # Open ports for spotify device discovery
   networking.firewall.allowedUDPPorts = [ 5353 ];
 
+  virtualisation.virtualbox.host.enable = true;
+
   environment = {
     etc = {
       "1password/custom_allowed_browsers" = {
