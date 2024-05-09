@@ -4,4 +4,5 @@
 cd $(dirname $(readlink -f $0))
 cd ..
 
-sudo nixos-rebuild switch --install-bootloader --flake . $@
+#sudo nixos-rebuild switch --install-bootloader --flake . $@
+sudo nixos-rebuild switch --flake . $@
