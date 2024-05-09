@@ -6,7 +6,7 @@
 , fullname
 , ...
 }: {
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   networking.hostName = "${hostname}";
   time.timeZone = "America/Los_Angeles";

@@ -20,6 +20,9 @@
       url = "github:pbozeman/lazyvim-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -29,6 +32,7 @@
     , nix-darwin
     , home-manager
     , lazyvim-nix
+    , nixos-wsl
     , ...
     } @ inputs:
     let
@@ -98,6 +102,7 @@
               hardware.nixosModules.framework-13-7040-amd
               ./hardware/fw.nix
               ./nixos
+              ./nixos/services.nix
               ./nixos-gui
               home-manager.nixosModules.home-manager
               (mkHome user fullname email [
@@ -119,6 +124,27 @@
             modules = [
               ./hardware/proxmox.nix
               ./nixos
+              ./nixos/services.nix
+              home-manager.nixosModules.home-manager
+              (mkHome user fullname email [
+                ./home-manager
+              ])
+            ];
+          };
+
+        wsl =
+          let
+            hostname = "wsl";
+          in
+          nixpkgs.lib.nixosSystem {
+            pkgs = mkPkgs "x86_64-linux";
+            specialArgs = {
+              inherit inputs nixpkgs secrets hostname user fullname;
+            };
+            modules = [
+              nixos-wsl.nixosModules.wsl
+              ./wsl.nix
+              ./nixos
               home-manager.nixosModules.home-manager
               (mkHome user fullname email [
                 ./home-manager
@@ -129,6 +155,14 @@
 
       homeConfigurations = {
         "ubuntu-dev" = home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs "x86_64-linux";
+          extraSpecialArgs = { inherit inputs secrets user fullname email; };
+          modules = [
+            ./home-manager
+          ];
+        };
+
+        "wsl-dev" = home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs "x86_64-linux";
           extraSpecialArgs = { inherit inputs secrets user fullname email; };
           modules = [
