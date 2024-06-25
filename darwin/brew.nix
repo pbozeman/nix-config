@@ -37,6 +37,7 @@
       "spotify"
       "qlmarkdown"
       "wireshark"
+      "xquartz"
       "zoom"
     ];
     taps = [
