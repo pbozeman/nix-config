@@ -1,8 +1,7 @@
-{
-  pkgs,
-  secrets,
-  user,
-  ...
+{ pkgs
+, secrets
+, user
+, ...
 }: {
   system.stateVersion = 4;
 
@@ -25,7 +24,7 @@
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
 
-  environment.shells = [pkgs.bashInteractive pkgs.zsh];
+  environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
 
   users.users.${user} = {
     # See https://github.com/nix-community/home-manager/issues/4026
@@ -35,8 +34,7 @@
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = [(pkgs.nerdfonts.override {fonts = ["Meslo"];})];
+    packages = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
   };
 
   documentation.enable = true;
