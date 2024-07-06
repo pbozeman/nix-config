@@ -20,7 +20,7 @@
     gnome.gnome-tweaks
     gnome.gnome-shell-extensions
     gnomeExtensions.forge
-    wl-clipboard
+    xsel
   ];
 
   gtk = {
