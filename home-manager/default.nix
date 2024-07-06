@@ -462,6 +462,7 @@ in
         "super+equal" = "increase_font_size";
         "super+minus" = "decrease_font_size";
         "super+0" = "restore_font_size";
+        "ctrl+v" = "paste_from_clipboard";
         "cmd+c" = "copy_to_clipboard";
         "cmd+v" = "paste_from_clipboard";
         "cmd+1" = "goto_tab 1";
