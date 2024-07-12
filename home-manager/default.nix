@@ -217,9 +217,10 @@ in
       initExtra = ''
         eval "$(direnv hook zsh)"
 
-        # this should not be necessary, but homeManager isn't addding this to
-        # the path when running stand alone (i.e. without nixos or darwin)
-        export PATH="$HOME/.nix-profile/bin:$PATH"
+        # the nix-profile/bin should not be necessary, but homeManager isn't
+        # addding this to the path when running stand alone
+        # (i.e. without nixos or darwin)
+        export PATH="$HOME/bin:$HOME/.nix-profile/bin:$PATH"
 
         export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 
