@@ -18,7 +18,9 @@
 
     lazyvim-nix = {
       url = "github:pbozeman/lazyvim-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # temporary work around to use a version of nixpkgs
+      # that doesn't have the is-nil? handler bug
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
