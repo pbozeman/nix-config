@@ -28,6 +28,7 @@
       "arduino-ide"
       "brave-browser"
       "itsycal"
+      "karabiner-elements"
       "kicad"
       "kitty"
       "firefox"
