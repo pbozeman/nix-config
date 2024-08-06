@@ -158,6 +158,9 @@ in
       fixme = "rg -U '#.*FIXME.*(\n# .*)*'";
       todo = "rg -U '#.*TODO.*(\n# .*)*'";
       wut = "rg -U '(#.*TODO|#.*FIXME|#.*DNC).*((\n# ).*)*'";
+
+      # search and replace
+      srv = "sr_f v";
     };
 
     file = {
@@ -171,8 +174,8 @@ in
         source = ./lazygit/config.yml;
       };
     };
-
   };
+
   programs = {
     zsh = {
       enable = true;
@@ -363,6 +366,10 @@ in
             fi
           done
           cd "$current_dir"
+        }
+
+        sr_f() {
+          find . -type f -name "*.$1" -exec sed -i "s/$2/$3/g" {} \;
         }
       '';
     };
