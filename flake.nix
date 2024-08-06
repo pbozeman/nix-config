@@ -2,9 +2,7 @@
   description = "dev machines nix config";
 
   inputs = {
-    # FIXME: work around broken helmfile-wrapped
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/b805578dc67530c5f50e312474c2dec7eca2cd22";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     hardware.url = "github:nixos/nixos-hardware";
 
