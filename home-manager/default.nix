@@ -562,7 +562,7 @@ in
           }),
           font_size = 12.0,
           native_macos_fullscreen_mode = true,
-          window_decorations = "NONE",
+          window_decorations = "RESIZE",
           enable_wayland = false,
           keys = {
             {
