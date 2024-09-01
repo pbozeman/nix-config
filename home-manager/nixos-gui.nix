@@ -92,7 +92,7 @@
 
     "org/gnome/shell" = {
       favorite-apps = [
-        "kitty.desktop"
+        "wezterm.desktop"
         "brave-browser.desktop"
         "obsidian.desktop"
         "1password.desktop"

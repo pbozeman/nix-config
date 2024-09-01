@@ -540,13 +540,20 @@ in
     wezterm = {
       enable = true;
 
+      package = inputs.wezterm.packages.${pkgs.system}.default;
+
       extraConfig = ''
         return {
+          audible_bell = "Disabled",
           enable_tab_bar = false,
-          font = wezterm.font("MesloLGS Nerd Font Mono"),
+          font = wezterm.font_with_fallback({
+            "MesloLGS NF",
+            "MesloLGS Nerd Font Mono",
+          }),
           font_size = 12.0,
           native_macos_fullscreen_mode = true,
-          window_decorations = "RESIZE",
+          window_decorations = "NONE",
+          enable_wayland = false,
           keys = {
             {
               key = 'Enter',
