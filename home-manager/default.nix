@@ -261,6 +261,8 @@ in
 
         zstyle ':completion:*' completer _extensions _complete _approximate
         zstyle ':completion:*' menu select
+        zstyle ':completion:*:make:*:targets' call-command true
+        zstyle ':completion:*:*:make:*' tag-order 'targets'
         zstyle ':completion:*:manuals'    separate-sections true
         zstyle ':completion:*:manuals.*'  insert-sections   true
         zstyle ':completion:*:man:*'      menu yes select
