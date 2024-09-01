@@ -210,6 +210,14 @@ in
       completionInit = ''
         autoload -Uz compinit
         compinit -i # ignore unsecure dirs
+
+        # gtkwave completion
+        function _gtkwave() {
+          _arguments -S -s \
+            '*:VCD files:_files -g "*(-/)" -g "*.vcd(-.)"'
+        }
+
+        compdef _gtkwave gtkwave
       '';
 
       initExtra = ''
