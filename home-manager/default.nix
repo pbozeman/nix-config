@@ -72,11 +72,6 @@ in
       # TODO: figure out how to do this via the lazyvim config
       nvim = "nvim -";
 
-      # ssh
-      # https://sw.kovidgoyal.net/kitty/kittens/ssh/
-      kssh = "kitty +kitten ssh";
-      s = "kitty +kitten ssh";
-
       # ls
       ls = "ls --color=auto -F";
 
@@ -450,87 +445,11 @@ in
         bind-key -T copy-mode-vi 'C-k' if-shell -F '#{pane_at_top}'    {} { select-pane -U }
 
         # dim inactive panes
-        # Note: these have to be coordinated with the kitty and tmux style.
-        # TODO: someday use kitty escape codes to remap the entire palette
+        # Note: these have to be coordinated with the terminal and tmux style.
         set -g window-style 'fg=#939cac,bg=#111111'
         set -g window-active-style 'fg=#dcdfe4,bg=#000000'
         set -g pane-border-style 'fg=#666666,bg=#111111'
         set -g pane-active-border-style 'fg=#666666,bg=#111111'
-      '';
-    };
-
-    kitty = {
-      enable = true;
-      theme = "Nord";
-      font = {
-        name = "MesloLGS Nerd Font Mono";
-        size = 12;
-      };
-      keybindings = {
-        "super+equal" = "increase_font_size";
-        "super+minus" = "decrease_font_size";
-        "super+0" = "restore_font_size";
-        "ctrl+v" = "paste_from_clipboard";
-        "cmd+c" = "copy_to_clipboard";
-        "cmd+v" = "paste_from_clipboard";
-        "cmd+1" = "goto_tab 1";
-        "cmd+2" = "goto_tab 2";
-        "cmd+3" = "goto_tab 3";
-        "cmd+4" = "goto_tab 4";
-        "cmd+5" = "goto_tab 5";
-        "cmd+6" = "goto_tab 6";
-        "cmd+7" = "goto_tab 7";
-        "cmd+8" = "goto_tab 8";
-        "cmd+9" = "goto_tab 9";
-        "cmd+enter" = "toggle_fullscreen";
-        "alt+v" = "paste_from_clipboard";
-        "alt+c" = "copy_to_clipboard";
-        "alt+n" = "new_os_window";
-        "alt+t" = "new_tab";
-        "alt+1" = "goto_tab 1";
-        "alt+2" = "goto_tab 2";
-        "alt+3" = "goto_tab 3";
-        "alt+4" = "goto_tab 4";
-        "alt+5" = "goto_tab 5";
-        "alt+6" = "goto_tab 6";
-        "alt+7" = "goto_tab 7";
-        "alt+8" = "goto_tab 8";
-        "alt+9" = "goto_tab 9";
-      };
-      settings = {
-        scrollback_lines = 10000;
-        enable_audio_bell = false;
-        update_check_interval = 0;
-        macos_quit_when_last_window_closed = true;
-        adjust_line_height = "105%";
-        disable_ligatures = "cursor"; # disable ligatures when cursor is on them
-        shell_integration = "enabled";
-        strip_trailing_newline = "yes";
-
-        # Window layout
-        # hide_window_decorations = "titlebar-only";
-        hide_window_decorations = "yes";
-        window_padding_width = "0 2";
-        macos_show_window_title_in = "window";
-
-        remember_window_size = "no";
-        initial_window_width = "80c";
-        initial_window_height = "25c";
-
-        # Tab bar
-        tab_bar_style = "hidden";
-        #tab_bar_edge = "bottom";
-        #tab_bar_style = "powerline";
-        #tab_title_template = "{title}"; # "{index}: {title}";
-
-        enabled_layouts = "Tall";
-      };
-      extraConfig = ''
-        mouse_hide_wait 1.0
-        active_border_color #888888
-        inactive_border_color #888888
-        background #000000
-        focus_follows_mouse yes
       '';
     };
 
@@ -616,6 +535,58 @@ in
           format = "\\[[⏱ $duration]($style)\\]";
         };
       };
+    };
+
+    wezterm = {
+      enable = true;
+
+      extraConfig = ''
+        return {
+          enable_tab_bar = false,
+          font = wezterm.font("MesloLGS Nerd Font Mono"),
+          font_size = 12.0,
+          native_macos_fullscreen_mode = true,
+          window_decorations = "RESIZE",
+          keys = {
+            {
+              key = 'Enter',
+              mods = 'CMD',
+              action = wezterm.action.ToggleFullScreen,
+            },
+            {
+              key = 'v',
+              mods = 'CTRL',
+              action = wezterm.action.PasteFrom('Clipboard'),
+            },
+          },
+          colors = {
+            foreground = "#D8DEE9",
+            background = "#000000",
+            cursor_bg = "#D8DEE9",
+            cursor_border = "#D8DEE9",
+            cursor_fg = "#2E3440",
+            selection_bg = "#4C566A",
+            selection_fg = "#D8DEE9",
+
+            ansi = {"#3B4252", "#BF616A", "#A3BE8C", "#EBCB8B", "#81A1C1", "#B48EAD", "#88C0D0", "#E5E9F0"},
+            brights = {"#4C566A", "#BF616A", "#A3BE8C", "#EBCB8B", "#81A1C1", "#B48EAD", "#8FBCBB", "#ECEFF4"},
+
+            tab_bar = {
+              background = "#2E3440",
+
+              active_tab = {
+                bg_color = "#88C0D0",
+                fg_color = "#2E3440",
+              },
+
+              inactive_tab = {
+                bg_color = "#4C566A",
+                fg_color = "#D8DEE9",
+              },
+            },
+          },
+        }
+      '';
     };
   };
 }

@@ -23,20 +23,20 @@
       "Xcode" = 497799835;
     };
 
-    # TODO: move to homemanager version of kitty once it installs into the apps dir
+    # TODO: move to homemanager version of wezeterm once it installs into the apps dir
     casks = [
       "arduino-ide"
       "brave-browser"
       "itsycal"
       "karabiner-elements"
       "kicad"
-      "kitty"
       "firefox"
       "google-chrome"
       "obsidian"
       "openlens"
       "spotify"
       "qlmarkdown"
+      "wezterm"
       "wireshark"
       "xquartz"
       "zoom"

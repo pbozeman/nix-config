@@ -1,17 +1,16 @@
-{
-  pkgs,
-  home,
-  lib,
-  user,
-  ...
+{ pkgs
+, home
+, lib
+, user
+, ...
 }: {
-  home.packages = [pkgs.dockutil];
+  home.packages = [ pkgs.dockutil ];
 
-  home.activation.dockutil = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.dockutil = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.dockutil}/bin/dockutil \
       --remove all \
       --add "/Applications/Brave Browser.app" \
-      --add /Applications/Kitty.app \
+      --add /Applications/WezTerm.app \
       --add /Applications/NotePlan.app \
       --add /Applications/Spotify.app \
       --add "/System/Applications/Preview.app" \
