@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+sudo nix-env --delete-generations old
+sudo nix-collect-garbage -d
+nix-env --delete-generations old
+nix-collect-garbage -d
