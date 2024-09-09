@@ -74,6 +74,9 @@ in
 
       # ls
       ls = "ls --color=auto -F";
+      l = "ls -lh";
+      ll = "ls -lh";
+      la = "ls -alh";
 
       # movement
       ".." = "cd ..";
