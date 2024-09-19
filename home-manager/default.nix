@@ -123,6 +123,8 @@ in
       gco = "git checkout";
       grs = "git restore --staged";
 
+      wip = "git add -A && git commit -m wip";
+
       lazygit = "lazygit -ucd ~/.config/lazygit";
 
       # Always enable colored `grep` output
