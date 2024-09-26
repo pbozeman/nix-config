@@ -34,6 +34,7 @@
       "google-chrome"
       "obsidian"
       "openlens"
+      "pd"
       "spotify"
       "qlmarkdown"
       "wezterm"
