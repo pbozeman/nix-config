@@ -41,6 +41,7 @@ with pkgs; [
 
   # Source code management, Git, GitHub tools
   git
+  git-absorb
   git-crypt
   git-filter-repo
   gh
