@@ -116,11 +116,14 @@ in
       g = "git";
       ga = "git add";
       gca = "git commit --amend";
-      gl = "git log";
+      gco = "git checkout";
       gd = "git diff";
       gdc = "git diff --cached";
+      gf = "git absorb";
+      gfr = "git absorb --and-rebase";
+      gl = "git log";
       gs = "git status";
-      gco = "git checkout";
+      gr = "git rebase -i --autosquash";
       grs = "git restore --staged";
 
       wip = "git add -A && git commit -m wip";
