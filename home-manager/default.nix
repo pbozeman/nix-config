@@ -430,6 +430,7 @@ in
 
         set -g focus-events on
         set -g automatic-rename on
+        set -g renumber-windows on
         set -g base-index 1
         setw -g pane-base-index 1
 
@@ -444,11 +445,14 @@ in
         bind k select-pane -U
         bind l select-pane -R
 
+        # renames
         bind , command-prompt "rename-window '%%'"
         bind $ command-prompt "rename-session '%%'"
 
-        bind R move-window -r
-        bind K send-key C-k
+        # window management
+        bind K kill-window
+        bind L swap-window -t -1 \; select-window -t -1
+        bind R swap-window -t +1 \; select-window -t +1
 
         # vim/tmux integration
         is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$'"
