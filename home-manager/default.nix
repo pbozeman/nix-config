@@ -418,7 +418,7 @@ in
       keyMode = "vi";
       shell = "${pkgs.zsh}/bin/zsh";
       terminal = "screen-256color";
-      plugins = with pkgs; [ tmux-tokyo-night ];
+      plugins = [ tmux-tokyo-night ];
       extraConfig = ''
         # work arounds from:
         #  https://github.com/LazyVim/LazyVim/discussions/163
