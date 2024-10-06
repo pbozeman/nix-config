@@ -420,9 +420,11 @@ in
       terminal = "screen-256color";
       plugins = with pkgs; [ tmux-tokyo-night ];
       extraConfig = ''
-        # https://github.com/LazyVim/LazyVim/discussions/163
+        # work arounds from:
+        #  https://github.com/LazyVim/LazyVim/discussions/163
+        #  https://github.com/LazyVim/LazyVim/discussions/658
         set -sg escape-time 0
-        set -g status-interval 0
+        set-option -g focus-events on
 
         # https://github.com/mobile-shell/mosh/pull/1054
         set -s set-clipboard on
