@@ -452,7 +452,8 @@ in
         bind $ command-prompt "rename-session '%%'"
 
         # window management
-        bind K kill-window
+        bind K kill-pane
+        bind W kill-window
         bind L swap-window -t -1 \; select-window -t -1
         bind R swap-window -t +1 \; select-window -t +1
 
