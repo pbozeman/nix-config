@@ -28,22 +28,21 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
+    atomix
+    cheese
+    epiphany
+    geary
     gedit
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    epiphany # web browser
-    geary # email reader
     gnome-characters
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-    yelp # Help view
     gnome-contacts
     gnome-initial-setup
+    gnome-music
+    gnome-photos
+    gnome-tour
+    hitori
+    iagno
+    tali
+    yelp
   ]);
 
   # Configure keymap in X11

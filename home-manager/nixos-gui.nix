@@ -17,8 +17,8 @@
     zoom-us
 
     # x/gnome support apps
-    gnome.gnome-tweaks
-    gnome.gnome-shell-extensions
+    gnome-shell-extensions
+    gnome-tweaks
     gnomeExtensions.forge
     xsel
   ];
