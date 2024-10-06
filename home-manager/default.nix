@@ -481,8 +481,8 @@ in
         #
         # https://github.com/fabioluciano/tmux-tokyo-night says that
         # set -g @theme_plugin_datetime_format should work, but it didn't on the
-        # first try. 
-        set -g status-right "#[fg=#3d59a1,bg=#292e42]#[none]#[fg=#ffffff,bg=#3d59a1]#[fg=#394b70,bg=#3d59a1]#[none]#[fg=#ffffff,bg=#394b70]%a %b %d %H:%M %Y#[none]"
+        # first try.
+        set -g status-right "#[fg=#394b70,bg=#292e42]#[none]#[fg=#ffffff,bg=#394b70] %a %b %d %H:%M %Y #[none]"
       '';
     };
 
