@@ -474,6 +474,15 @@ in
         set -g window-active-style 'fg=#dcdfe4,bg=#000000'
         set -g pane-border-style 'fg=#666666,bg=#111111'
         set -g pane-active-border-style 'fg=#666666,bg=#111111'
+
+        # override status bar to remove seconds from clock
+        #
+        # TODO: figure out how to use @theme_plugin_datetime_format instead
+        #
+        # https://github.com/fabioluciano/tmux-tokyo-night says that
+        # set -g @theme_plugin_datetime_format should work, but it didn't on the
+        # first try. 
+        set -g status-right "#[fg=#3d59a1,bg=#292e42]#[none]#[fg=#ffffff,bg=#3d59a1]#[fg=#394b70,bg=#3d59a1]#[none]#[fg=#ffffff,bg=#394b70]%a %b %d %H:%M %Y#[none]"
       '';
     };
 
