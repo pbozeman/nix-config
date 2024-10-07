@@ -52,6 +52,16 @@
     options = "ctrl:nocaps";
   };
 
+  environment.systemPackages = with pkgs; [
+    input-remapper
+  ];
+
+  # mouse button remapping
+  #
+  # TODO: pull in the config file to this flake. The only
+  # preset used is button FORWARD to SUPER_L
+  services.input-remapper.enable = true;
+
   services.xserver.autoRepeatDelay = 200;
   services.xserver.autoRepeatInterval = 15;
 
