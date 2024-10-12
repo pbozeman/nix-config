@@ -12,7 +12,7 @@
   services.hardware.bolt.enable = true;
 
   # enable fingerprint reader
-  services.fprintd.enable = false;
+  services.fprintd.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
