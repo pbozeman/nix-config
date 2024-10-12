@@ -11,6 +11,9 @@
   # this on a laptop.
   services.eternal-terminal.enable = true;
 
+  # https://wiki.nixos.org/wiki/Fwupd
+  services.fwupd.enable = true;
+
   # tailscale
   services.tailscale.enable = true;
 
