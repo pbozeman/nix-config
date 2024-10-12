@@ -106,7 +106,7 @@
               inherit inputs nixpkgs secrets hostname user fullname;
             };
             modules = [
-              hardware.nixosModules.framework-13-7040-amd
+              hardware.nixosModules.framework-16-7040-amd
               ./hardware/fw.nix
               ./nixos
               ./nixos/services.nix
