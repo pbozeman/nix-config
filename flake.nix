@@ -52,6 +52,10 @@
       mkPkgs = system:
         import nixpkgs {
           inherit system;
+          inherit
+            (import ./overlays {
+              inherit inputs nixpkgs nix-darwin;
+            }) overlays;
           config = {
             allowUnsupportedSystem = false;
             allowBroken = false;

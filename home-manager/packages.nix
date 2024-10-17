@@ -36,6 +36,10 @@ with pkgs; [
   gnumake
   gcc
 
+  # Sigrok
+  pulseview
+  sigrok-cli
+
   # Fonts
   meslo-lgs-nf
 
