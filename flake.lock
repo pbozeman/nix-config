@@ -19,11 +19,11 @@
     "cmake-gtest-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1719856888,
-        "narHash": "sha256-1Jg8mP5RsHEoYyP5XQ2p4VvMRdVcacnEll8cJ+96wgw=",
+        "lastModified": 1725721375,
+        "narHash": "sha256-SfcMXjs5JrXai8dxWa5dq2McJW2evRmRNrdIUIhz7ac=",
         "owner": "hfn92",
         "repo": "cmake-gtest.nvim",
-        "rev": "b61b88c39f87c51bd526e091fc0774a69a77a294",
+        "rev": "96b41e0a032f80ff02f12b5ded9706960d1d54ca",
         "type": "github"
       },
       "original": {
@@ -35,11 +35,11 @@
     "cmake-tools-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1719330804,
-        "narHash": "sha256-VRuryIGCV6W+WYX98wmtbAIROT4abtTFEgV9vY+mnok=",
+        "lastModified": 1729431900,
+        "narHash": "sha256-NOA1IxkvuD7szxMtTRXFgy0mM/o5xcqBOWFalZXpaY4=",
         "owner": "Civitasv",
         "repo": "cmake-tools.nvim",
-        "rev": "4be3c229fe932043fd83ad52fdf0ba9af7297789",
+        "rev": "d8eb4372fff47028c36f6bec6a8318b166092ed0",
         "type": "github"
       },
       "original": {
@@ -104,11 +104,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719994518,
-        "narHash": "sha256-pQMhCCHyQGRzdfAkdJ4cIWiw+JNuWsTX7f0ZYSyz0VY=",
+        "lastModified": 1727826117,
+        "narHash": "sha256-K5ZLCyfO/Zj9mPFldf3iwS6oZStJcU4tSpiXTMYaaL0=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "9227223f6d922fee3c7b190b2cc238a99527bbb7",
+        "rev": "3d04084d54bedc3d6b8b736c70ef449225c361b1",
         "type": "github"
       },
       "original": {
@@ -126,11 +126,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719994518,
-        "narHash": "sha256-pQMhCCHyQGRzdfAkdJ4cIWiw+JNuWsTX7f0ZYSyz0VY=",
+        "lastModified": 1727826117,
+        "narHash": "sha256-K5ZLCyfO/Zj9mPFldf3iwS6oZStJcU4tSpiXTMYaaL0=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "9227223f6d922fee3c7b190b2cc238a99527bbb7",
+        "rev": "3d04084d54bedc3d6b8b736c70ef449225c361b1",
         "type": "github"
       },
       "original": {
@@ -230,11 +230,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720524665,
-        "narHash": "sha256-ni/87oHPZm6Gv0ECYxr1f6uxB0UKBWJ6HvS7lwLU6oY=",
+        "lastModified": 1729104314,
+        "narHash": "sha256-pZRZsq5oCdJt3upZIU4aslS9XwFJ+/nVtALHIciX/BI=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "8d6a17d0cdf411c55f12602624df6368ad86fac1",
+        "rev": "3c3e88f0f544d6bb54329832616af7eb971b6be6",
         "type": "github"
       },
       "original": {
@@ -308,11 +308,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719226092,
-        "narHash": "sha256-YNkUMcCUCpnULp40g+svYsaH1RbSEj6s4WdZY/SHe38=",
+        "lastModified": 1724947644,
+        "narHash": "sha256-MHHrHasTngp7EYQOObHJ1a/IsRF+wodHqOckhH6uZbk=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-effects",
-        "rev": "11e4b8dc112e2f485d7c97e1cee77f9958f498f5",
+        "rev": "dba4367b9a9d9615456c430a6d6af716f6e84cef",
         "type": "github"
       },
       "original": {
@@ -349,14 +349,16 @@
         "cmake-tools-nvim": "cmake-tools-nvim",
         "flake-parts": "flake-parts",
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1728940171,
-        "narHash": "sha256-gLswQHvE89iz1wLw9QnbuozB6hWvVa8/aC5koDVtr+w=",
+        "lastModified": 1730264413,
+        "narHash": "sha256-Z7ks7j2JRvuFin8fPLAt3nhVq13Rp1hB/X2IYkkFaWU=",
         "owner": "pbozeman",
         "repo": "lazyvim-nix",
-        "rev": "00faa4a8922faeb58c2b132f0d0d34e2a1484def",
+        "rev": "b62e0397b9d7fad0aa783646af0f42f8c400b94b",
         "type": "github"
       },
       "original": {
@@ -395,11 +397,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720796317,
-        "narHash": "sha256-2B4PFl75fFjQkquRCPB5PYeY0bFqF/xvsLy014c+7W4=",
+        "lastModified": 1730088025,
+        "narHash": "sha256-FIdIaN7f6karwtDV65VXTV8VThNrR63nwykfgXpm4p4=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "a07ca86e6922bc2a68ec4c801ab7e05e12397af0",
+        "rev": "f35afbe60a4ff71fd65fec3839fc38943f961951",
         "type": "github"
       },
       "original": {
@@ -411,11 +413,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1720739431,
-        "narHash": "sha256-lEgZwuKL1eLsiFqoSiOZgq30jQCFTEYlreL79Txbxu4=",
+        "lastModified": 1729121305,
+        "narHash": "sha256-c94xkA/RuszC4PfmB+MWqOo2vbO66GTO6XKer0mbltA=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "a5de650f0eb93a848831f1ba631485437a82d57b",
+        "rev": "852954ff6d96adce0158f74ca494fdcef3aa1921",
         "type": "github"
       },
       "original": {
@@ -468,22 +470,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1718699679,
-        "narHash": "sha256-HgIULndtoCHou7vy6hEpbdqAgnN9ZxAzVAI70FjNDuk=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "502b1ac291b58703a9c84a8c414c77fa88607ce6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "502b1ac291b58703a9c84a8c414c77fa88607ce6",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1729880355,
         "narHash": "sha256-RP+OQ6koQQLX5nw0NmcDrzvGL8HDLnyXt/jHhL1jwjM=",
         "owner": "nixos",
@@ -498,7 +484,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1726238386,
         "narHash": "sha256-3//V84fYaGVncFImitM6lSAliRdrGayZLdxWlpcuGk0=",
@@ -521,7 +507,7 @@
         "lazyvim-nix": "lazyvim-nix",
         "nix-darwin": "nix-darwin",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "wezterm": "wezterm"
       }
     },
@@ -582,7 +568,7 @@
         "freetype2": "freetype2",
         "harfbuzz": "harfbuzz",
         "libpng": "libpng",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay",
         "zlib": "zlib"
       },
