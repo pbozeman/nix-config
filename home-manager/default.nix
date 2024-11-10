@@ -115,7 +115,9 @@ in
       # git
       g = "git";
       ga = "git add";
+      gc = "git commit";
       gca = "git commit --amend";
+      gcm = "git commit -m";
       gco = "git checkout";
       gd = "git diff";
       gdc = "git diff --cached";
