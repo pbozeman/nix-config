@@ -132,7 +132,7 @@
               inherit inputs nixpkgs secrets hostname user fullname;
             };
             modules = [
-              hardware.nixosModules.framework-16-7040-amd
+              hardware.nixosModules.lenovo-thinkpad-l13
               ./hardware/tp.nix
               ./nixos
               ./nixos/services.nix
