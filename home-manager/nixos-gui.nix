@@ -58,6 +58,11 @@
       text-scaling-factor = 1.5;
     };
 
+    "org/gnome/desktop/peripherals/keyboard" = {
+      delay = lib.hm.gvariant.mkUint32 400;
+      repeat-interval = lib.hm.gvariant.mkUint32 10;
+    };
+
     "org/gnome/desktop/peripherals/touchpad" = {
       natural-scroll = false;
     };
