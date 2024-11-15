@@ -417,7 +417,7 @@ in
     tmux = {
       enable = true;
       prefix = "C-Space";
-      sensibleOnTop = true;
+      sensibleOnTop = false;
       mouse = true;
       keyMode = "vi";
       shell = "${pkgs.zsh}/bin/zsh";
