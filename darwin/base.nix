@@ -19,7 +19,7 @@
 
   # shells
   programs.bash.enable = true;
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
