@@ -564,6 +564,7 @@ in
 
       extraConfig = ''
         return {
+          check_for_updates = false,
           audible_bell = "Disabled",
           enable_tab_bar = false,
           font = wezterm.font_with_fallback({
