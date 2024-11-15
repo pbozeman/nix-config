@@ -197,27 +197,6 @@ in
         skip_global_compinit=1
       '';
 
-      initExtraFirst = ''
-        tmux_start() {
-          name="dev"
-          tmux has-session -t "$name" 2>/dev/null
-          if [ $? -eq 0 ]; then
-            tmux ls | grep "^dev:" | grep attached > /dev/null
-            if [ $? -ne 0 ]; then
-              tmux new-session -A -s "$name"
-            fi
-          else
-            tmux new-session -A -s "$name"
-          fi
-        }
-
-        # if an interative shell, and not nested in tmux,
-        # start a new dev session, or attach if no one else is.
-        if [ -n "$SSH_CLIENT" ] && [ -n "$PS1" ] && [ -z "$TMUX" ]; then
-          tmux_start
-        fi
-      '';
-
       completionInit = ''
         autoload -Uz compinit
         compinit -i # ignore unsecure dirs
