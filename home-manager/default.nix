@@ -234,6 +234,9 @@ in
       initExtra = ''
         eval "$(direnv hook zsh)"
 
+        export LANG=en_US.UTF-8
+        export LC_ALL=en_US.UTF-8
+
         # the nix-profile/bin should not be necessary, but homeManager isn't
         # addding this to the path when running stand alone
         # (i.e. without nixos or darwin)
