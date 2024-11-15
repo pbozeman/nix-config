@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
   ];
 
@@ -43,6 +44,7 @@
       "zoom"
     ];
     taps = [
+      "chipsalliance/verible"
       "dimentium/autoraise"
       "MisterTea/et"
     ];
@@ -54,6 +56,7 @@
       "docker"
       "et"
       "pam-reattach"
+      "verilator"
     ];
   };
 }

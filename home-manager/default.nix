@@ -219,7 +219,11 @@ in
         # the nix-profile/bin should not be necessary, but homeManager isn't
         # addding this to the path when running stand alone
         # (i.e. without nixos or darwin)
-        export PATH="$HOME/bin:$HOME/.nix-profile/bin:$PATH"
+        #
+        # verible couldn't be found on darwin without adding homebrew explicitly.
+        # It has to be installed from there because the nix package doesn't support
+        # apple silicon yet.
+        export PATH="$HOME/bin:$HOME/.nix-profile/bin:/opt/homebrew/bin:$PATH"
 
         export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 
