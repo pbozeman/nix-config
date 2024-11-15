@@ -4,3 +4,7 @@ sudo nix-env --delete-generations old
 sudo nix-collect-garbage -d
 nix-env --delete-generations old
 nix-collect-garbage -d
+
+if nixos-version >/dev/null 2>&1; then
+  sudo nixos-rebuild boot --flake .
+fi
