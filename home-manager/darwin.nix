@@ -11,7 +11,6 @@
       --remove all \
       --add "/Applications/Brave Browser.app" \
       --add /Applications/WezTerm.app \
-      --add /Applications/NotePlan.app \
       --add /Applications/Spotify.app \
       --add "/System/Applications/Preview.app" \
       --add "/System/Applications/Utilities/Activity Monitor.app" \

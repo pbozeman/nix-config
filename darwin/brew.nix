@@ -12,12 +12,12 @@
     global.brewfile = true;
 
     masApps = {
-      "1Password" = 1333542190;
+      # "1Password" = 1333542190;
       "Amphetamine" = 937984704;
       "BetterSnapTool" = 417375580;
       "BlueSee" = 1336679524;
-      "Noteplan" = 1505432629;
-      "Parallels" = 1085114709;
+      # "Noteplan" = 1505432629;
+      # "Parallels" = 1085114709;
       "PdfScanner" = 410968114;
       "Tailscale" = 1475387142;
       "Xcode" = 497799835;
