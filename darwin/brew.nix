@@ -40,6 +40,7 @@
       "qlmarkdown"
       "wezterm"
       "wireshark"
+      "vlc"
       "xquartz"
       "zoom"
     ];
