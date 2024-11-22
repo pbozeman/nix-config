@@ -18,7 +18,7 @@
 
     lazyvim-nix = {
       url = "github:pbozeman/lazyvim-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     wezterm = {
