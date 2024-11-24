@@ -65,8 +65,8 @@ with pkgs; [
   unzip
 
   # Python packages
-  python39
-  python39Packages.virtualenv
+  python3
+  python3Packages.virtualenv
 
   # Platformio
   platformio
