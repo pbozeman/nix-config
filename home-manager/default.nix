@@ -167,6 +167,8 @@ in
       # search and replace
       srv = "sr_f v";
       srsv = "sr_f sv";
+
+      gtkwave = "command gtkwave --dark";
     };
 
     file = {
