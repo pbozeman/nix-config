@@ -58,11 +58,12 @@ in
       # just al be dumped into the common alias set.  Consider refactoring later.
 
       # don't add a newline at the top of a clear
-      clear = "precmd() {precmd() {echo }} && clear";
+      clear = "precmd() {precmd() {echo }} && clear && tmux clear-history";
 
       # misc shortcuts
       e = "\${EDITOR}";
       c = "clear";
+      cm = "clear && make";
 
       # rebuilds
       darwin-rebuild = "~/src/nix-config/bin/darwin-rebuild";
