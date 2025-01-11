@@ -21,12 +21,6 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      # https://github.com/NixOS/nixpkgs/issues/348832
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };

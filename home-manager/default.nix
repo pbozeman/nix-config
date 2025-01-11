@@ -566,10 +566,9 @@ in
     wezterm = {
       enable = true;
 
-      package = inputs.wezterm.packages.${pkgs.system}.default;
-
       extraConfig = ''
         return {
+          front_end = "WebGpu",
           check_for_updates = false,
           audible_bell = "Disabled",
           enable_tab_bar = false,
