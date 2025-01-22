@@ -129,8 +129,6 @@ in
       gr = "git rebase -i --autosquash";
       grs = "git restore --staged";
 
-      wip = "git add -A && git commit -m wip";
-
       lazygit = "lazygit -ucd ~/.config/lazygit";
 
       # Always enable colored `grep` output
@@ -375,6 +373,14 @@ in
 
         sr_f() {
           find . -type f -name "*.$1" -exec sed -i "s/$2/$3/g" {} \;
+        }
+
+        wip() {
+          local message="wip"
+          if [ $# -gt 0 ]; then
+            message="$message: $*"
+          fi
+          git add -A && git commit -m "$message"
         }
       '';
     };
