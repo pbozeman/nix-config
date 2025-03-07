@@ -38,8 +38,8 @@ with pkgs; [
   gcc
 
   # Sigrok
-  pulseview
-  sigrok-cli
+  # pulseview
+  # sigrok-cli
 
   # Fonts
   meslo-lgs-nf

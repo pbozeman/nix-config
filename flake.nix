@@ -2,7 +2,7 @@
   description = "dev machines nix config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     hardware.url = "github:nixos/nixos-hardware";
 

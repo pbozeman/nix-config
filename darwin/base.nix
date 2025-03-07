@@ -34,7 +34,7 @@
   };
 
   fonts = {
-    packages = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
+    packages = [ pkgs.nerd-fonts.meslo-lg ];
   };
 
   documentation.enable = true;
@@ -190,15 +190,52 @@
       # settings we’re about to change
       osascript -e 'tell application "System Preferences" to quit'
 
-      # control cetner
+      # Control Center
       # Note: this requires a full reboot, not just logout/login
-      /usr/libexec/PlistBuddy -c "clear dict" -c "add :Siri integer 8" -c "add :Bluetooth integer 18" -c "add :WiFi integer 2" -c "add :ScreenMirroring integer 18" -c "add :Display integer 18" -c "add :FocusModes integer 2" -c "add :BatteryShowPercentage bool true" -c "add :StageManager integer 8" -c "add :NowPlaing integer 2" -c "add :Sound integer 18" -c "add :KeyboardBrightness integer 8" -c "add :AirDrop integer 8" -c "add :UserSwitcher integer 2" ~${user}/Library/Preferences/ByHost/com.apple.controlcenter.$(system_profiler SPHardwareDataType | awk '/UUID/ { print $3; }').plist
+      /usr/libexec/PlistBuddy \
+        -c "clear dict" \
+        -c "add :Siri integer 8" \
+        -c "add :Bluetooth integer 18" \
+        -c "add :WiFi integer 2" \
+        -c "add :ScreenMirroring integer 18" \
+        -c "add :Display integer 18" \
+        -c "add :FocusModes integer 2" \
+        -c "add :BatteryShowPercentage bool true" \
+        -c "add :StageManager integer 8" \
+        -c "add :NowPlaing integer 2" \
+        -c "add :Sound integer 18" \
+        -c "add :KeyboardBrightness integer 8" \
+        -c "add :AirDrop integer 8" \
+        -c "add :UserSwitcher integer 2" \
+        "/Users/${user}/Library/Preferences/ByHost/com.apple.controlcenter.$(system_profiler SPHardwareDataType | awk '/UUID/ { print $3; }').plist"
 
       # Better Snap Tool
-      /usr/libexec/PlistBuddy -c "delete :registeredHotkeys" ~${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist || true
-      /usr/libexec/PlistBuddy -c "delete :shiftMove" ~${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist || true
-      /usr/libexec/PlistBuddy -c "add :shiftMove integer 1" -c "add :registeredHotkeys dict" -c "add :registeredHotkeys:15 dict" -c "add :registeredHotkeys:16 dict" -c "add :registeredHotkeys:2 dict" -c "add :registeredHotkeys:4 dict" -c "add :registeredHotkeys:15:keyCode integer 126" -c "add :registeredHotkeys:15:modifiers integer 8392960" -c "add :registeredHotkeys:16:keyCode integer 125" -c "add :registeredHotkeys:16:modifiers integer 8392960" -c "add :registeredHotkeys:2:keyCode integer 123" -c "add :registeredHotkeys:2:modifiers integer 8392960" -c "add :registeredHotkeys:4:keyCode integer 124" -c "add :registeredHotkeys:4:modifiers integer 8392960" ~${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist
+      /usr/libexec/PlistBuddy \
+        -c "delete :registeredHotkeys" \
+        "/Users/${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist" || true
+
+      /usr/libexec/PlistBuddy \
+        -c "delete :shiftMove" \
+        "/Users/${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist" || true
+
+      /usr/libexec/PlistBuddy \
+        -c "add :shiftMove integer 1" \
+        -c "add :registeredHotkeys dict" \
+        -c "add :registeredHotkeys:15 dict" \
+        -c "add :registeredHotkeys:16 dict" \
+        -c "add :registeredHotkeys:2 dict" \
+        -c "add :registeredHotkeys:4 dict" \
+        -c "add :registeredHotkeys:15:keyCode integer 126" \
+        -c "add :registeredHotkeys:15:modifiers integer 8392960" \
+        -c "add :registeredHotkeys:16:keyCode integer 125" \
+        -c "add :registeredHotkeys:16:modifiers integer 8392960" \
+        -c "add :registeredHotkeys:2:keyCode integer 123" \
+        -c "add :registeredHotkeys:2:modifiers integer 8392960" \
+        -c "add :registeredHotkeys:4:keyCode integer 124" \
+        -c "add :registeredHotkeys:4:modifiers integer 8392960" \
+        "/Users/${user}/Library/Preferences/com.hegenberg.BetterSnapTool.plist"
     '';
+
     # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
     activationScripts.postUserActivation.text = ''
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
