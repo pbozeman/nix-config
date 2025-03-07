@@ -37,6 +37,9 @@ with pkgs; [
   gnumake
   gcc
 
+  # agents
+  claude-code
+
   # Sigrok
   # pulseview
   # sigrok-cli
