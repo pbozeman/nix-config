@@ -23,6 +23,7 @@ with pkgs; [
   btop
   coreutils
   direnv
+  fswatch
   nix-direnv
   fd
   duf
