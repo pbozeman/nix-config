@@ -380,7 +380,7 @@ in
           if [ $# -gt 0 ]; then
             message="$message: $*"
           fi
-          git add -A && git commit -m "$message"
+          git add -A && git commit --no-verify -m "$message"
         }
       '';
     };
