@@ -47,7 +47,7 @@
           inherit system;
           inherit
             (import ./overlays {
-              inherit inputs nixpkgs nix-darwin;
+              inherit inputs nixpkgs;
             }) overlays;
           config = {
             allowUnsupportedSystem = false;

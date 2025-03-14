@@ -1,7 +1,10 @@
 { inputs
 , nixpkgs
-, nix-darwin
 , ...
 }: {
-  overlays = [ ];
+  overlays = [
+    (import ./claude-code.nix {
+      inherit inputs nixpkgs;
+    })
+  ];
 }
