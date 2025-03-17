@@ -573,10 +573,9 @@ in
     wezterm = {
       enable = true;
 
-      # TODO: remove this if workign without it now
-      #    front_end = "WebGpu",
       extraConfig = ''
         return {
+          front_end = "WebGpu",
           check_for_updates = false,
           audible_bell = "Disabled",
           enable_tab_bar = false,

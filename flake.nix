@@ -2,8 +2,8 @@
   description = "dev machines nix config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -29,7 +29,7 @@
   outputs =
     { self
     , nixpkgs
-    , nixpkgs-stable
+    , nixpkgs-unstable
     , hardware
     , nix-darwin
     , home-manager
@@ -60,7 +60,6 @@
             keep-outputs = true;
           };
         };
-
 
       mkHome = user: fullname: email: modules: {
         home-manager = {
