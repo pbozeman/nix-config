@@ -33,6 +33,7 @@
       "kicad"
       "firefox"
       "google-chrome"
+      "obs"
       "obsidian"
       "openlens"
       "pd"
