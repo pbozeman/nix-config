@@ -46,22 +46,28 @@
     yelp
   ]);
 
+  # mouse button remapping
+  environment.etc."udev/hwdb.d/90-logitech-mouse-button-remap.hwdb".text = ''
+    # Remap BTN_FORWARD (scan code 90006) to KEY_LEFTMETA (Super key)
+    # Logitech USB Receiver Mouse
+    evdev:input:b0003v046DpC548*
+     KEYBOARD_KEY_90006=leftmeta
+     ID_INPUT_KEYBOARD=1
+  '';
+
+  # Create a udev rule to apply the mapping
+  services.udev.extraRules = ''
+    # Apply hwdb mapping for Logitech USB Receiver Mouse
+    ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c548", RUN+="${pkgs.systemd}/bin/systemd-hwdb update", RUN+="${pkgs.coreutils}/bin/sleep 1", RUN+="${pkgs.systemd}/bin/udevadm trigger %p"
+  '';
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     options = "ctrl:nocaps";
   };
 
-  environment.systemPackages = with pkgs; [
-    input-remapper
-  ];
-
-  # mouse button remapping
-  #
-  # TODO: pull in the config file to this flake. The only
-  # preset used is button FORWARD to SUPER_L
-  services.input-remapper.enable = true;
-
+  # keyboard rate
   services.xserver.autoRepeatDelay = 200;
   services.xserver.autoRepeatInterval = 15;
 
