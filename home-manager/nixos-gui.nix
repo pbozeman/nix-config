@@ -21,6 +21,7 @@
     gnome-shell-extensions
     gnome-tweaks
     gnomeExtensions.forge
+    gnomeExtensions.hide-top-bar
     xsel
   ];
 
