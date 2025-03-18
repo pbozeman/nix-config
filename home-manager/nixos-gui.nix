@@ -23,6 +23,13 @@
     gnomeExtensions.forge
     gnomeExtensions.hide-top-bar
     xsel
+
+    # TODO: this is sort of a hack in that we want verible support on all but darwin
+    # since there isn't an arm version of the verible build. Dropping this in the gui
+    # file for the moment, as it achieves the short term goal. If this package stays
+    # in the nix config, then find it a proper home.. However, it really should be
+    # in the lazyvim flake.
+    verible
   ];
 
   gtk = {
