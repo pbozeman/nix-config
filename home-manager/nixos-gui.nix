@@ -12,6 +12,7 @@
 
     # apps
     kicad
+    obs-studio
     obsidian
     spotify
     zoom-us
