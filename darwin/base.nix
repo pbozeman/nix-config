@@ -34,7 +34,7 @@
   };
 
   fonts = {
-    packages = [ pkgs.nerd-fonts.meslo-lg ];
+    packages = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
   };
 
   documentation.enable = true;
