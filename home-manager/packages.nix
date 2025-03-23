@@ -15,6 +15,7 @@ in
 
 with pkgs; [
   # General packages for development and system management
+  ascii
   aspell
   aspellDicts.en
   autojump
