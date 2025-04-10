@@ -24,6 +24,8 @@
     gnomeExtensions.hide-top-bar
     xsel
 
+    xorg.xhost
+
     # TODO: this is sort of a hack in that we want verible support on all but darwin
     # since there isn't an arm version of the verible build. Dropping this in the gui
     # file for the moment, as it achieves the short term goal. If this package stays
