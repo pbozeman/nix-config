@@ -36,7 +36,6 @@ in
     # TODO: make lazyvim-nix show up in packages (with an overlay? )
     packages = with pkgs; let
       additionalPackages = [
-        # Add your additional packages here
         inputs.lazyvim-nix.packages.${system}.nvim
       ];
     in
