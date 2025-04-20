@@ -101,8 +101,10 @@
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      X11Forwarding = true;
+      X11UseLocalhost = true;
     };
   };
 }
