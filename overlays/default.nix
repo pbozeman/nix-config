@@ -9,5 +9,8 @@
     (import ./brave.nix {
       inherit inputs nixpkgs;
     })
+    (import ./kicad.nix {
+      inherit inputs nixpkgs;
+    })
   ];
 }
