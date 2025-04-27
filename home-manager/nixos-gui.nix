@@ -5,6 +5,8 @@
 , ...
 }: {
   home.packages = with pkgs; [
+    anki
+
     # browsers
     brave
     chromium
