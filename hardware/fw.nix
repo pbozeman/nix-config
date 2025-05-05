@@ -11,6 +11,9 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.kernelParams = [
+    "resume=UUID=a739fd88-0229-45be-8950-86b67ff22e9b"
+  ];
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod" ];
