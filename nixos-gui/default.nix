@@ -47,13 +47,13 @@
   ]);
 
   # mouse button remapping
-  environment.etc."udev/hwdb.d/90-logitech-mouse-button-remap.hwdb".text = ''
-    # Remap BTN_FORWARD (scan code 90006) to KEY_LEFTMETA (Super key)
-    # Logitech USB Receiver Mouse
-    evdev:input:b0003v046DpC548*
-     KEYBOARD_KEY_90006=leftmeta
-     ID_INPUT_KEYBOARD=1
-  '';
+  #environment.etc."udev/hwdb.d/90-logitech-mouse-button-remap.hwdb".text = ''
+  #  # Remap BTN_FORWARD (scan code 90006) to KEY_LEFTMETA (Super key)
+  #  # Logitech USB Receiver Mouse
+  #  evdev:input:b0003v046DpC548*
+  #   KEYBOARD_KEY_90006=leftmeta
+  #   ID_INPUT_KEYBOARD=1
+  #'';
 
   # Create a udev rule to apply the mapping
   services.udev.extraRules = ''
@@ -78,7 +78,8 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

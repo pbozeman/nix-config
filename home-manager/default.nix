@@ -210,7 +210,7 @@ in
         compdef _gtkwave gtkwave
       '';
 
-      initExtra = ''
+      initContent = ''
         eval "$(direnv hook zsh)"
 
         export LANG=en_US.UTF-8
