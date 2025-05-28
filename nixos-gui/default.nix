@@ -18,8 +18,17 @@
   networking.networkmanager.enable = true;
 
   # Lid switch power settings
-  services.logind.lidSwitch = "hibernate";
-  services.logind.lidSwitchExternalPower = "lock";
+  services.logind =
+    {
+      lidSwitch = "hibernate";
+      lidSwitchDocked = "ignore";
+      lidSwitchExternalPower = "ignore";
+      extraConfig = ''
+        HandleLidSwitch=hibernate
+        HandleLidSwitchExternalPower=hibernate
+        HandleLidSwitchDocked=ignore
+      '';
+    };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
