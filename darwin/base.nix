@@ -5,7 +5,7 @@
 }: {
   system.stateVersion = 4;
 
-  services.nix-daemon.enable = true;
+  ids.gids.nixbld = 350;
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
@@ -33,9 +33,9 @@
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
-  fonts = {
-    packages = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
-  };
+  fonts.packages = [
+    pkgs.meslo-lgs-nf
+  ];
 
   documentation.enable = true;
 

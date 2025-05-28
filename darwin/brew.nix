@@ -47,14 +47,14 @@
     ];
     taps = [
       "chipsalliance/verible"
-      "dimentium/autoraise"
+#     "dimentium/autoraise"
       "MisterTea/et"
     ];
     brews = [
-      {
-        name = "autoraise";
-        start_service = true;
-      }
+#      {
+#        name = "autoraise";
+#        start_service = true;
+#      }
       "docker"
       "et"
       "pam-reattach"
