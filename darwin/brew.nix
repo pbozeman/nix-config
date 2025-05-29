@@ -26,6 +26,7 @@
 
     # TODO: move to homemanager version of wezeterm once it installs into the apps dir
     casks = [
+      "alacritty"
       "arduino-ide"
       "brave-browser"
       "itsycal"
@@ -47,14 +48,14 @@
     ];
     taps = [
       "chipsalliance/verible"
-#     "dimentium/autoraise"
+      #     "dimentium/autoraise"
       "MisterTea/et"
     ];
     brews = [
-#      {
-#        name = "autoraise";
-#        start_service = true;
-#      }
+      #      {
+      #        name = "autoraise";
+      #        start_service = true;
+      #      }
       "docker"
       "et"
       "pam-reattach"

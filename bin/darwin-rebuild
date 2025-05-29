@@ -4,4 +4,4 @@
 cd $(dirname $(readlink -f $0))
 cd ..
 
-darwin-rebuild switch --flake . $@
+sudo darwin-rebuild switch --flake . $@

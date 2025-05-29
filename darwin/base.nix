@@ -4,6 +4,7 @@
 , ...
 }: {
   system.stateVersion = 4;
+  system.primaryUser = user;
 
   ids.gids.nixbld = 350;
 
@@ -237,7 +238,7 @@
     '';
 
     # https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
-    activationScripts.postUserActivation.text = ''
+    activationScripts.customize.text = ''
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     '';
   };

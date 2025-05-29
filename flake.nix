@@ -249,6 +249,22 @@
             ])
           ];
         };
+
+        "slabtop" = nix-darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          pkgs = mkPkgs "x86_64-darwin";
+          specialArgs = {
+            inherit inputs nixpkgs secrets user;
+          };
+          modules = [
+            ./darwin
+            home-manager.darwinModules.home-manager
+            (mkHome user fullname email [
+              ./home-manager
+              ./home-manager/darwin.nix
+            ])
+          ];
+        };
       };
     };
 }
