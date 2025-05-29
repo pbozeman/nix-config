@@ -110,7 +110,7 @@
 
     "org/gnome/shell" = {
       favorite-apps = [
-        "org.wezfurlong.wezterm.desktop"
+        "Alacritty.desktop"
         "brave-browser.desktop"
         "obsidian.desktop"
         "1password.desktop"
