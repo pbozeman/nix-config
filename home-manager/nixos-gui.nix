@@ -22,6 +22,7 @@
     # x/gnome support apps
     gnome-shell-extensions
     gnome-tweaks
+    gnomeExtensions.caffeine
     gnomeExtensions.forge
     gnomeExtensions.hide-top-bar
     xsel
