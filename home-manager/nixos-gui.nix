@@ -16,6 +16,7 @@
     kicad
     obs-studio
     obsidian
+    slack
     spotify
     zoom-us
 
