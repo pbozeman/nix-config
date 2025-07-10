@@ -1,5 +1,6 @@
 { inputs
 , pkgs
+, lib
 , user
 , fullname
 , email
@@ -180,6 +181,17 @@ in
         source = ./lazygit/config.yml;
       };
     };
+
+    activation.linkBinFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      src="${./bin}"
+      dest="$HOME/bin"
+
+      mkdir -p "$dest"
+      for f in "$src"/*; do
+        [ -f "$f" ] || continue
+        ln -sf "$f" "$dest/$(basename "$f")"
+      done
+    '';
   };
 
   programs = {
