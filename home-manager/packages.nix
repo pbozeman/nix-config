@@ -73,9 +73,6 @@ with pkgs; [
   python3
   python3Packages.virtualenv
 
-  # Platformio
-  platformio
-
   # iac
   terraform
 
