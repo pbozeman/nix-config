@@ -88,6 +88,7 @@
       "docker"
       "wheel"
       "vboxusers"
+      "wireshark"
     ];
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };

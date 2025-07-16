@@ -18,6 +18,7 @@
     obsidian
     slack
     spotify
+    wireshark
     zoom-us
 
     # x/gnome support apps
