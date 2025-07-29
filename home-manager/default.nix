@@ -94,8 +94,8 @@ in
       calc = "kalker";
       df = "duf";
 
-      # clang format for pio code
-      cf = "find {src,test} -iname *.h -o -iname *.cpp | xargs clang-format -i -style=Google";
+      # clang format
+      cf = "git -C \"$(git rev-parse --show-toplevel)\" status --porcelain | awk '{print $2}' | grep -E '\\.(h|cpp)$' | sed \"s|^|$(git rev-parse --show-toplevel)/|\" | xargs -r clang-format -i";
 
       #scc
       scc = "scc --cocomo-project-type embedded";
