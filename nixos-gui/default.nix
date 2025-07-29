@@ -68,7 +68,10 @@
   services.udev.extraRules = ''
     # Apply hwdb mapping for Logitech USB Receiver Mouse
     ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c548", RUN+="${pkgs.systemd}/bin/systemd-hwdb update", RUN+="${pkgs.coreutils}/bin/sleep 1", RUN+="${pkgs.systemd}/bin/udevadm trigger %p"
+    SUBSYSTEM=="usbmon", GROUP="usbmon", MODE="0640"
   '';
+
+  users.groups.usbmon = { };
 
   # Configure keymap in X11
   services.xserver.xkb = {

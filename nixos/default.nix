@@ -87,6 +87,7 @@
       "dialout"
       "docker"
       "wheel"
+      "usbmon"
       "vboxusers"
       "wireshark"
     ];
