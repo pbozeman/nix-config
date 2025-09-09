@@ -31,7 +31,6 @@ with pkgs; [
   killall
   openssh
   pandoc
-  usbtop
   wget
   zip
 

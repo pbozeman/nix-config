@@ -18,6 +18,7 @@
     obsidian
     slack
     spotify
+    usbtop
     wireshark
     zoom-us
 
