@@ -68,6 +68,7 @@ with pkgs; [
   tree
   tmux
   unzip
+  zathura
 
   # Python packages
   python3
