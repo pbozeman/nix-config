@@ -32,6 +32,7 @@
       "itsycal"
       "karabiner-elements"
       "kicad"
+      "lm-studio"
       "firefox"
       "google-chrome"
       "obs"
