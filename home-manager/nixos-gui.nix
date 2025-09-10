@@ -13,6 +13,7 @@
     firefox
 
     # apps
+    lmstudio
     kicad
     obs-studio
     obsidian
