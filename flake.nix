@@ -119,6 +119,28 @@
             ];
           };
 
+        fwd =
+          let
+            hostname = "fwd";
+          in
+          nixpkgs.lib.nixosSystem {
+            pkgs = mkPkgs "x86_64-linux";
+            specialArgs = {
+              inherit inputs nixpkgs secrets hostname user fullname;
+            };
+            modules = [
+              ./hardware/fwd.nix
+              ./nixos
+              ./nixos/services.nix
+              ./nixos-gui
+              home-manager.nixosModules.home-manager
+              (mkHome user fullname email [
+                ./home-manager
+                ./home-manager/nixos-gui.nix
+              ])
+            ];
+          };
+
         tp =
           let
             hostname = "tp";
