@@ -56,19 +56,19 @@
   ]);
 
   # mouse button remapping
-  #environment.etc."udev/hwdb.d/90-logitech-mouse-button-remap.hwdb".text = ''
-  #  # Remap BTN_FORWARD (scan code 90006) to KEY_LEFTMETA (Super key)
-  #  # Logitech USB Receiver Mouse
-  #  evdev:input:b0003v046DpC548*
-  #   KEYBOARD_KEY_90006=leftmeta
-  #   ID_INPUT_KEYBOARD=1
-  #'';
+  environment.etc."udev/hwdb.d/90-logitech-mouse-button-remap.hwdb".text = ''
+    # Remap BTN_FORWARD (scan code 90006) to KEY_LEFTMETA (Super key)
+    # Logitech USB Receiver Mouse
+    evdev:input:b*v046DpC548*
+     KEYBOARD_KEY_0115=leftmeta
+     KEYBOARD_KEY_90006=leftmeta
+  '';
 
-  # Create a udev rule to apply the mapping
+  # mark the receiver's input event nodes as a keyboard (needed on Wayland)
   services.udev.extraRules = ''
-    # Apply hwdb mapping for Logitech USB Receiver Mouse
-    ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c548", RUN+="${pkgs.systemd}/bin/systemd-hwdb update", RUN+="${pkgs.coreutils}/bin/sleep 1", RUN+="${pkgs.systemd}/bin/udevadm trigger %p"
-    SUBSYSTEM=="usbmon", GROUP="usbmon", MODE="0640"
+    # Tag Logitech 046d:c548 input interfaces as keyboards so GNOME/Mutter accepts key events
+    KERNEL=="event*", SUBSYSTEM=="input", ENV{ID_VENDOR_ID}=="046d", ENV{ID_MODEL_ID}=="c548", \
+      ENV{ID_INPUT_KEYBOARD}="1"
   '';
 
   users.groups.usbmon = { };
