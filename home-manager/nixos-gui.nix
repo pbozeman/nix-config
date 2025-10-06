@@ -76,6 +76,10 @@
       text-scaling-factor = 1.5;
     };
 
+    "org/gnome/desktop/input-sources" = {
+      "xkb-options" = [ "ctrl:nocaps" ];
+    };
+
     "org/gnome/desktop/peripherals/keyboard" = {
       delay = lib.hm.gvariant.mkUint32 200;
       repeat-interval = lib.hm.gvariant.mkUint32 10;
