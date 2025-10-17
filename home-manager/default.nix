@@ -603,6 +603,10 @@ in
           title = "term";
           dynamic_title = true;
           decorations = "none";
+          padding = {
+            x = 8;
+            y = 8;
+          };
         };
         colors = {
           primary.foreground = "#D8DEE9";

@@ -4,6 +4,8 @@
 , user
 , ...
 }: {
+  home.file.".config/forge/stylesheet/forge/stylesheet.css".source = ./gnome-forge/stylesheet.css;
+
   home.packages = with pkgs; [
     anki
 
@@ -112,6 +114,7 @@
       begin-move = [ "<Super>w" ];
       begin-resize = [ "<Super>r" ];
       toggle-fullscreen = [ "<Super>Return" ];
+      minimize = [ ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -119,6 +122,9 @@
     };
 
     "org/gnome/shell" = {
+      enabled-extensions = [
+        "forge@jmmaranan.com"
+      ];
       favorite-apps = [
         "Alacritty.desktop"
         "brave-browser.desktop"
@@ -127,6 +133,15 @@
         "spotify.desktop"
         "org.gnome.Nautilus.desktop"
       ];
+    };
+
+    "org/gnome/shell/extensions/forge" = {
+      focus-border-toggle = true;
+      window-gap-size-increment = lib.hm.gvariant.mkUint32 1;
+    };
+
+    "org/gnome/shell/extensions/forge/keybindings" = {
+      prefs-tiling-toggle = [ ];
     };
   };
 }
