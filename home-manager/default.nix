@@ -601,6 +601,7 @@ in
         window = {
           title = "term";
           dynamic_title = true;
+          decorations = "none";
         };
         colors = {
           primary.foreground = "#D8DEE9";
