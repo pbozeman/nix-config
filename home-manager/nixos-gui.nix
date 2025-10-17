@@ -115,6 +115,18 @@
       begin-resize = [ "<Super>r" ];
       toggle-fullscreen = [ "<Super>Return" ];
       minimize = [ ];
+      # workspace switching
+      switch-to-workspace-1 = [ "<Super>1" ];
+      switch-to-workspace-2 = [ "<Super>2" ];
+      switch-to-workspace-3 = [ "<Super>3" ];
+      switch-to-workspace-4 = [ "<Super>4" ];
+      switch-to-workspace-left = [ "<Super>Left" ];
+      switch-to-workspace-right = [ "<Super>Right" ];
+      # move window to workspace
+      move-to-workspace-1 = [ "<Shift><Super>1" ];
+      move-to-workspace-2 = [ "<Shift><Super>2" ];
+      move-to-workspace-3 = [ "<Shift><Super>3" ];
+      move-to-workspace-4 = [ "<Shift><Super>4" ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -142,6 +154,18 @@
 
     "org/gnome/shell/extensions/forge/keybindings" = {
       prefs-tiling-toggle = [ ];
+    };
+
+    "org/gnome/shell/keybindings" = {
+      switch-to-application-1 = [ ];
+      switch-to-application-2 = [ ];
+      switch-to-application-3 = [ ];
+      switch-to-application-4 = [ ];
+    };
+
+    "org/gnome/mutter/keybindings" = {
+      toggle-tiled-left = [ ];
+      toggle-tiled-right = [ ];
     };
   };
 }
