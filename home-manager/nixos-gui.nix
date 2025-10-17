@@ -26,6 +26,7 @@
     zoom-us
 
     # x/gnome support apps
+    devilspie2
     gnome-shell-extensions
     gnome-tweaks
     gnomeExtensions.caffeine
@@ -167,5 +168,43 @@
       toggle-tiled-left = [ ];
       toggle-tiled-right = [ ];
     };
+  };
+
+  # Create wrapper script to launch zathura with X11 backend
+  home.file."bin/zathura" = {
+    text = ''
+      #!/usr/bin/env bash
+      GDK_BACKEND=x11 exec ${pkgs.zathura}/bin/zathura "$@"
+    '';
+    executable = true;
+  };
+
+  # Devilspie2 config to remove zathura decorations
+  home.file.".config/devilspie2/zathura.lua" = {
+    text = ''
+      -- Try multiple ways to detect zathura
+      debug_print("Window: " .. get_window_name())
+      debug_print("Application: " .. get_application_name())
+      debug_print("Class: " .. get_class_instance_name())
+
+      if (string.find(get_application_name(), "zathura") or
+          string.find(get_window_name(), "zathura") or
+          string.find(get_class_instance_name(), "zathura")) then
+        undecorate_window()
+      end
+    '';
+  };
+
+  # Autostart devilspie2 with X11 backend
+  home.file.".config/autostart/devilspie2.desktop" = {
+    text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Devilspie2
+      Exec=env GDK_BACKEND=x11 ${pkgs.devilspie2}/bin/devilspie2
+      Hidden=false
+      NoDisplay=false
+      X-GNOME-Autostart-enabled=true
+    '';
   };
 }
