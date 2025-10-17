@@ -129,6 +129,7 @@
               inherit inputs nixpkgs secrets hostname user fullname;
             };
             modules = [
+              hardware.nixosModules.framework-desktop-amd-ai-max-300-series
               ./hardware/fwd.nix
               ./nixos
               ./nixos/services.nix
