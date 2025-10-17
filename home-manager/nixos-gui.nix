@@ -74,6 +74,7 @@
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
       text-scaling-factor = 1.5;
+      font-antialiasing = "rgba";
     };
 
     "org/gnome/desktop/input-sources" = {
