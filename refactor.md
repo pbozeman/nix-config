@@ -14,12 +14,7 @@ The file itself warns it's "playing with fire" and can break sudo access. This s
 
 ## Dead/Unused Code
 
-### 2. Large commented settings block in darwin/base.nix
-**Location**: `darwin/base.nix:114-167` (54 lines)
-
-Commented Safari, Mail, AdLib, SoftwareUpdate, TimeMachine, ImageCapture settings.
-
-**Action**: Delete or move to separate `darwin/unused-settings.nix` with explanation.
+~~No remaining dead/unused code~~ ✅
 
 ## Structural Improvements
 
@@ -259,11 +254,13 @@ Consider disko for declarative disk management across all systems.
 - **Total .nix files**: 23
 - **Main flake.nix**: ~170 lines (down from 293)
   - **Achieved reduction**: ~120 lines with mkNixosSystem, mkDarwinSystem, mkHomeConfiguration helpers
+- **darwin/base.nix**: ~192 lines (down from 246)
+  - **Achieved reduction**: ~54 lines of commented dead code removed
 - **home-manager/default.nix**: 772 lines
   - **Potential reduction**: Split into 5-8 smaller modules
 - **TODOs/FIXMEs**: 13+ across codebase
-- **Commented dead code**: ~100 lines
-- **Remaining potential cleanup**: ~80 lines
+- **Commented dead code**: ~~None remaining~~ ✅
+- **Remaining potential cleanup**: ~25 lines
 
 ## Prioritized Action Plan
 
@@ -272,10 +269,11 @@ Consider disko for declarative disk management across all systems.
 2. ~~Create `mkNixosSystem` helper function~~ - Done
 3. ~~Create `mkDarwinSystem` helper function~~ - Done
 4. ~~Create `mkHomeConfiguration` helper function~~ - Done
+5. ~~Delete or document `overlays/brave.nix`~~ - Done
+6. ~~Delete commented settings block in `darwin/base.nix`~~ - Done
 
 ### Phase 1: Critical Fixes (High Impact, Low Risk)
-1. ~~Delete or document `overlays/brave.nix`~~ - Done
-2. Update `initContent` → `initExtra` in home-manager
+1. Update `initContent` → `initExtra` in home-manager
 
 ### Phase 2: Modularization (Medium Impact, Medium Risk)
 2. Split `home-manager/default.nix` into modules
