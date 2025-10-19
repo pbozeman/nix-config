@@ -74,136 +74,72 @@
           };
         };
       };
+
+      mkNixosSystem =
+        { hostname
+        , system ? "x86_64-linux"
+        , hardwareModules
+        , services ? true
+        , gui ? true
+        , homeModules ? [ ]
+        }:
+        let
+          guiHomeModules = nixpkgs.lib.optional gui ./home-manager/nixos-gui.nix;
+        in
+        nixpkgs.lib.nixosSystem {
+          pkgs = mkPkgs system;
+          specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
+          modules = hardwareModules
+            ++ [ ./nixos ]
+            ++ nixpkgs.lib.optional services ./nixos/services.nix
+            ++ nixpkgs.lib.optional gui ./nixos-gui
+            ++ [
+            home-manager.nixosModules.home-manager
+            (mkHome user fullname email ([ ./home-manager ] ++ guiHomeModules ++ homeModules))
+          ];
+        };
     in
     {
       nixosConfigurations = {
-        nixos-parallels =
-          let
-            hostname = "nixos-parallels";
-          in
-          nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = {
-              inherit inputs nixpkgs secrets hostname user fullname;
-            };
-            modules = [
-              ./hardware/parallels.nix
-              ./nixos
-              home-manager.nixosModules.home-manager
-              (mkHome user fullname email [
-                ./home-manager
-              ])
-            ];
-          };
+        fw = mkNixosSystem {
+          hostname = "fw";
+          hardwareModules = [
+            hardware.nixosModules.framework-16-7040-amd
+            ./hardware/fw.nix
+          ];
+        };
 
-        fw =
-          let
-            hostname = "fw";
-          in
-          nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = {
-              inherit inputs nixpkgs secrets hostname user fullname;
-            };
-            modules = [
-              hardware.nixosModules.framework-16-7040-amd
-              ./hardware/fw.nix
-              ./nixos
-              ./nixos/services.nix
-              ./nixos-gui
-              home-manager.nixosModules.home-manager
-              (mkHome user fullname email [
-                ./home-manager
-                ./home-manager/nixos-gui.nix
-              ])
-            ];
-          };
+        fwd = mkNixosSystem {
+          hostname = "fwd";
+          hardwareModules = [
+            hardware.nixosModules.framework-desktop-amd-ai-max-300-series
+            ./hardware/fwd.nix
+          ];
+        };
 
-        fwd =
-          let
-            hostname = "fwd";
-          in
-          nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = {
-              inherit inputs nixpkgs secrets hostname user fullname;
-            };
-            modules = [
-              hardware.nixosModules.framework-desktop-amd-ai-max-300-series
-              ./hardware/fwd.nix
-              ./nixos
-              ./nixos/services.nix
-              ./nixos-gui
-              home-manager.nixosModules.home-manager
-              (mkHome user fullname email [
-                ./home-manager
-                ./home-manager/nixos-gui.nix
-              ])
-            ];
-          };
+        tp = mkNixosSystem {
+          hostname = "tp";
+          hardwareModules = [
+            hardware.nixosModules.lenovo-thinkpad-l13
+            ./hardware/tp.nix
+          ];
+        };
 
-        tp =
-          let
-            hostname = "tp";
-          in
-          nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = {
-              inherit inputs nixpkgs secrets hostname user fullname;
-            };
-            modules = [
-              hardware.nixosModules.lenovo-thinkpad-l13
-              ./hardware/tp.nix
-              ./nixos
-              ./nixos/services.nix
-              ./nixos-gui
-              home-manager.nixosModules.home-manager
-              (mkHome user fullname email [
-                ./home-manager
-                ./home-manager/nixos-gui.nix
-              ])
-            ];
-          };
+        dev = mkNixosSystem {
+          hostname = "dev";
+          hardwareModules = [ ./hardware/proxmox.nix ];
+          gui = false;
+        };
 
-        dev =
-          let
-            hostname = "dev";
-          in
-          nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = {
-              inherit inputs nixpkgs secrets hostname user fullname;
-            };
-            modules = [
-              ./hardware/proxmox.nix
-              ./nixos
-              ./nixos/services.nix
-              home-manager.nixosModules.home-manager
-              (mkHome user fullname email [
-                ./home-manager
-              ])
-            ];
-          };
-
-        wsl =
-          let
-            hostname = "wsl";
-          in
-          nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            specialArgs = {
-              inherit inputs nixpkgs secrets hostname user fullname;
-            };
-            modules = [
-              nixos-wsl.nixosModules.wsl
-              ./wsl.nix
-              ./nixos
-              home-manager.nixosModules.home-manager
-              (mkHome user fullname email [
-                ./home-manager
-              ])
-            ];
-          };
+        wsl = mkNixosSystem {
+          hostname = "wsl";
+          hardwareModules = [
+            nixos-wsl.nixosModules.wsl
+            ./wsl.nix
+          ];
+          services = false;
+          gui = false;
+        };
       };
 
       homeConfigurations = {
