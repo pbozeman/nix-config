@@ -1,23 +1,11 @@
-{ config
-, pkgs
+{ pkgs
 , secrets
-, hostname
-, user
-, fullname
 , ...
 }: {
-  # FIXME: This isn't the best place for this, but as of now, all my nixos
-  # machines are backend servers, not laptops. I would not want to enable
-  # this on a laptop.
-  services.eternal-terminal.enable = true;
-
-  # https://wiki.nixos.org/wiki/Fwupd
-  services.fwupd.enable = true;
-
-  # tailscale
+  # Tailscale VPN
   services.tailscale.enable = true;
 
-  # create a oneshot job to authenticate to Tailscale
+  # Create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
     description = "Automatic connection to Tailscale";
 

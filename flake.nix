@@ -90,9 +90,9 @@
           pkgs = mkPkgs system;
           specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
           modules = hardwareModules
-            ++ [ ./nixos ]
-            ++ nixpkgs.lib.optional services ./nixos/services.nix
-            ++ nixpkgs.lib.optional gui ./nixos-gui
+            ++ [ ./platforms/nixos ]
+            ++ nixpkgs.lib.optional services ./platforms/nixos/services
+            ++ nixpkgs.lib.optional gui ./platforms/nixos/gui.nix
             ++ [
             home-manager.nixosModules.home-manager
             (mkHome user fullname email ([ ./home-manager ] ++ guiHomeModules ++ homeModules))
@@ -105,7 +105,7 @@
           pkgs = mkPkgs system;
           specialArgs = { inherit inputs nixpkgs secrets user; };
           modules = [
-            ./darwin
+            ./platforms/darwin
             home-manager.darwinModules.home-manager
             (mkHome user fullname email [
               ./home-manager
@@ -170,7 +170,7 @@
           hostname = "wsl";
           hardwareModules = [
             nixos-wsl.nixosModules.wsl
-            ./wsl.nix
+            ./platforms/nixos/wsl.nix
           ];
           services = false;
           gui = false;

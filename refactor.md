@@ -3,7 +3,7 @@
 ## Critical Issues
 
 ### 1. Dangerous PAM configuration
-**Location**: `darwin/pam.nix:13`
+**Location**: `platforms/darwin/pam.nix:13`
 
 The file itself warns it's "playing with fire" and can break sudo access. This should be properly reviewed and hardened or removed.
 
@@ -17,34 +17,6 @@ The file itself warns it's "playing with fire" and can break sudo access. This s
 ~~No remaining dead/unused code~~ ✅
 
 ## Structural Improvements
-
-### 3. services.nix module organization
-**Location**: `nixos/services.nix:9`
-
-**Current issues**:
-- FIXME noting it's "not the best place"
-- Imported in 3/6 NixOS configs (fw, fwd, tp, dev)
-- NOT imported in nixos-parallels or wsl
-- Contains services that shouldn't run on laptops (eternal-terminal comment)
-
-**Proposed solution**:
-Split into separate modules:
-```
-nixos/
-  services/
-    tailscale.nix       # common across all
-    eternal-terminal.nix  # server-only
-    fwupd.nix            # hardware-dependent
-```
-
-Or create hardware profiles:
-```
-nixos/
-  profiles/
-    server.nix      # imports eternal-terminal
-    workstation.nix # imports fwupd, tailscale
-    minimal.nix     # minimal services
-```
 
 ### 4. home-manager/default.nix is monolithic (772 lines)
 **Location**: `home-manager/default.nix`
@@ -83,22 +55,6 @@ home-manager/
 - Logical separation of concerns
 - Easier to conditionally enable/disable features
 
-### 5. Naming clarity: nixos-gui vs home-manager/nixos-gui.nix
-**Current confusion**:
-- `nixos-gui/default.nix` - system-level X11/GNOME config
-- `home-manager/nixos-gui.nix` - user-level GUI apps
-
-**Proposed clarification**:
-```
-nixos/
-  gnome.nix (or desktop.nix)  # system-level GUI config
-
-home-manager/
-  gui-apps.nix  # user-level GUI applications
-```
-
-Or merge system config into conditional in main nixos module.
-
 ## TODOs from Codebase
 
 ### High Priority TODOs
@@ -115,7 +71,7 @@ Or merge system config into conditional in main nixos module.
    ```
    Currently using additionalPackages - may be resolved.
 
-3. **darwin/brew.nix:27**
+3. **platforms/darwin/brew.nix:27**
    ```
    # TODO: move to homemanager version of wezeterm once it installs into the apps dir
    ```
@@ -251,16 +207,55 @@ Consider disko for declarative disk management across all systems.
 
 ## Summary Statistics
 
-- **Total .nix files**: 23
-- **Main flake.nix**: ~170 lines (down from 293)
+- **Total .nix files**: 26 (increased due to service module split)
+- **Main flake.nix**: ~180 lines (down from 293)
   - **Achieved reduction**: ~120 lines with mkNixosSystem, mkDarwinSystem, mkHomeConfiguration helpers
-- **darwin/base.nix**: ~192 lines (down from 246)
+- **platforms/darwin/base.nix**: ~192 lines (down from 246)
   - **Achieved reduction**: ~54 lines of commented dead code removed
+- **platforms/nixos/**: Now properly organized
+  - **base.nix**: System-level NixOS configuration
+  - **gui.nix**: Desktop environment configuration
+  - **wsl.nix**: WSL-specific configuration
+  - **services/**: Split into 3 focused modules (tailscale, eternal-terminal, fwupd)
 - **home-manager/default.nix**: 772 lines
   - **Potential reduction**: Split into 5-8 smaller modules
 - **TODOs/FIXMEs**: 13+ across codebase
 - **Commented dead code**: ~~None remaining~~ ✅
-- **Remaining potential cleanup**: ~25 lines
+- **Directory structure**: Reorganized under `platforms/` for better clarity
+
+## Recent Changes
+
+### Directory Reorganization (Completed)
+**Date**: 2025-10-18
+
+Reorganized the entire directory structure under `platforms/` for better clarity:
+
+**New structure**:
+```
+platforms/
+  darwin/
+    base.nix
+    brew.nix
+    pam.nix
+    default.nix
+  nixos/
+    base.nix
+    gui.nix
+    wsl.nix
+    default.nix
+    services/
+      tailscale.nix
+      eternal-terminal.nix
+      fwupd.nix
+      default.nix
+```
+
+**Benefits**:
+- Clear separation between platform types (darwin vs nixos)
+- Service modules are now focused and composable
+- Eliminates confusing `nixos-gui/` vs `nixos/` split
+- wsl.nix properly categorized under nixos
+- Easier to understand the codebase at a glance
 
 ## Prioritized Action Plan
 
@@ -271,20 +266,20 @@ Consider disko for declarative disk management across all systems.
 4. ~~Create `mkHomeConfiguration` helper function~~ - Done
 5. ~~Delete or document `overlays/brave.nix`~~ - Done
 6. ~~Delete commented settings block in `darwin/base.nix`~~ - Done
+7. ~~Reorganize directory structure under `platforms/`~~ - Done
+8. ~~Split `nixos/services.nix` into focused modules~~ - Done
+9. ~~Clarify nixos-gui naming (now `platforms/nixos/gui.nix`)~~ - Done
 
 ### Phase 1: Critical Fixes (High Impact, Low Risk)
 1. Update `initContent` → `initExtra` in home-manager
 
 ### Phase 2: Modularization (Medium Impact, Medium Risk)
 2. Split `home-manager/default.nix` into modules
-3. Reorganize `nixos/services.nix` structure
-4. Clarify nixos-gui naming
 
 ### Phase 3: Cleanup (Low Impact, Low Risk)
-5. Delete commented Safari settings block
-6. Address TODOs in home-manager shell functions
-7. Document secrets management approach
-8. Add comments to explain design decisions
+1. Address TODOs in home-manager shell functions
+2. Document secrets management approach
+3. Add comments to explain design decisions
 
 ### Phase 4: Enhancements (Low Priority)
 9. Consider disko for disk management
