@@ -18,6 +18,69 @@ The file itself warns it's "playing with fire" and can break sudo access. This s
 
 ## Structural Improvements
 
+### 3. Create hosts/ directory structure
+**Current issues**:
+- Host-specific configurations scattered across flake.nix (as boolean flags)
+- Hardware configs in separate top-level `hardware/` directory
+- No clear place for per-host settings
+- Hardware files (auto-generated) mixed with configuration choices
+
+**Proposed structure**:
+```
+hosts/
+  fw/
+    default.nix                  # Host-specific config & imports
+    hardware-configuration.nix   # Auto-generated hardware detection
+  fwd/
+    default.nix
+    hardware-configuration.nix
+  tp/
+    default.nix
+    hardware-configuration.nix
+  dev/
+    default.nix
+    hardware-configuration.nix
+  wsl/
+    default.nix
+    hardware-configuration.nix
+
+platforms/
+  darwin/
+    ...
+  nixos/
+    base.nix
+    gui.nix
+    amd.nix      # AMD-specific settings (for fw, fwd)
+    intel.nix    # Intel-specific settings (for tp)
+    services/
+      ...
+```
+
+**Example `hosts/fw/default.nix`**:
+```nix
+{ ... }: {
+  imports = [
+    ./hardware-configuration.nix
+    ../../platforms/nixos
+    ../../platforms/nixos/gui.nix
+    ../../platforms/nixos/amd.nix
+    ../../platforms/nixos/services
+  ];
+
+  networking.hostName = "fw";
+  # Other fw-specific settings
+}
+```
+
+**Benefits**:
+- Everything for a host in one directory
+- Uses idiomatic NixOS naming (`hardware-configuration.nix`)
+- Clear separation: auto-generated vs hand-written config
+- Keeps `hardware-configuration.nix` pure (no custom config)
+- Platform-specific modules (amd.nix, intel.nix) can be shared
+- Easier to bootstrap new hosts
+- Cleaner flake.nix (just reference `./hosts/fw`)
+
 ### 4. home-manager/default.nix is monolithic (772 lines)
 **Location**: `home-manager/default.nix`
 

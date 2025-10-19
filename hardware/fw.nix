@@ -6,6 +6,9 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  # AMD GPU driver
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.kernelParams = [
@@ -18,6 +21,9 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-amd" "usbmon" ];
   boot.extraModulePackages = [ ];
+
+  # USB monitoring group (for Wireshark, etc.)
+  users.groups.usbmon = { };
 
   boot.resumeDevice = "/dev/disk/by-uuid/a739fd88-0229-45be-8950-86b67ff22e9b";
 

@@ -5,6 +5,9 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  # AMD GPU driver
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
