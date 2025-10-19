@@ -603,6 +603,7 @@ in
           title = "term";
           dynamic_title = true;
           decorations = "none";
+          dynamic_padding = true;
           padding = {
             x = 8;
             y = 8;
