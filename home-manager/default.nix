@@ -58,7 +58,7 @@ in
       # just al be dumped into the common alias set.  Consider refactoring later.
 
       # don't add a newline at the top of a clear
-      clear = "precmd() {precmd() {echo }} && clear && tmux clear-history";
+      clear = "precmd() {precmd() {echo }} && clear && [ -n \"\$TMUX\" ] && tmux clear-history || true";
 
       # misc shortcuts
       e = "\${EDITOR}";
