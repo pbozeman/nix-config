@@ -113,8 +113,28 @@
             ])
           ];
         };
+
+      mkHomeConfiguration = { system ? "x86_64-linux" }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs system;
+          extraSpecialArgs = { inherit inputs secrets user fullname email; };
+          modules = [
+            ./home-manager
+          ];
+        };
     in
     {
+      darwinConfigurations = {
+        "mba" = mkDarwinSystem { system = "aarch64-darwin"; };
+        "mini" = mkDarwinSystem { system = "aarch64-darwin"; };
+        "slabtop" = mkDarwinSystem { system = "x86_64-darwin"; };
+      };
+
+      homeConfigurations = {
+        "ubuntu-dev" = mkHomeConfiguration { };
+        "wsl-dev" = mkHomeConfiguration { };
+      };
+
       nixosConfigurations = {
         fw = mkNixosSystem {
           hostname = "fw";
@@ -155,30 +175,6 @@
           services = false;
           gui = false;
         };
-      };
-
-      homeConfigurations = {
-        "ubuntu-dev" = home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs "x86_64-linux";
-          extraSpecialArgs = { inherit inputs secrets user fullname email; };
-          modules = [
-            ./home-manager
-          ];
-        };
-
-        "wsl-dev" = home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs "x86_64-linux";
-          extraSpecialArgs = { inherit inputs secrets user fullname email; };
-          modules = [
-            ./home-manager
-          ];
-        };
-      };
-
-      darwinConfigurations = {
-        "mba" = mkDarwinSystem { system = "aarch64-darwin"; };
-        "mini" = mkDarwinSystem { system = "aarch64-darwin"; };
-        "slabtop" = mkDarwinSystem { system = "x86_64-darwin"; };
       };
     };
 }
