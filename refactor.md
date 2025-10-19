@@ -2,20 +2,7 @@
 
 ## Critical Issues
 
-### 1. Hardcoded username in nixos/default.nix:42
-**Location**: `nixos/default.nix:42`
-
-```nix
-# Current (bad):
-polkitPolicyOwners = [ "pbozeman" ];
-
-# Should be:
-polkitPolicyOwners = [ user ];
-```
-
-**Impact**: Breaks reusability if config is used with different username.
-
-### 2. Dangerous PAM configuration
+### 1. Dangerous PAM configuration
 **Location**: `darwin/pam.nix:13`
 
 The file itself warns it's "playing with fire" and can break sudo access. This should be properly reviewed and hardened or removed.
@@ -25,128 +12,9 @@ The file itself warns it's "playing with fire" and can break sudo access. This s
 # FIXME: this implementation is sort of playing with fire. It can break sudo access
 ```
 
-## Major Code Duplication
-
-### 3. flake.nix: NixOS system configurations (lines 79-206)
-
-All 6 NixOS configs (fw, fwd, tp, dev, nixos-parallels, wsl) follow nearly identical patterns.
-
-**Current pattern (repeated 6 times)**:
-```nix
-HOSTNAME =
-  let hostname = "HOSTNAME"; in
-  nixpkgs.lib.nixosSystem {
-    pkgs = mkPkgs "x86_64-linux";
-    specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
-    modules = [
-      /* hardware config */
-      ./nixos
-      /* optional ./nixos/services.nix */
-      /* optional ./nixos-gui */
-      home-manager.nixosModules.home-manager
-      (mkHome user fullname email [ ./home-manager /* optional gui */ ])
-    ];
-  };
-```
-
-**Proposed solution**:
-```nix
-mkNixosSystem = {
-  hostname,
-  system ? "x86_64-linux",
-  hardwareModules,
-  services ? false,
-  gui ? false,
-  homeModules ? []
-}:
-  nixpkgs.lib.nixosSystem {
-    pkgs = mkPkgs system;
-    specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
-    modules = hardwareModules
-      ++ [ ./nixos ]
-      ++ lib.optional services ./nixos/services.nix
-      ++ lib.optional gui ./nixos-gui
-      ++ [
-        home-manager.nixosModules.home-manager
-        (mkHome user fullname email ([ ./home-manager ] ++ homeModules))
-      ];
-  };
-
-# Usage:
-nixosConfigurations = {
-  fw = mkNixosSystem {
-    hostname = "fw";
-    hardwareModules = [
-      hardware.nixosModules.framework-16-7040-amd
-      ./hardware/fw.nix
-    ];
-    services = true;
-    gui = true;
-    homeModules = [ ./home-manager/nixos-gui.nix ];
-  };
-
-  wsl = mkNixosSystem {
-    hostname = "wsl";
-    hardwareModules = [
-      nixos-wsl.nixosModules.wsl
-      ./wsl.nix
-    ];
-  };
-};
-```
-
-**Estimated reduction**: ~80 lines → ~40 lines
-
-### 4. flake.nix: Darwin system configurations (lines 227-290)
-
-All 4 Darwin configs are 100% identical except for system architecture.
-
-**Current duplication**:
-- miles-mba (x86_64-darwin)
-- mba (aarch64-darwin)
-- mini (aarch64-darwin)
-- slabtop (x86_64-darwin)
-
-**Proposed solution**:
-```nix
-mkDarwinSystem = { system }:
-  nix-darwin.lib.darwinSystem {
-    inherit system;
-    pkgs = mkPkgs system;
-    specialArgs = { inherit inputs nixpkgs secrets user; };
-    modules = [
-      ./darwin
-      home-manager.darwinModules.home-manager
-      (mkHome user fullname email [
-        ./home-manager
-        ./home-manager/darwin.nix
-      ])
-    ];
-  };
-
-# Usage:
-darwinConfigurations = {
-  miles-mba = mkDarwinSystem { system = "x86_64-darwin"; };
-  mba = mkDarwinSystem { system = "aarch64-darwin"; };
-  mini = mkDarwinSystem { system = "aarch64-darwin"; };
-  slabtop = mkDarwinSystem { system = "x86_64-darwin"; };
-};
-```
-
-**Estimated reduction**: ~60 lines → ~15 lines
-
-### 5. Identical homeConfigurations (lines 209-224)
-
-Both `ubuntu-dev` and `wsl-dev` are 100% identical.
-
-**Options**:
-- Combine into single `standalone-home` config
-- Remove if unused
-- Document why both exist if there's a reason
-
 ## Dead/Unused Code
 
-### 6. Commented overlay: overlays/brave.nix
+### 2. Commented overlay: overlays/brave.nix
 **Location**: `overlays/brave.nix` (45 lines)
 
 File exists but is commented out in `overlays/default.nix:9-11`:
@@ -158,7 +26,7 @@ File exists but is commented out in `overlays/default.nix:9-11`:
 
 **Action**: Delete file or document why it's kept for future use.
 
-### 7. Large commented settings block in darwin/base.nix
+### 3. Large commented settings block in darwin/base.nix
 **Location**: `darwin/base.nix:114-167` (54 lines)
 
 Commented Safari, Mail, AdLib, SoftwareUpdate, TimeMachine, ImageCapture settings.
@@ -167,7 +35,7 @@ Commented Safari, Mail, AdLib, SoftwareUpdate, TimeMachine, ImageCapture setting
 
 ## Structural Improvements
 
-### 8. services.nix module organization
+### 4. services.nix module organization
 **Location**: `nixos/services.nix:9`
 
 **Current issues**:
@@ -195,7 +63,7 @@ nixos/
     minimal.nix     # minimal services
 ```
 
-### 9. home-manager/default.nix is monolithic (772 lines)
+### 5. home-manager/default.nix is monolithic (772 lines)
 **Location**: `home-manager/default.nix`
 
 **Current structure**:
@@ -232,7 +100,7 @@ home-manager/
 - Logical separation of concerns
 - Easier to conditionally enable/disable features
 
-### 10. Naming clarity: nixos-gui vs home-manager/nixos-gui.nix
+### 6. Naming clarity: nixos-gui vs home-manager/nixos-gui.nix
 **Current confusion**:
 - `nixos-gui/default.nix` - system-level X11/GNOME config
 - `home-manager/nixos-gui.nix` - user-level GUI apps
@@ -330,10 +198,10 @@ Or merge system config into conditional in main nixos module.
 
 ## Minor Issues
 
-### 11. Missing fullname in darwinConfigurations specialArgs
-**Location**: `flake.nix:232` (and other darwin configs)
+### 11. Missing fullname in mkDarwinSystem specialArgs
+**Location**: `flake.nix` (mkDarwinSystem helper)
 
-Darwin configs don't pass `fullname` to specialArgs, only `user`. This is inconsistent with NixOS configs but may be intentional since darwin/base.nix doesn't use it.
+The `mkDarwinSystem` helper only passes `user` to specialArgs, not `fullname`. This is inconsistent with `mkNixosSystem` but may be intentional since darwin/base.nix doesn't use it.
 
 **Action**: Document or make consistent.
 
@@ -358,7 +226,7 @@ Uses deprecated `initContent` instead of `initExtra` for zsh.
 
 ## Opportunities for Improvement
 
-### 14. Extract common package sets
+### 7. Extract common package sets
 
 **Current state**:
 - `nixos/default.nix` defines system packages
@@ -374,7 +242,7 @@ packages/
   darwin.nix      # darwin-specific
 ```
 
-### 15. Secrets management documentation
+### 8. Secrets management documentation
 
 **Current state**:
 - Simple import from `./secrets`
@@ -388,7 +256,7 @@ packages/
 - Consider whether sops-nix integration is needed
 - Add README in secrets/ directory
 
-### 16. Hardware configurations lack consistency
+### 9. Hardware configurations lack consistency
 
 **Current state**:
 - Some use nixos-hardware modules (fw, fwd, tp)
@@ -401,42 +269,41 @@ Consider disko for declarative disk management across all systems.
 ## Summary Statistics
 
 - **Total .nix files**: 23
-- **Main flake.nix**: 293 lines
-  - **Potential reduction**: ~150 lines with helpers
+- **Main flake.nix**: ~170 lines (down from 293)
+  - **Achieved reduction**: ~120 lines with mkNixosSystem, mkDarwinSystem, mkHomeConfiguration helpers
 - **home-manager/default.nix**: 772 lines
   - **Potential reduction**: Split into 5-8 smaller modules
 - **TODOs/FIXMEs**: 13+ across codebase
 - **Commented dead code**: ~100 lines
-- **Total potential cleanup**: 200+ lines
+- **Remaining potential cleanup**: ~80 lines
 
 ## Prioritized Action Plan
 
+### ✅ Completed
+1. ~~Fix hardcoded username in `nixos/default.nix:42`~~ - Done
+2. ~~Create `mkNixosSystem` helper function~~ - Done
+3. ~~Create `mkDarwinSystem` helper function~~ - Done
+4. ~~Create `mkHomeConfiguration` helper function~~ - Done
+
 ### Phase 1: Critical Fixes (High Impact, Low Risk)
-1. Fix hardcoded username in `nixos/default.nix:42`
-2. Delete or document `overlays/brave.nix`
-3. Update `initContent` → `initExtra` in home-manager
-4. Decide on ubuntu-dev/wsl-dev duplication
+1. Delete or document `overlays/brave.nix`
+2. Update `initContent` → `initExtra` in home-manager
 
-### Phase 2: Deduplication (High Impact, Medium Risk)
-5. Create `mkNixosSystem` helper function
-6. Create `mkDarwinSystem` helper function
-7. Test all system configurations still build
+### Phase 2: Modularization (Medium Impact, Medium Risk)
+3. Split `home-manager/default.nix` into modules
+4. Reorganize `nixos/services.nix` structure
+5. Clarify nixos-gui naming
 
-### Phase 3: Modularization (Medium Impact, Medium Risk)
-8. Split `home-manager/default.nix` into modules
-9. Reorganize `nixos/services.nix` structure
-10. Clarify nixos-gui naming
+### Phase 3: Cleanup (Low Impact, Low Risk)
+6. Delete commented Safari settings block
+7. Address TODOs in home-manager shell functions
+8. Document secrets management approach
+9. Add comments to explain design decisions
 
-### Phase 4: Cleanup (Low Impact, Low Risk)
-11. Delete commented Safari settings block
-12. Address TODOs in home-manager shell functions
-13. Document secrets management approach
-14. Add comments to explain design decisions
-
-### Phase 5: Enhancements (Low Priority)
-15. Consider disko for disk management
-16. Extract common package sets
-17. Investigate sops-nix integration
+### Phase 4: Enhancements (Low Priority)
+10. Consider disko for disk management
+11. Extract common package sets
+12. Investigate sops-nix integration
 
 ## Implementation Notes
 
