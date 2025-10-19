@@ -26,3 +26,8 @@
 - home-manager/: User environment configurations
 - hardware/: Machine-specific hardware configurations
 - bin/: Utility scripts for common operations
+
+## Git Commit Format
+- Use format: `[🤖][component] description` (robot emoji in brackets at front)
+- Do NOT include author attribution (no "Co-Authored-By" or "Generated with Claude Code")
+- Example: `[🤖][nixos] use user variable instead of hardcoded username`
