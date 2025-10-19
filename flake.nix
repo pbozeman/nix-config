@@ -98,6 +98,21 @@
             (mkHome user fullname email ([ ./home-manager ] ++ guiHomeModules ++ homeModules))
           ];
         };
+
+      mkDarwinSystem = { system }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          pkgs = mkPkgs system;
+          specialArgs = { inherit inputs nixpkgs secrets user; };
+          modules = [
+            ./darwin
+            home-manager.darwinModules.home-manager
+            (mkHome user fullname email [
+              ./home-manager
+              ./home-manager/darwin.nix
+            ])
+          ];
+        };
     in
     {
       nixosConfigurations = {
@@ -161,69 +176,9 @@
       };
 
       darwinConfigurations = {
-        "miles-mba" = nix-darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          pkgs = mkPkgs "x86_64-darwin";
-          specialArgs = {
-            inherit inputs nixpkgs secrets user;
-          };
-          modules = [
-            ./darwin
-            home-manager.darwinModules.home-manager
-            (mkHome user fullname email [
-              ./home-manager
-              ./home-manager/darwin.nix
-            ])
-          ];
-        };
-
-        "mba" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          pkgs = mkPkgs "aarch64-darwin";
-          specialArgs = {
-            inherit inputs nixpkgs secrets user;
-          };
-          modules = [
-            ./darwin
-            home-manager.darwinModules.home-manager
-            (mkHome user fullname email [
-              ./home-manager
-              ./home-manager/darwin.nix
-            ])
-          ];
-        };
-
-        "mini" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          pkgs = mkPkgs "aarch64-darwin";
-          specialArgs = {
-            inherit inputs nixpkgs secrets user;
-          };
-          modules = [
-            ./darwin
-            home-manager.darwinModules.home-manager
-            (mkHome user fullname email [
-              ./home-manager
-              ./home-manager/darwin.nix
-            ])
-          ];
-        };
-
-        "slabtop" = nix-darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          pkgs = mkPkgs "x86_64-darwin";
-          specialArgs = {
-            inherit inputs nixpkgs secrets user;
-          };
-          modules = [
-            ./darwin
-            home-manager.darwinModules.home-manager
-            (mkHome user fullname email [
-              ./home-manager
-              ./home-manager/darwin.nix
-            ])
-          ];
-        };
+        "mba" = mkDarwinSystem { system = "aarch64-darwin"; };
+        "mini" = mkDarwinSystem { system = "aarch64-darwin"; };
+        "slabtop" = mkDarwinSystem { system = "x86_64-darwin"; };
       };
     };
 }
