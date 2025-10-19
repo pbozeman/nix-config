@@ -18,68 +18,84 @@ The file itself warns it's "playing with fire" and can break sudo access. This s
 
 ## Structural Improvements
 
-### 3. Create hosts/ directory structure
-**Current issues**:
-- Host-specific configurations scattered across flake.nix (as boolean flags)
-- Hardware configs in separate top-level `hardware/` directory
-- No clear place for per-host settings
-- Hardware files (auto-generated) mixed with configuration choices
+### 3. ~~Create hosts/ directory structure~~ ✅
+**Status**: COMPLETED (2025-10-19)
 
-**Proposed structure**:
+**Final structure**:
 ```
 hosts/
   fw/
-    default.nix                  # Host-specific config & imports
-    hardware-configuration.nix   # Auto-generated hardware detection
+    default.nix      # Metadata + config
+    hardware.nix     # Hardware detection
   fwd/
     default.nix
-    hardware-configuration.nix
+    hardware.nix
   tp/
     default.nix
-    hardware-configuration.nix
+    hardware.nix
   dev/
     default.nix
-    hardware-configuration.nix
+    hardware.nix
   wsl/
     default.nix
-    hardware-configuration.nix
+  mba/
+    default.nix
+  mini/
+    default.nix
+  slabtop/
+    default.nix
 
 platforms/
   darwin/
-    ...
+    base.nix
+    brew.nix
+    pam.nix
+    default.nix
   nixos/
     base.nix
     gui.nix
-    amd.nix      # AMD-specific settings (for fw, fwd)
-    intel.nix    # Intel-specific settings (for tp)
+    wsl.nix
+    default.nix
     services/
       ...
 ```
 
 **Example `hosts/fw/default.nix`**:
 ```nix
-{ ... }: {
-  imports = [
-    ./hardware-configuration.nix
-    ../../platforms/nixos
-    ../../platforms/nixos/gui.nix
-    ../../platforms/nixos/amd.nix
-    ../../platforms/nixos/services
+{ inputs, ... }: {
+  system = "x86_64-linux";
+
+  homeModules = [
+    ../../home-manager
+    ../../home-manager/nixos-gui.nix
   ];
 
-  networking.hostName = "fw";
-  # Other fw-specific settings
+  extraModules = [
+    inputs.hardware.nixosModules.framework-16-7040-amd
+  ];
+
+  config = {
+    imports = [
+      ./hardware.nix
+      ../../platforms/nixos
+      ../../platforms/nixos/gui.nix
+      ../../platforms/nixos/services
+    ];
+
+    networking.hostName = "fw";
+    services.xserver.videoDrivers = [ "amdgpu" ];
+    users.groups.usbmon = { };
+  };
 }
 ```
 
-**Benefits**:
-- Everything for a host in one directory
-- Uses idiomatic NixOS naming (`hardware-configuration.nix`)
-- Clear separation: auto-generated vs hand-written config
-- Keeps `hardware-configuration.nix` pure (no custom config)
-- Platform-specific modules (amd.nix, intel.nix) can be shared
-- Easier to bootstrap new hosts
-- Cleaner flake.nix (just reference `./hosts/fw`)
+**Benefits achieved**:
+- Single source of truth per host - all metadata in host's default.nix
+- No split-brain between flake.nix and host configs
+- flake.nix simplified to just pass hostnames
+- Clear separation: platforms/ for shared, hosts/ for specific
+- Consistent mk functions (specialArgs, extraModules handling)
+- Easy to add new hosts - just create directory and default.nix
 
 ### 4. home-manager/default.nix is monolithic (772 lines)
 **Location**: `home-manager/default.nix`
@@ -200,12 +216,11 @@ home-manager/
 
 ## Minor Issues
 
-### 9. Missing fullname in mkDarwinSystem specialArgs
-**Location**: `flake.nix` (mkDarwinSystem helper)
+### 9. ~~Missing fullname in mkDarwinSystem specialArgs~~ ✅
+**Status**: FIXED (2025-10-19)
 
-The `mkDarwinSystem` helper only passes `user` to specialArgs, not `fullname`. This is inconsistent with `mkNixosSystem` but may be intentional since darwin/base.nix doesn't use it.
-
-**Action**: Document or make consistent.
+Both mkNixosSystem and mkDarwinSystem now consistently pass the same specialArgs:
+`{ inherit inputs nixpkgs secrets hostname user fullname; }`
 
 ### 10. Commented lazyvim-nix nixpkgs follows
 **Location**: `flake.nix:22`
@@ -288,6 +303,59 @@ Consider disko for declarative disk management across all systems.
 
 ## Recent Changes
 
+### Host-Driven Configuration Refactor (Completed)
+**Date**: 2025-10-19
+
+Refactored host configuration to eliminate split-brain between flake.nix and host configs:
+
+**Changes**:
+- Created `hosts/` directory with per-host `default.nix` files
+- Each host now declares its own metadata (system, homeModules, extraModules)
+- Simplified flake.nix from verbose parameter passing to simple hostname strings
+- Made mkNixosSystem and mkDarwinSystem consistent (specialArgs, extraModules)
+- Removed unnecessary attribute quotes for cleaner syntax
+
+**Before**:
+```nix
+# flake.nix
+fw = mkNixosSystem {
+  hostname = "fw";
+  gui = true;
+  homeModules = [...];
+  extraModules = [...];
+};
+
+# hosts/fw/default.nix (old)
+{ ... }: {
+  imports = [ ./hardware.nix ../../platforms/nixos ... ];
+  networking.hostName = "fw";
+}
+```
+
+**After**:
+```nix
+# flake.nix
+fw = mkNixosSystem "fw";
+
+# hosts/fw/default.nix (new)
+{ inputs, ... }: {
+  system = "x86_64-linux";
+  homeModules = [...];
+  extraModules = [...];
+  config = {
+    imports = [ ./hardware.nix ../../platforms/nixos ... ];
+    networking.hostName = "fw";
+  };
+}
+```
+
+**Benefits**:
+- Single source of truth for each host
+- flake.nix is now declarative (just lists hostnames)
+- Easier to understand what each host uses
+- Consistent mk function behavior
+- No more duplicate hostname declarations
+
 ### Directory Reorganization (Completed)
 **Date**: 2025-10-18
 
@@ -332,6 +400,9 @@ platforms/
 7. ~~Reorganize directory structure under `platforms/`~~ - Done
 8. ~~Split `nixos/services.nix` into focused modules~~ - Done
 9. ~~Clarify nixos-gui naming (now `platforms/nixos/gui.nix`)~~ - Done
+10. ~~Create `hosts/` directory structure~~ - Done
+11. ~~Move host metadata into host default.nix files~~ - Done
+12. ~~Make mk functions consistent (specialArgs, extraModules)~~ - Done
 
 ### Phase 1: Critical Fixes (High Impact, Low Risk)
 1. Update `initContent` → `initExtra` in home-manager

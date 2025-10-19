@@ -2,11 +2,19 @@
 { ... }:
 
 {
-  imports = [
-    ./hardware.nix
-    ../../platforms/nixos
-    ../../platforms/nixos/services
+  system = "x86_64-linux";
+
+  homeModules = [
+    ../../home-manager
   ];
 
-  networking.hostName = "dev";
+  config = {
+    imports = [
+      ./hardware.nix
+      ../../platforms/nixos
+      ../../platforms/nixos/services
+    ];
+
+    networking.hostName = "dev";
+  };
 }

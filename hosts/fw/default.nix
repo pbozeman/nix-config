@@ -1,19 +1,32 @@
 # Framework 16 laptop configuration
-{ ... }:
+{ inputs, ... }:
 
 {
-  imports = [
-    ./hardware.nix
-    ../../platforms/nixos
-    ../../platforms/nixos/gui.nix
-    ../../platforms/nixos/services
+  system = "x86_64-linux";
+
+  homeModules = [
+    ../../home-manager
+    ../../home-manager/nixos-gui.nix
   ];
 
-  networking.hostName = "fw";
+  extraModules = [
+    inputs.hardware.nixosModules.framework-16-7040-amd
+  ];
 
-  # AMD GPU driver
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  config = {
+    imports = [
+      ./hardware.nix
+      ../../platforms/nixos
+      ../../platforms/nixos/gui.nix
+      ../../platforms/nixos/services
+    ];
 
-  # USB monitoring group (for Wireshark, etc.)
-  users.groups.usbmon = { };
+    networking.hostName = "fw";
+
+    # AMD GPU driver
+    services.xserver.videoDrivers = [ "amdgpu" ];
+
+    # USB monitoring group (for Wireshark, etc.)
+    users.groups.usbmon = { };
+  };
 }

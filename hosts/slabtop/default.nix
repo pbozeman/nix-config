@@ -2,9 +2,18 @@
 { ... }:
 
 {
-  imports = [
-    ../../platforms/darwin
+  system = "x86_64-darwin";
+
+  homeModules = [
+    ../../home-manager
+    ../../home-manager/darwin.nix
   ];
 
-  networking.hostName = "slabtop";
+  config = {
+    imports = [
+      ../../platforms/darwin
+    ];
+
+    networking.hostName = "slabtop";
+  };
 }

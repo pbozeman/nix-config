@@ -2,9 +2,18 @@
 { ... }:
 
 {
-  imports = [
-    ../../platforms/darwin
+  system = "aarch64-darwin";
+
+  homeModules = [
+    ../../home-manager
+    ../../home-manager/darwin.nix
   ];
 
-  networking.hostName = "mba";
+  config = {
+    imports = [
+      ../../platforms/darwin
+    ];
+
+    networking.hostName = "mba";
+  };
 }
