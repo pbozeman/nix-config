@@ -14,19 +14,7 @@ The file itself warns it's "playing with fire" and can break sudo access. This s
 
 ## Dead/Unused Code
 
-### 2. Commented overlay: overlays/brave.nix
-**Location**: `overlays/brave.nix` (45 lines)
-
-File exists but is commented out in `overlays/default.nix:9-11`:
-```nix
-# (import ./brave.nix {
-#   inherit inputs nixpkgs;
-# })
-```
-
-**Action**: Delete file or document why it's kept for future use.
-
-### 3. Large commented settings block in darwin/base.nix
+### 2. Large commented settings block in darwin/base.nix
 **Location**: `darwin/base.nix:114-167` (54 lines)
 
 Commented Safari, Mail, AdLib, SoftwareUpdate, TimeMachine, ImageCapture settings.
@@ -35,7 +23,7 @@ Commented Safari, Mail, AdLib, SoftwareUpdate, TimeMachine, ImageCapture setting
 
 ## Structural Improvements
 
-### 4. services.nix module organization
+### 3. services.nix module organization
 **Location**: `nixos/services.nix:9`
 
 **Current issues**:
@@ -63,7 +51,7 @@ nixos/
     minimal.nix     # minimal services
 ```
 
-### 5. home-manager/default.nix is monolithic (772 lines)
+### 4. home-manager/default.nix is monolithic (772 lines)
 **Location**: `home-manager/default.nix`
 
 **Current structure**:
@@ -100,7 +88,7 @@ home-manager/
 - Logical separation of concerns
 - Easier to conditionally enable/disable features
 
-### 6. Naming clarity: nixos-gui vs home-manager/nixos-gui.nix
+### 5. Naming clarity: nixos-gui vs home-manager/nixos-gui.nix
 **Current confusion**:
 - `nixos-gui/default.nix` - system-level X11/GNOME config
 - `home-manager/nixos-gui.nix` - user-level GUI apps
@@ -198,14 +186,14 @@ Or merge system config into conditional in main nixos module.
 
 ## Minor Issues
 
-### 11. Missing fullname in mkDarwinSystem specialArgs
+### 9. Missing fullname in mkDarwinSystem specialArgs
 **Location**: `flake.nix` (mkDarwinSystem helper)
 
 The `mkDarwinSystem` helper only passes `user` to specialArgs, not `fullname`. This is inconsistent with `mkNixosSystem` but may be intentional since darwin/base.nix doesn't use it.
 
 **Action**: Document or make consistent.
 
-### 12. Commented lazyvim-nix nixpkgs follows
+### 10. Commented lazyvim-nix nixpkgs follows
 **Location**: `flake.nix:22`
 
 ```nix
@@ -217,7 +205,7 @@ lazyvim-nix = {
 
 **Action**: Uncomment or add comment explaining why it's disabled.
 
-### 13. initContent vs initExtra naming
+### 11. initContent vs initExtra naming
 **Location**: `home-manager/default.nix:225`
 
 Uses deprecated `initContent` instead of `initExtra` for zsh.
@@ -226,7 +214,7 @@ Uses deprecated `initContent` instead of `initExtra` for zsh.
 
 ## Opportunities for Improvement
 
-### 7. Extract common package sets
+### 6. Extract common package sets
 
 **Current state**:
 - `nixos/default.nix` defines system packages
@@ -242,7 +230,7 @@ packages/
   darwin.nix      # darwin-specific
 ```
 
-### 8. Secrets management documentation
+### 7. Secrets management documentation
 
 **Current state**:
 - Simple import from `./secrets`
@@ -256,7 +244,7 @@ packages/
 - Consider whether sops-nix integration is needed
 - Add README in secrets/ directory
 
-### 9. Hardware configurations lack consistency
+### 8. Hardware configurations lack consistency
 
 **Current state**:
 - Some use nixos-hardware modules (fw, fwd, tp)
@@ -286,24 +274,24 @@ Consider disko for declarative disk management across all systems.
 4. ~~Create `mkHomeConfiguration` helper function~~ - Done
 
 ### Phase 1: Critical Fixes (High Impact, Low Risk)
-1. Delete or document `overlays/brave.nix`
+1. ~~Delete or document `overlays/brave.nix`~~ - Done
 2. Update `initContent` → `initExtra` in home-manager
 
 ### Phase 2: Modularization (Medium Impact, Medium Risk)
-3. Split `home-manager/default.nix` into modules
-4. Reorganize `nixos/services.nix` structure
-5. Clarify nixos-gui naming
+2. Split `home-manager/default.nix` into modules
+3. Reorganize `nixos/services.nix` structure
+4. Clarify nixos-gui naming
 
 ### Phase 3: Cleanup (Low Impact, Low Risk)
-6. Delete commented Safari settings block
-7. Address TODOs in home-manager shell functions
-8. Document secrets management approach
-9. Add comments to explain design decisions
+5. Delete commented Safari settings block
+6. Address TODOs in home-manager shell functions
+7. Document secrets management approach
+8. Add comments to explain design decisions
 
 ### Phase 4: Enhancements (Low Priority)
-10. Consider disko for disk management
-11. Extract common package sets
-12. Investigate sops-nix integration
+9. Consider disko for disk management
+10. Extract common package sets
+11. Investigate sops-nix integration
 
 ## Implementation Notes
 
