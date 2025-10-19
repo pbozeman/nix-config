@@ -76,7 +76,7 @@
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
-      text-scaling-factor = 1.8;
+      text-scaling-factor = lib.mkDefault 1.5;
       font-antialiasing = "rgba";
     };
 

@@ -7,6 +7,7 @@
   homeModules = [
     ../../home-manager
     ../../home-manager/nixos-gui.nix
+    ./nixos-gui.nix
   ];
 
   extraModules = [
