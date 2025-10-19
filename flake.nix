@@ -78,10 +78,8 @@
       mkNixosSystem =
         { hostname
         , system ? "x86_64-linux"
-        , hardwareModules
-        , services ? true
-        , gui ? true
-        , homeModules ? [ ]
+        , extraModules ? [ ]
+        , gui ? false
         }:
         let
           guiHomeModules = nixpkgs.lib.optional gui ./home-manager/nixos-gui.nix;
@@ -89,23 +87,23 @@
         nixpkgs.lib.nixosSystem {
           pkgs = mkPkgs system;
           specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
-          modules = hardwareModules
-            ++ [ ./platforms/nixos ]
-            ++ nixpkgs.lib.optional services ./platforms/nixos/services
-            ++ nixpkgs.lib.optional gui ./platforms/nixos/gui.nix
-            ++ [
+          modules = [
+            (./hosts + "/${hostname}")
             home-manager.nixosModules.home-manager
-            (mkHome user fullname email ([ ./home-manager ] ++ guiHomeModules ++ homeModules))
-          ];
+            (mkHome user fullname email ([ ./home-manager ] ++ guiHomeModules))
+          ] ++ extraModules;
         };
 
-      mkDarwinSystem = { system }:
+      mkDarwinSystem =
+        { hostname
+        , system
+        }:
         nix-darwin.lib.darwinSystem {
           inherit system;
           pkgs = mkPkgs system;
           specialArgs = { inherit inputs nixpkgs secrets user; };
           modules = [
-            ./platforms/darwin
+            (./hosts + "/${hostname}")
             home-manager.darwinModules.home-manager
             (mkHome user fullname email [
               ./home-manager
@@ -125,9 +123,18 @@
     in
     {
       darwinConfigurations = {
-        "mba" = mkDarwinSystem { system = "aarch64-darwin"; };
-        "mini" = mkDarwinSystem { system = "aarch64-darwin"; };
-        "slabtop" = mkDarwinSystem { system = "x86_64-darwin"; };
+        "mba" = mkDarwinSystem {
+          hostname = "mba";
+          system = "aarch64-darwin";
+        };
+        "mini" = mkDarwinSystem {
+          hostname = "mini";
+          system = "aarch64-darwin";
+        };
+        "slabtop" = mkDarwinSystem {
+          hostname = "slabtop";
+          system = "x86_64-darwin";
+        };
       };
 
       homeConfigurations = {
@@ -138,42 +145,37 @@
       nixosConfigurations = {
         fw = mkNixosSystem {
           hostname = "fw";
-          hardwareModules = [
+          gui = true;
+          extraModules = [
             hardware.nixosModules.framework-16-7040-amd
-            ./hardware/fw.nix
           ];
         };
 
         fwd = mkNixosSystem {
           hostname = "fwd";
-          hardwareModules = [
+          gui = true;
+          extraModules = [
             hardware.nixosModules.framework-desktop-amd-ai-max-300-series
-            ./hardware/fwd.nix
           ];
         };
 
         tp = mkNixosSystem {
           hostname = "tp";
-          hardwareModules = [
+          gui = true;
+          extraModules = [
             hardware.nixosModules.lenovo-thinkpad-l13
-            ./hardware/tp.nix
           ];
         };
 
         dev = mkNixosSystem {
           hostname = "dev";
-          hardwareModules = [ ./hardware/proxmox.nix ];
-          gui = false;
         };
 
         wsl = mkNixosSystem {
           hostname = "wsl";
-          hardwareModules = [
+          extraModules = [
             nixos-wsl.nixosModules.wsl
-            ./platforms/nixos/wsl.nix
           ];
-          services = false;
-          gui = false;
         };
       };
     };
