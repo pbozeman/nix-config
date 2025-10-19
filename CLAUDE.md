@@ -3,7 +3,7 @@
 ## Build Commands
 - `./bin/darwin-rebuild`: Rebuild macOS configurations
 - `./bin/nixos-rebuild`: Rebuild NixOS configurations
-- `./bin/home-build`: Rebuild home-manager configurations
+- `./bin/home-rebuild`: Rebuild home-manager configurations
 - `./bin/gc`: Run garbage collection
 - `nix flake update`: Update flake inputs
 - `nix flake lock --update-input <input>`: Update specific flake input
