@@ -96,11 +96,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761369100,
-        "narHash": "sha256-ZQ4eJHXzyrktqDnRlRoOowT3sfSHhvIOS8kfeVXpHJY=",
+        "lastModified": 1761371102,
+        "narHash": "sha256-F2msW0xGRgNfC3NaoGCJZaOiXB2wa81OBN4zehhE1mU=",
         "owner": "pbozeman",
         "repo": "nixcats",
-        "rev": "eef2e51cc0842fcda7c1f6a1401b01c11dc31584",
+        "rev": "9379ab9071ddd98c4a3a4560f915bbfce650ed9e",
         "type": "github"
       },
       "original": {
