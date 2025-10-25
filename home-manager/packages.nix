@@ -94,7 +94,4 @@ with pkgs; [
   # rust
   cargo
   rustc
-
-  # FIXME: this should be coming from lazyvim-nix
-  markdownlint-cli
 ]

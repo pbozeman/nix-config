@@ -33,10 +33,10 @@
       then "/Users/${user}"
       else "/home/${user}";
 
-    # TODO: make lazyvim-nix show up in packages (with an overlay? )
+    # TODO: make nixcats show up in packages (with an overlay? )
     packages = with pkgs; let
       additionalPackages = [
-        inputs.lazyvim-nix.packages.${system}.nvim
+        inputs.nixcats.packages.${system}.nvim
       ];
     in
     (import ./packages.nix { inherit pkgs; }) ++ additionalPackages;

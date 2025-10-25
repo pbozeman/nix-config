@@ -17,9 +17,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lazyvim-nix = {
-      url = "github:pbozeman/lazyvim-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    nixcats = {
+      url = "github:pbozeman/nixcats";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-wsl = {
@@ -35,7 +35,7 @@
     , hardware
     , nix-darwin
     , home-manager
-    , lazyvim-nix
+    , nixcats
     , nixos-wsl
     , ...
     } @ inputs:
@@ -134,3 +134,5 @@
       };
     };
 }
+
+
