@@ -19,7 +19,7 @@
 
     nixcats = {
       url = "github:pbozeman/nixcats";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-wsl = {
@@ -29,16 +29,17 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-unstable
-    , hardware
-    , nix-darwin
-    , home-manager
-    , nixcats
-    , nixos-wsl
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      hardware,
+      nix-darwin,
+      home-manager,
+      nixcats,
+      nixos-wsl,
+      ...
+    }@inputs:
     let
       secrets = import ./secrets;
 
@@ -46,13 +47,16 @@
       fullname = "Patrick Bozeman";
       email = "pbozeman@gmail.com";
 
-      mkPkgs = system:
+      mkPkgs =
+        system:
         import nixpkgs {
           inherit system;
           inherit
             (import ./overlays {
               inherit inputs nixpkgs;
-            }) overlays;
+            })
+            overlays
+            ;
           config = {
             allowUnsupportedSystem = false;
             allowBroken = false;
@@ -68,46 +72,89 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           backupFileExtension = "bak";
-          extraSpecialArgs = { inherit inputs secrets user fullname email; };
-          users."${user}" = { lib, ... }: {
-            imports = modules;
+          extraSpecialArgs = {
+            inherit
+              inputs
+              secrets
+              user
+              fullname
+              email
+              ;
           };
+          users."${user}" =
+            { lib, ... }:
+            {
+              imports = modules;
+            };
         };
       };
 
-      mkNixosSystem = hostname:
+      mkNixosSystem =
+        hostname:
         let
           hostConfig = import (./hosts + "/${hostname}") { inherit inputs; };
         in
         nixpkgs.lib.nixosSystem {
           pkgs = mkPkgs hostConfig.system;
-          specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
+          specialArgs = {
+            inherit
+              inputs
+              nixpkgs
+              secrets
+              hostname
+              user
+              fullname
+              ;
+          };
           modules = [
             hostConfig.config
             home-manager.nixosModules.home-manager
             (mkHome user fullname email hostConfig.homeModules)
-          ] ++ (hostConfig.extraModules or [ ]);
+          ]
+          ++ (hostConfig.extraModules or [ ]);
         };
 
-      mkDarwinSystem = hostname:
+      mkDarwinSystem =
+        hostname:
         let
           hostConfig = import (./hosts + "/${hostname}") { inherit inputs; };
         in
         nix-darwin.lib.darwinSystem {
           system = hostConfig.system;
           pkgs = mkPkgs hostConfig.system;
-          specialArgs = { inherit inputs nixpkgs secrets hostname user fullname; };
+          specialArgs = {
+            inherit
+              inputs
+              nixpkgs
+              secrets
+              hostname
+              user
+              fullname
+              ;
+          };
           modules = [
             hostConfig.config
             home-manager.darwinModules.home-manager
             (mkHome user fullname email hostConfig.homeModules)
-          ] ++ (hostConfig.extraModules or [ ]);
+          ]
+          ++ (hostConfig.extraModules or [ ]);
         };
 
-      mkHomeConfiguration = { system ? "x86_64-linux" }:
+      mkHomeConfiguration =
+        {
+          system ? "x86_64-linux",
+        }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
-          extraSpecialArgs = { inherit inputs secrets user fullname email; };
+          extraSpecialArgs = {
+            inherit
+              inputs
+              secrets
+              user
+              fullname
+              email
+              ;
+          };
           modules = [
             ./home-manager
           ];
@@ -134,5 +181,3 @@
       };
     };
 }
-
-
