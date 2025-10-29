@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# This script sets up git remotes for a repository with the following structure:
+# - github: GitHub remote (git@github.com:pbozeman/repo.git)
+# - dev: Development server remote (pbozeman@dev:git/repo)
+
+set -e
+
+# Check if we're in a git repository
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Error: Not in a git repository"
+  exit 1
+fi
+
+# Get the current repo name from the directory
+REPO_NAME=$(basename "$(git rev-parse --show-toplevel)")
+
+# Show help
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "Usage: $0"
+  echo ""
+  echo "Sets up git remotes for the current repository:"
+  echo "  - github: git@github.com:pbozeman/$REPO_NAME.git"
+  echo "  - dev: pbozeman@dev:git/$REPO_NAME"
+  exit 0
+fi
+
+echo "Setting up git remotes for repository: $REPO_NAME"
+echo ""
+echo "Configuration:"
+echo "  github: git@github.com:pbozeman/$REPO_NAME.git"
+echo "  dev:    pbozeman@dev:git/$REPO_NAME"
+echo ""
+
+# Remove existing remotes if they exist
+git remote remove origin 2>/dev/null || true
+git remote remove github 2>/dev/null || true
+git remote remove dev 2>/dev/null || true
+
+# Create bare repo on dev server if it doesn't exist
+echo "Creating bare repository on dev server (if it doesn't exist)..."
+ssh pbozeman@dev "[ -d git/$REPO_NAME ] || git init --bare git/$REPO_NAME"
+
+# Add remotes
+git remote add github "git@github.com:pbozeman/$REPO_NAME.git"
+git remote add dev "pbozeman@dev:git/$REPO_NAME"
+
+# Set dev as the default push remote
+git config remote.pushDefault dev
+
+echo "Remotes configured successfully:"
+git remote -v
+echo ""
+echo "Default push remote set to: dev"
