@@ -66,9 +66,11 @@
     gf = "git absorb";
     gfr = "git absorb --and-rebase";
     gl = "git log";
-    gs = "git status";
     gr = "git rebase -i --autosquash";
     grs = "git restore --staged";
+    gs = "git status";
+    gski = "git stash push --keep-index --include-untracked";
+    gsp = "git stash pop";
 
     lazygit = "lazygit -ucd ~/.config/lazygit";
 
