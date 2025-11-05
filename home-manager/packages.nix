@@ -40,6 +40,7 @@ with pkgs; [
 
   # agents
   claude-code
+  codex
 
   # Sigrok
   # pulseview

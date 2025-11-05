@@ -1,4 +1,4 @@
-{ ... }:
+{ secrets, ... }:
 
 {
   imports = [
@@ -20,6 +20,7 @@
       COLORTERM = "truecolor";
       MANPAGER = "less -R --use-color -Dd+r -Du+b +Gg -M -s";
       HOMEBREW_NO_AUTO_UPDATE = 1;
+      OPENAI_API_KEY = secrets.openAIKey;
     };
 
     # homemanager on ubuntu created "insecure"
