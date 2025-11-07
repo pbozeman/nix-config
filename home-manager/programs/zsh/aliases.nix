@@ -70,6 +70,7 @@
     grs = "git restore --staged";
     gs = "git status";
     gski = "git stash push --keep-index --include-untracked";
+    gsi = "git stash push --staged";
     gsp = "git stash pop";
 
     lazygit = "lazygit -ucd ~/.config/lazygit";
