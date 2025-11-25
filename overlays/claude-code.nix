@@ -1,6 +1,4 @@
 { inputs, ... }:
 final: prev: {
-  claude-code = inputs.nixpkgs-unstable.legacyPackages.${final.system}.claude-code.overrideAttrs (old: {
-    meta = old.meta // { license = "unfree"; };
-  });
+  claude-code = inputs.claude-code.packages.${final.system}.default;
 }

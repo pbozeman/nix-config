@@ -26,6 +26,8 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs =
@@ -38,6 +40,7 @@
       home-manager,
       nixcats,
       nixos-wsl,
+      claude-code,
       ...
     }@inputs:
     let
