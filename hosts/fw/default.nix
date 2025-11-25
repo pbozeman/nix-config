@@ -23,8 +23,9 @@
 
     networking.hostName = "fw";
 
-    # AMD GPU driver
-    services.xserver.videoDrivers = [ "amdgpu" ];
+    # NVidia GPU driver
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware.nvidia.open = true;
 
     # USB monitoring group (for Wireshark, etc.)
     users.groups.usbmon = { };
