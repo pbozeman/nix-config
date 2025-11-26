@@ -1,9 +1,11 @@
-{ pkgs
-, home
-, lib
-, user
-, ...
-}: {
+{
+  pkgs,
+  home,
+  lib,
+  user,
+  ...
+}:
+{
   home.file.".config/forge/stylesheet/forge/stylesheet.css".source = ./gnome-forge/stylesheet.css;
 
   home.packages = with pkgs; [
@@ -136,6 +138,7 @@
 
     "org/gnome/shell" = {
       enabled-extensions = [
+        "caffeine@patapon.info"
         "forge@jmmaranan.com"
       ];
       favorite-apps = [
