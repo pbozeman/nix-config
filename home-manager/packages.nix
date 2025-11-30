@@ -1,19 +1,24 @@
 { pkgs }:
 let
   # https://nixos.wiki/wiki/Helm_and_Helmfile
-  my-kubernetes-helm = with pkgs; wrapHelm kubernetes-helm {
-    plugins = with pkgs.kubernetes-helmPlugins; [
-      helm-secrets
-      helm-diff
-    ];
-  };
+  my-kubernetes-helm =
+    with pkgs;
+    wrapHelm kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+        helm-diff
+      ];
+    };
 
-  my-helmfile = with pkgs; helmfile-wrapped.override {
-    inherit (my-kubernetes-helm.passthru) pluginsDir;
-  };
+  my-helmfile =
+    with pkgs;
+    helmfile-wrapped.override {
+      inherit (my-kubernetes-helm.passthru) pluginsDir;
+    };
 in
 
-with pkgs; [
+with pkgs;
+[
   # General packages for development and system management
   ascii
   aspell
@@ -37,6 +42,10 @@ with pkgs; [
   # c/c++
   gnumake
   gcc
+
+  # agent container
+  bubblewrap
+  socat
 
   # agents
   claude-code

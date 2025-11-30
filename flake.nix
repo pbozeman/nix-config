@@ -183,24 +183,27 @@
         wsl-dev = mkHomeConfiguration { };
       };
 
-      devShells = nixpkgs.lib.genAttrs
-        [
-          "x86_64-linux"
-          "aarch64-linux"
-          "x86_64-darwin"
-          "aarch64-darwin"
-        ]
-        (system:
-          let
-            pkgs = mkPkgs system;
-          in
-          {
-            default = pkgs.mkShell {
-              packages = import ./home-manager/packages.nix { inherit pkgs; };
-              shellHook = ''
-                exec zsh
-              '';
-            };
-          });
+      devShells =
+        nixpkgs.lib.genAttrs
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+            "x86_64-darwin"
+            "aarch64-darwin"
+          ]
+          (
+            system:
+            let
+              pkgs = mkPkgs system;
+            in
+            {
+              default = pkgs.mkShell {
+                packages = import ./home-manager/packages.nix { inherit pkgs; };
+                shellHook = ''
+                  exec zsh
+                '';
+              };
+            }
+          );
     };
 }
