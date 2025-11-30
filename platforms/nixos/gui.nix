@@ -7,8 +7,8 @@
 
   # === Display & Desktop Environment ===
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Exclude unwanted GNOME packages
   environment.gnome.excludePackages = (with pkgs; [
@@ -64,15 +64,10 @@
   services.fprintd.enable = true;
 
   # === Laptop Power Management ===
-  services.logind = {
-    lidSwitch = "hibernate";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
-    extraConfig = ''
-      HandleLidSwitch=hibernate
-      HandleLidSwitchExternalPower=hibernate
-      HandleLidSwitchDocked=ignore
-    '';
+  services.logind.settings.Login = {
+    HandleLidSwitch = "hibernate";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   # === Audio ===

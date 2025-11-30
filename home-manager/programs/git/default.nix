@@ -1,19 +1,22 @@
 { fullname, email, ... }:
 
 {
+  programs.difftastic = {
+    enable = false;
+    options.background = "dark";
+  };
+
   programs.git = {
     enable = true;
     ignores = [ "*.swp" ];
-    userName = fullname;
-    userEmail = email;
-    aliases = {
-      co = "checkout";
-    };
-    difftastic = {
-      enable = false;
-      background = "dark";
-    };
-    extraConfig = {
+    settings = {
+      user = {
+        name = fullname;
+        email = email;
+      };
+      alias = {
+        co = "checkout";
+      };
       color.ui = true;
       core = {
         editor = "nvim";
