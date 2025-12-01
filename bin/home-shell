@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+cd ~/src/nix-config
+
+HOSTNAME=$(hostname)
+
+echo "Building home-manager configuration for $HOSTNAME..."
+nix build ".#nixosConfigurations.$HOSTNAME.config.home-manager.users.pbozeman.home.activationPackage" -o /tmp/hm-test
+
+echo "Activating..."
+/tmp/hm-test/activate
+
+echo "Entering test shell..."
+exec zsh
