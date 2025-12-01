@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ -z "$1" ]; then
+  echo "usage: git-clone <repo>"
+  exit 1
+fi
+
+git clone git@github.com:pbozeman/"$1".git
+cd "$1"
+git-setup
