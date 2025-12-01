@@ -150,6 +150,7 @@
       favorite-apps = [
         "Alacritty.desktop"
         "brave-browser.desktop"
+        "vivado.desktop"
         "obsidian.desktop"
         "1password.desktop"
         "spotify.desktop"
