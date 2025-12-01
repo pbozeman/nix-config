@@ -36,7 +36,7 @@
     # TODO: make nixcats show up in packages (with an overlay? )
     packages = with pkgs; let
       additionalPackages = [
-        inputs.nixcats.packages.${system}.nvim
+        inputs.nixcats.packages.${pkgs.stdenv.hostPlatform.system}.nvim
       ];
     in
     (import ./packages.nix { inherit pkgs; }) ++ additionalPackages;
