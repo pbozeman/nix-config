@@ -24,6 +24,7 @@
     # apps
     lmstudio
     kicad
+    vivado-wrapped
     obs-studio
     obsidian
     slack

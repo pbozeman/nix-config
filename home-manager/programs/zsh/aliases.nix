@@ -112,5 +112,7 @@
     srsv = "sr_f sv";
 
     gtkwave = "command gtkwave --dark";
+
+    vivado = "cd /tmp && command vivado";
   };
 }

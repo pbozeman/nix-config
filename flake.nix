@@ -29,6 +29,8 @@
     };
 
     claude-code.url = "github:sadjow/claude-code-nix";
+
+    nix-vivado.url = "github:pbozeman/nix-vivado";
   };
 
   outputs =
@@ -42,6 +44,7 @@
       nixcats,
       nixos-wsl,
       claude-code,
+      nix-vivado,
       ...
     }@inputs:
     let

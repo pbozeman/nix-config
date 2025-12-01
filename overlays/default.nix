@@ -9,5 +9,8 @@
     (import ./kicad.nix {
       inherit inputs nixpkgs;
     })
+    (import ./vivado.nix {
+      inherit inputs nixpkgs;
+    })
   ];
 }
