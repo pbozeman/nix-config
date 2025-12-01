@@ -1,0 +1,17 @@
+#!/bin/sh
+
+XILINX_DIR="$HOME/xilinx"
+VERSION="2024.2"
+CONFIG_FILE="$HOME/.config/xilinx/nix.sh"
+
+# Create config if missing
+if [ ! -f "$CONFIG_FILE" ]; then
+  mkdir -p "$(dirname "$CONFIG_FILE")"
+  cat > "$CONFIG_FILE" << EOF
+INSTALL_DIR=$XILINX_DIR
+VERSION=$VERSION
+EOF
+fi
+
+cd /tmp
+exec nix run github:pbozeman/nix-vivado#vivado -- "$@"
