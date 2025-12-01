@@ -48,7 +48,14 @@ git remote add dev "pbozeman@dev:git/$REPO_NAME"
 # Set dev as the default push remote
 git config remote.pushDefault dev
 
+# Set upstream tracking branch for main
+CURRENT_BRANCH=$(git branch --show-current)
+if [ -n "$CURRENT_BRANCH" ]; then
+  git branch --set-upstream-to=github/"$CURRENT_BRANCH" "$CURRENT_BRANCH" 2>/dev/null || true
+fi
+
 echo "Remotes configured successfully:"
 git remote -v
 echo ""
 echo "Default push remote set to: dev"
+echo "Upstream tracking set to: github/$CURRENT_BRANCH"
