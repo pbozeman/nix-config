@@ -27,9 +27,7 @@
 
     # tmux
     tm = "tmux";
-    tma = "tmux new-session -A -s";
-    tmls = "tmux ls";
-    tmd = "tmux new-session -A -s dev";
+    tml = "tmux ls";
 
     # utils
     calc = "kalker";
