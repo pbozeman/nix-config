@@ -10,7 +10,7 @@
   ];
 
   extraModules = [
-    inputs.hardware.nixosModules.framework-16-7040-amd
+    inputs.hardware.nixosModules.framework-16-amd-ai-300-series-nvidia
   ];
 
   config = {
