@@ -56,6 +56,7 @@ with pkgs;
   # sigrok-cli
 
   # Fonts
+  hack-font
   meslo-lgs-nf
 
   # Source code management, Git, GitHub tools

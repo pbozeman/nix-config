@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       # Font
-      font-family = "MesloLGS NF";
+      font-family = "Hack";
       font-size = 12;
 
       shell-integration = "none";
