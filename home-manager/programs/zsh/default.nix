@@ -10,6 +10,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    enableVteIntegration = false;
 
     sessionVariables = {
       EDITOR = "nvim";

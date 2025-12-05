@@ -8,6 +8,10 @@
 {
   home.file.".config/forge/stylesheet/forge/stylesheet.css".source = ./gnome-forge/stylesheet.css;
 
+  # Use Nordzy terminal icon for Ghostty
+  home.file.".local/share/icons/hicolor/scalable/apps/com.mitchellh.ghostty.svg".source =
+    "${pkgs.nordzy-icon-theme}/share/icons/Nordzy-dark/apps/scalable/terminal.svg";
+
   home.file.".config/xilinx/nix.sh".text = ''
     INSTALL_DIR=$HOME/xilinx
     VERSION=2024.2
@@ -148,7 +152,7 @@
         "forge@jmmaranan.com"
       ];
       favorite-apps = [
-        "Alacritty.desktop"
+        "com.mitchellh.ghostty.desktop"
         "brave-browser.desktop"
         "vivado.desktop"
         "obsidian.desktop"
