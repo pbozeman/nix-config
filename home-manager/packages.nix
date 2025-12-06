@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, lib }:
 let
   # https://nixos.wiki/wiki/Helm_and_Helmfile
   my-kubernetes-helm =
@@ -44,7 +44,6 @@ with pkgs;
   gcc
 
   # agent container
-  bubblewrap
   socat
 
   # agents
@@ -105,4 +104,7 @@ with pkgs;
   # rust
   cargo
   rustc
+]
+++ lib.optionals (!pkgs.stdenvNoCC.isDarwin) [
+  bubblewrap
 ]

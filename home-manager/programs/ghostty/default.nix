@@ -1,7 +1,74 @@
-{ ... }:
+{ pkgs, lib, ... }:
 
+let
+  isDarwin = pkgs.stdenvNoCC.isDarwin;
+
+  ghosttyConfig = ''
+    # Font
+    font-family = Hack
+    font-size = 12
+
+    shell-integration = none
+    app-notifications = no-clipboard-copy
+
+    # Window
+    title = term
+    macos-titlebar-style = hidden
+    gtk-tabs-location = hidden
+    mouse-hide-while-typing = true
+
+    # Colors (matching Alacritty config)
+    foreground = D8DEE9
+    background = 000000
+    cursor-color = D8DEE9
+    cursor-text = 2E3440
+    selection-foreground = D8DEE9
+    selection-background = 4C566A
+
+    # Normal colors
+    palette = 0=#3B4252
+    palette = 1=#BF616A
+    palette = 2=#A3BE8C
+    palette = 3=#EBCB8B
+    palette = 4=#81A1C1
+    palette = 5=#B48EAD
+    palette = 6=#88C0D0
+    palette = 7=#E5E9F0
+    # Bright colors
+    palette = 8=#4C566A
+    palette = 9=#BF616A
+    palette = 10=#A3BE8C
+    palette = 11=#EBCB8B
+    palette = 12=#81A1C1
+    palette = 13=#B48EAD
+    palette = 14=#8FBCBB
+    palette = 15=#ECEFF4
+
+    # Key bindings
+    keybind = ctrl+v=paste_from_clipboard
+    keybind = cmd+enter=toggle_fullscreen
+    keybind = shift+enter=text:\x1b\r
+    keybind = alt+t=new_tab
+    keybind = alt+n=new_window
+    keybind = alt+one=goto_tab:1
+    keybind = alt+two=goto_tab:2
+    keybind = alt+three=goto_tab:3
+    keybind = alt+four=goto_tab:4
+    keybind = alt+five=goto_tab:5
+    keybind = alt+six=goto_tab:6
+    keybind = alt+seven=goto_tab:7
+    keybind = alt+eight=goto_tab:8
+    keybind = alt+nine=goto_tab:9
+  '';
+in
 {
-  programs.ghostty = {
+  # Use home-manager's file management to create the config on Darwin
+  xdg.configFile = lib.mkIf isDarwin {
+    "ghostty/config".text = ghosttyConfig;
+  };
+
+  # Use the ghostty program module on non-Darwin systems
+  programs.ghostty = lib.mkIf (!isDarwin) {
     enable = true;
     settings = {
       # Font

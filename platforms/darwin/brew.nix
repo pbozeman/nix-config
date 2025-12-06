@@ -29,6 +29,7 @@
       "alacritty"
       "arduino-ide"
       "brave-browser"
+      "ghostty"
       "itsycal"
       "karabiner-elements"
       "kicad"

@@ -20,7 +20,7 @@
 
     nixcats = {
       url = "github:pbozeman/nixcats";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-wsl = {

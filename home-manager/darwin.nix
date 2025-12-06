@@ -10,7 +10,7 @@
     ${pkgs.dockutil}/bin/dockutil \
       --remove all \
       --add "/Applications/Brave Browser.app" \
-      --add /Applications/Alacritty.app \
+      --add /Applications/Ghostty.app \
       --add /Applications/Spotify.app \
       --add "/System/Applications/Preview.app" \
       --add "/System/Applications/Utilities/Activity Monitor.app" \

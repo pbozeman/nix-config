@@ -40,7 +40,7 @@
         inputs.nixcats.packages.${pkgs.stdenv.hostPlatform.system}.nvim
       ];
     in
-    (import ./packages.nix { inherit pkgs; }) ++ additionalPackages;
+    (import ./packages.nix { inherit pkgs lib; }) ++ additionalPackages;
 
     activation.linkBinFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       src="${./bin}"

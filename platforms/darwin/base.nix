@@ -123,12 +123,22 @@
       };
 
       # firewall settings
-      alf = {
-        # 0 = disabled 1 = enabled 2 = blocks all connections except for essential services
-        globalstate = 1;
-        loggingenabled = 0;
-        stealthenabled = 1;
-      };
+      #        Failed assertions:
+      # - The option definition `system.defaults.alf.stealthenabled' in `/nix/store/a6ymwrvp4rcwblh7p8y8yw568nwy3cy7-source/platforms/darwin/base.nix' no longer has any effect; please remove it.
+      # Use `networking.applicationFirewall.enableStealthMode' instead.
+      #
+      # - The option definition `system.defaults.alf.loggingenabled' in `/nix/store/a6ymwrvp4rcwblh7p8y8yw568nwy3cy7-source/platforms/darwin/base.nix' no longer has any effect; please remove it.
+      # It's no longer necessary.
+      #
+      # - The option definition `system.defaults.alf.globalstate' in `/nix/store/a6ymwrvp4rcwblh7p8y8yw568nwy3cy7-source/platforms/darwin/base.nix' no longer has any effect; please remove it.
+      # Use `networking.applicationFirewall.enable' and `networking.applicationFirewall.blockAllIncoming' instead.
+      #
+      # alf = {
+      #   # 0 = disabled 1 = enabled 2 = blocks all connections except for essential services
+      #   globalstate = 1;
+      #   loggingenabled = 0;
+      #   stealthenabled = 1;
+      # };
     };
 
     activationScripts.extraActivation.enable = true;
