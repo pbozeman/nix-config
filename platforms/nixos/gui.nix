@@ -67,7 +67,7 @@
   services.logind.settings.Login = {
     HandleLidSwitch = "hibernate";
     HandleLidSwitchDocked = "ignore";
-    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchExternalPower = "suspend";
   };
 
   # === Audio ===
