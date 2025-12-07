@@ -6,8 +6,6 @@
   ...
 }:
 {
-  home.file.".config/forge/stylesheet/forge/stylesheet.css".source = ./gnome-forge/stylesheet.css;
-
   # Use Nordzy terminal icon for Ghostty
   home.file.".local/share/icons/hicolor/scalable/apps/com.mitchellh.ghostty.svg".source =
     "${pkgs.nordzy-icon-theme}/share/icons/Nordzy-dark/apps/scalable/terminal.svg";
@@ -42,7 +40,7 @@
     gnome-shell-extensions
     gnome-tweaks
     gnomeExtensions.caffeine
-    gnomeExtensions.forge
+    gnomeExtensions.tiling-shell
     gnomeExtensions.hide-top-bar
     xsel
 
@@ -149,7 +147,7 @@
     "org/gnome/shell" = {
       enabled-extensions = [
         "caffeine@patapon.info"
-        "forge@jmmaranan.com"
+        "tilingshell@ferrarodomenico.com"
       ];
       favorite-apps = [
         "com.mitchellh.ghostty.desktop"
@@ -160,15 +158,6 @@
         "spotify.desktop"
         "org.gnome.Nautilus.desktop"
       ];
-    };
-
-    "org/gnome/shell/extensions/forge" = {
-      focus-border-toggle = true;
-      window-gap-size-increment = lib.hm.gvariant.mkUint32 1;
-    };
-
-    "org/gnome/shell/extensions/forge/keybindings" = {
-      prefs-tiling-toggle = [ ];
     };
 
     "org/gnome/shell/keybindings" = {
