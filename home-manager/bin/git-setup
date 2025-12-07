@@ -45,6 +45,9 @@ ssh pbozeman@dev "[ -d git/$REPO_NAME ] || git init --bare git/$REPO_NAME"
 git remote add github "git@github.com:pbozeman/$REPO_NAME.git"
 git remote add dev "pbozeman@dev:git/$REPO_NAME"
 
+git fetch dev
+git fetch github
+
 # Set dev as the default push remote
 git config remote.pushDefault dev
 
