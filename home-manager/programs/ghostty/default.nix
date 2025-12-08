@@ -13,9 +13,10 @@ let
 
     # Window
     title = term
-    macos-titlebar-style = hidden
+    macos-titlebar-style = transparent
     gtk-tabs-location = hidden
     mouse-hide-while-typing = true
+    window-padding-color = background
 
     # Colors (matching Alacritty config)
     foreground = D8DEE9
