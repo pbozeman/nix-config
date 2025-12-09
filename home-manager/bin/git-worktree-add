@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Usage: git-worktree <name> [branch]" >&2
+  exit 1
+fi
+
+name="$1"
+dest="$HOME/src/$name"
+
+git worktree add "$dest"
+git push -u dev "$name" --no-verify
+git -C "$dest" submodule update --init --recursive
+
+cd "$dest"
+direnv allow
+
+tmux new-window -c "$dest" -n "$name"
+tmux split-window -h -c "$dest"
+tmux split-window -v -c "$dest"
+# shellcheck disable=SC2016
+tmux send-keys 'export MAKEFLAGS=-j$(nproc) ; clear' Enter
+tmux select-pane -U
+# shellcheck disable=SC2016
+tmux send-keys 'export MAKEFLAGS=-j$(( $(nproc) - 2 )) ; clear ; claude' Enter
+tmux select-pane -L
+tmux send-keys 'nvim' Enter

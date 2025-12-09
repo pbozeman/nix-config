@@ -70,6 +70,8 @@
     gski = "git stash push --keep-index --include-untracked";
     gsi = "git stash push --staged";
     gsp = "git stash pop";
+    gwta = "git-worktree-add";
+    gwtrm = "git-worktree-rm";
 
     lazygit = "lazygit -ucd ~/.config/lazygit";
 

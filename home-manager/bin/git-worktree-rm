@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Usage: git-worktree-rm <name>" >&2
+  exit 1
+fi
+
+name="$1"
+dest="$HOME/src/$name"
+
+git worktree remove -f "$dest"
+git push dev --delete "$name" 2>/dev/null || true
+tmux kill-window -t "$name" 2>/dev/null || true
