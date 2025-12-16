@@ -7,6 +7,9 @@ let
     # Font
     font-family = Hack
     font-size = 12
+    font-style-italic = false
+    font-style-bold-italic = false
+    font-synthetic-style = no-italic,no-bold-italic
 
     shell-integration = none
     app-notifications = no-clipboard-copy
@@ -75,6 +78,9 @@ in
       # Font
       font-family = "Hack";
       font-size = 12;
+      font-style-italic = false;
+      font-style-bold-italic = false;
+      font-synthetic-style = "no-italic,no-bold-italic";
 
       shell-integration = "none";
       app-notifications = "no-clipboard-copy";

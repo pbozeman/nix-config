@@ -21,7 +21,7 @@ in
     mouse = true;
     keyMode = "vi";
     shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     plugins = [ tmux-tokyo-night ];
     extraConfig = ''
       # work arounds from:
@@ -33,6 +33,9 @@ in
       # https://github.com/mobile-shell/mosh/pull/1054
       set -s set-clipboard on
       set -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
+
+      # Disable italics (render as normal text instead of reverse video)
+      set -as terminal-overrides ',*:sitm=:ritm=:smso=:rmso='
 
       set -g focus-events on
       set -g automatic-rename on
