@@ -30,11 +30,7 @@
     experimental-features = nix-command flakes
   '';
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableBashCompletion = true;
-  };
+  programs.fish.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
@@ -43,7 +39,7 @@
   };
 
   environment = {
-    shells = [ pkgs.bashInteractive pkgs.zsh ];
+    shells = [ pkgs.bashInteractive pkgs.fish ];
 
     # Note: these vars are pam environment so set on login globally
     # as part of parent to shells. Starting new shells doesn't get the
@@ -80,7 +76,7 @@
   users.users.${user} = {
     hashedPassword = secrets.${user}.hashedPassword;
     home = "/home/${user}";
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     description = "${fullname}";
     isNormalUser = true;
     extraGroups = [

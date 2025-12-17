@@ -20,7 +20,7 @@ in
     sensibleOnTop = false;
     mouse = true;
     keyMode = "vi";
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.fish}/bin/fish";
     terminal = "tmux-256color";
     plugins = [ tmux-tokyo-night ];
     extraConfig = ''

@@ -11,6 +11,7 @@
   imports = [
     ./programs/alacritty
     ./programs/autoraise
+    ./programs/fish
     ./programs/ghostty
     ./programs/git
     ./programs/lazygit
@@ -19,7 +20,6 @@
     ./programs/tmux
     ./programs/wezterm
     ./programs/zathura
-    ./programs/zsh
   ];
 
   home = {

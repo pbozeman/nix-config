@@ -22,15 +22,14 @@
   programs.bash.enable = true;
   programs.bash.completion.enable = true;
 
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
+  programs.fish.enable = true;
 
-  environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
+  environment.shells = [ pkgs.bashInteractive pkgs.fish ];
 
   users.users.${user} = {
     # See https://github.com/nix-community/home-manager/issues/4026
     home = "/Users/${user}";
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     openssh.authorizedKeys.keys = secrets.authorizedKeys;
   };
 
