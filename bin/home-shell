@@ -13,4 +13,4 @@ echo "Activating..."
 /tmp/hm-test/activate
 
 echo "Entering test shell..."
-exec zsh
+exec fish

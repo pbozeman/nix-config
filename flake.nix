@@ -203,7 +203,7 @@
               default = pkgs.mkShell {
                 packages = import ./home-manager/packages.nix { inherit pkgs; };
                 shellHook = ''
-                  exec zsh
+                  exec fish
                 '';
               };
             }
