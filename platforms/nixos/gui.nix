@@ -63,13 +63,6 @@
   # Fingerprint reader
   services.fprintd.enable = true;
 
-  # === Laptop Power Management ===
-  services.logind.settings.Login = {
-    HandleLidSwitch = "hibernate";
-    HandleLidSwitchDocked = "ignore";
-    HandleLidSwitchExternalPower = "suspend";
-  };
-
   # === Audio ===
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;

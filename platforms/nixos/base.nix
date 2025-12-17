@@ -109,4 +109,9 @@
       X11UseLocalhost = true;
     };
   };
+
+  # Prevent idle suspend (important for SSH sessions)
+  services.logind.settings.Login = {
+    IdleAction = "ignore";
+  };
 }
