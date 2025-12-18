@@ -32,6 +32,7 @@ with pkgs;
   fswatch
   nix-direnv
   fd
+  fzf
   duf
   killall
   openssh

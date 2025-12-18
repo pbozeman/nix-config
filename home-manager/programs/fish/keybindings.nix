@@ -16,7 +16,6 @@
   bind -M insert \cw backward-kill-word
   bind -M insert \ck kill-line
   bind -M insert \cu backward-kill-line
-  bind -M insert \cr history-search-backward
   bind -M insert \eb backward-word
   bind -M insert \ef forward-word
 ''
