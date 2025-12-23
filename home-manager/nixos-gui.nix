@@ -12,7 +12,7 @@
 
   home.file.".config/xilinx/nix.sh".text = ''
     INSTALL_DIR=$HOME/xilinx
-    VERSION=2024.2
+    VERSION=2025.2
   '';
 
   home.packages = with pkgs; [
