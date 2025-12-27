@@ -6,6 +6,9 @@
     (import ./claude-code.nix {
       inherit inputs nixpkgs;
     })
+    (import ./codex.nix {
+      inherit inputs nixpkgs;
+    })
     (import ./kicad.nix {
       inherit inputs nixpkgs;
     })

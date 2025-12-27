@@ -201,7 +201,10 @@
             in
             {
               default = pkgs.mkShell {
-                packages = import ./home-manager/packages.nix { inherit pkgs; };
+                packages = import ./home-manager/packages.nix {
+                  inherit pkgs;
+                  lib = pkgs.lib;
+                };
                 shellHook = ''
                   exec fish
                 '';
