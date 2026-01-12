@@ -20,10 +20,8 @@ direnv allow
 tmux new-window -c "$dest" -n "$name"
 tmux split-window -h -c "$dest"
 tmux split-window -v -c "$dest"
-# shellcheck disable=SC2016
-tmux send-keys 'export MAKEFLAGS=-j$(nproc) ; clear' Enter
+tmux send-keys 'set -x MAKEFLAGS -j(nproc) ; clear' Enter
 tmux select-pane -U
-# shellcheck disable=SC2016
-tmux send-keys 'export MAKEFLAGS=-j$(( $(nproc) - 2 )) ; clear ; claude' Enter
+tmux send-keys 'set -x MAKEFLAGS -j(math (nproc) - 2) ; clear ; claude' Enter
 tmux select-pane -L
 tmux send-keys 'nvim' Enter
