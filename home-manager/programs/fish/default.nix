@@ -37,6 +37,7 @@
     interactiveShellInit = ''
       ${import ./keybindings.nix { }}
       ${import ./functions.nix { }}
+      ${import ./prompt-refresh.nix { }}
 
       # disable greeting
       set -g fish_greeting
