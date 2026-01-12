@@ -171,6 +171,10 @@
       toggle-tiled-left = [ ];
       toggle-tiled-right = [ ];
     };
+
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+    };
   };
 
   # Create wrapper script to launch zathura with X11 backend
