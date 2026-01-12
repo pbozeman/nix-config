@@ -11,5 +11,6 @@ name="$1"
 dest="$HOME/src/$name"
 
 git worktree remove -f "$dest"
+git branch -D "$name" 2>/dev/null || true
 git push dev --delete "$name" 2>/dev/null || true
 tmux kill-window -t "$name" 2>/dev/null || true
