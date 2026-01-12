@@ -14,6 +14,12 @@ git worktree add "$dest"
 git push -u dev "$name" --no-verify
 git -C "$dest" submodule update --init --recursive
 
+# Copy .claude settings if they exist in current repo
+src_root=$(git rev-parse --show-toplevel)
+if [[ -d "$src_root/.claude" ]]; then
+  cp -r "$src_root/.claude" "$dest/"
+fi
+
 cd "$dest"
 direnv allow
 
