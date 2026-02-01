@@ -19,6 +19,7 @@
       ./hardware.nix
       ../../platforms/nixos
       ../../platforms/nixos/gui.nix
+      ../../platforms/nixos/server.nix
       ../../platforms/nixos/services
     ];
 

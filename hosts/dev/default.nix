@@ -12,6 +12,7 @@
     imports = [
       ./hardware.nix
       ../../platforms/nixos
+      ../../platforms/nixos/server.nix
       ../../platforms/nixos/services
     ];
 
