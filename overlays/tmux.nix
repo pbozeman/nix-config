@@ -5,12 +5,12 @@
 # release
 final: prev: {
   tmux = prev.tmux.overrideAttrs (oldAttrs: {
-    version = "master";
+    version = "615c27c";
     src = prev.fetchFromGitHub {
       owner = "tmux";
       repo = "tmux";
-      rev = "master";
-      hash = "sha256-Le76k5X6YJKVjOstOreqixzeRLt6+E9qzmltMS5Vlc4=";
+      rev = "615c27c";
+      hash = "sha256-zcll86R5uxUHhEb7VKshJibGwgJOGz2K6ru2gf+DT9g=";
     };
   });
 }
