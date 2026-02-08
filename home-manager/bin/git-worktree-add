@@ -9,13 +9,44 @@ fi
 
 name="$1"
 dest="$HOME/src/$name"
+src_root=$(git rev-parse --show-toplevel)
 
 git worktree add "$dest"
 git push -u dev "$name" --no-verify
-git -C "$dest" submodule update --init --recursive
+
+# Clone submodules (may fail for commits that only exist on dev)
+git -C "$dest" submodule update --init --recursive || true
+
+# For pbozeman submodules, copy all remotes from source and fetch
+# so commits only on dev become available
+git submodule foreach --quiet 'echo "$sm_path"' 2>/dev/null | while IFS= read -r sm_path; do
+  [[ -z "$sm_path" ]] && continue
+  src_sub="$src_root/$sm_path"
+  dest_sub="$dest/$sm_path"
+
+  [[ -d "$dest_sub" ]] || continue
+  git -C "$src_sub" remote -v 2>/dev/null | grep -q "pbozeman" || continue
+
+  # Fetch from source submodule's local repo to get unpushed commits
+  git -C "$dest_sub" fetch "$src_sub" 2>/dev/null || true
+
+  # Add all remotes from source submodule
+  for remote in $(git -C "$src_sub" remote 2>/dev/null); do
+    url=$(git -C "$src_sub" remote get-url "$remote" 2>/dev/null || true)
+    [[ -n "$url" ]] || continue
+    git -C "$dest_sub" remote add "$remote" "$url" 2>/dev/null || true
+  done
+
+  # Fetch all remotes in dest submodule
+  for remote in $(git -C "$dest_sub" remote 2>/dev/null); do
+    git -C "$dest_sub" fetch "$remote" 2>/dev/null || true
+  done
+done
+
+# Retry submodule update now that dev commits are fetched
+git -C "$dest" submodule update --recursive
 
 # Copy .claude settings if they exist in current repo
-src_root=$(git rev-parse --show-toplevel)
 if [[ -d "$src_root/.claude" ]]; then
   cp -r "$src_root/.claude" "$dest/"
 fi
