@@ -24,6 +24,7 @@
     # tmux
     tm = "tmux";
     tml = "tmux ls";
+    trw = "set -gx TMUX_WN_MANUAL 1; and tmux rename-window";
 
     # utils
     calc = "kalker";
