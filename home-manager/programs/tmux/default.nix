@@ -80,8 +80,8 @@ in
       # Note: these have to be coordinated with the terminal and tmux style.
       set -g window-style 'fg=#939cac,bg=#111111'
       set -g window-active-style 'fg=#dcdfe4,bg=#000000'
-      set -g pane-border-style 'fg=#666666,bg=#111111'
-      set -g pane-active-border-style 'fg=#666666,bg=#111111'
+      set -g pane-border-style 'fg=#292e42,bg=#111111'
+      set -g pane-active-border-style 'fg=#292e42,bg=#111111'
 
       # override status bar to remove seconds from clock
       #
