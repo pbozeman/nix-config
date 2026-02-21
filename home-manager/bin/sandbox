@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+set -e
+
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Build env args from current environment
+env_args=()
+while IFS='=' read -r -d '' name value; do
+  # Skip problematic vars
+  [[ "$name" =~ ^(PWD|OLDPWD|SHLVL|_|TERM_SESSION_ID|BASH_FUNC_.*)$ ]] && continue
+  # Skip empty names or values with newlines
+  [[ -z "$name" ]] && continue
+  [[ "$value" == *$'\n'* ]] && continue
+  env_args+=("--setenv" "$name" "$value")
+done < <(env -0)
+
+# Home-manager paths to bind (read-only)
+hm_args=()
+for hm_path in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER"; do
+  if [[ -e "$hm_path" ]]; then
+    hm_args+=("--ro-bind" "$hm_path" "$hm_path")
+  fi
+done
+
+# Git submodule/worktree support - bind the actual git dir if .git is a file
+git_args=()
+if [[ -f "$PROJECT_DIR/.git" ]]; then
+  # Parse gitdir from the .git file
+  gitdir=$(sed -n 's/^gitdir: //p' "$PROJECT_DIR/.git")
+  if [[ -n "$gitdir" ]]; then
+    # Resolve relative path
+    if [[ "$gitdir" != /* ]]; then
+      gitdir="$PROJECT_DIR/$gitdir"
+    fi
+    gitdir=$(cd "$PROJECT_DIR" && cd "$(dirname "$gitdir")" && pwd)/$(basename "$gitdir")
+    if [[ -d "$gitdir" ]]; then
+      git_args+=("--ro-bind" "$gitdir" "$gitdir")
+      # For worktrees, also need the main .git directory
+      # worktree gitdir contains a 'commondir' file pointing to main repo
+      if [[ -f "$gitdir/commondir" ]]; then
+        commondir=$(cat "$gitdir/commondir")
+        if [[ "$commondir" != /* ]]; then
+          commondir="$gitdir/$commondir"
+        fi
+        commondir=$(cd "$(dirname "$commondir")" && pwd)/$(basename "$commondir")
+        if [[ -d "$commondir" ]]; then
+          git_args+=("--ro-bind" "$commondir" "$commondir")
+        fi
+      fi
+    fi
+  fi
+fi
+
+exec bwrap \
+  --ro-bind /nix/store /nix/store \
+  --ro-bind /run/current-system /run/current-system \
+  --ro-bind /etc/resolv.conf /etc/resolv.conf \
+  --ro-bind /etc/ssl /etc/ssl \
+  --ro-bind /etc/static /etc/static \
+  --ro-bind /etc/hosts /etc/hosts \
+  --ro-bind /usr /usr \
+  --ro-bind /bin /bin \
+  --symlink /usr/lib /lib \
+  --symlink /usr/lib64 /lib64 \
+  --proc /proc \
+  --dev /dev \
+  --tmpfs /tmp \
+  --tmpfs "$HOME" \
+  "${hm_args[@]}" \
+  --bind "$HOME/.claude" "$HOME/.claude" \
+  --bind "$HOME/.claude.json" "$HOME/.claude.json" \
+  --bind "$PROJECT_DIR" "$PROJECT_DIR" \
+  "${git_args[@]}" \
+  --chdir "$PROJECT_DIR" \
+  --die-with-parent \
+  "${env_args[@]}" \
+  --setenv PWD "$PROJECT_DIR" \
+  "${@:-bash}"

@@ -5,6 +5,8 @@ set -euo pipefail
 dir="$(pwd)"
 name="${1:-$(basename "$dir")}"
 
+claude_cmd="sandbox claude --dangerously-skip-permissions"
+
 nvim_pane=$(tmux display-message -p '#{pane_id}')
 
 tmux rename-window "$name"
@@ -13,6 +15,6 @@ claude_pane=$(tmux split-window -h -c "$dir" -P -F '#{pane_id}')
 shell_pane=$(tmux split-window -v -c "$dir" -P -F '#{pane_id}')
 
 tmux send-keys -t "$nvim_pane" 'nvim' Enter
-tmux send-keys -t "$claude_pane" 'set -x MAKEFLAGS -j(math (nproc) - 2) ; clear ; claude' Enter
+tmux send-keys -t "$claude_pane" "set -x MAKEFLAGS -j(math (nproc) - 2) ; clear ; $claude_cmd" Enter
 tmux send-keys -t "$shell_pane" 'set -x MAKEFLAGS -j(nproc) ; clear' Enter
 tmux select-pane -t "$claude_pane"
