@@ -54,11 +54,5 @@ fi
 cd "$dest"
 direnv allow
 
-tmux new-window -c "$dest" -n "$name"
-tmux split-window -h -c "$dest"
-tmux split-window -v -c "$dest"
-tmux send-keys 'set -x MAKEFLAGS -j(nproc) ; clear' Enter
-tmux select-pane -U
-tmux send-keys 'set -x MAKEFLAGS -j(math (nproc) - 2) ; clear ; claude' Enter
-tmux select-pane -L
-tmux send-keys 'nvim' Enter
+tmux new-window -c "$dest"
+dev-tmux "$name"
