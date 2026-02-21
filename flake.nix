@@ -28,6 +28,7 @@
     };
 
     claude-code.url = "github:sadjow/claude-code-nix";
+    codex.url = "github:sadjow/codex-cli-nix";
 
     nix-vivado.url = "github:pbozeman/nix-vivado";
   };
@@ -43,6 +44,7 @@
       nixcats,
       nixos-wsl,
       claude-code,
+      codex,
       nix-vivado,
       ...
     }@inputs:
