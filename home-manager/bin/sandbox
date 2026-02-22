@@ -34,7 +34,7 @@ if [[ -f "$PROJECT_DIR/.git" ]]; then
     fi
     gitdir=$(cd "$PROJECT_DIR" && cd "$(dirname "$gitdir")" && pwd)/$(basename "$gitdir")
     if [[ -d "$gitdir" ]]; then
-      git_args+=("--ro-bind" "$gitdir" "$gitdir")
+      git_args+=("--bind" "$gitdir" "$gitdir")
       # For worktrees, also need the main .git directory
       # worktree gitdir contains a 'commondir' file pointing to main repo
       if [[ -f "$gitdir/commondir" ]]; then
@@ -44,7 +44,7 @@ if [[ -f "$PROJECT_DIR/.git" ]]; then
         fi
         commondir=$(cd "$(dirname "$commondir")" && pwd)/$(basename "$commondir")
         if [[ -d "$commondir" ]]; then
-          git_args+=("--ro-bind" "$commondir" "$commondir")
+          git_args+=("--bind" "$commondir" "$commondir")
         fi
       fi
     fi
