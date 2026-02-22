@@ -5,7 +5,7 @@ set -euo pipefail
 dir="$(pwd)"
 name="${1:-$(basename "$dir")}"
 
-claude_cmd="sandbox claude --dangerously-skip-permissions"
+claude_cmd="sandbox claude --allow-dangerously-skip-permissions --permission-mode plan"
 
 nvim_pane=$(tmux display-message -p '#{pane_id}')
 
