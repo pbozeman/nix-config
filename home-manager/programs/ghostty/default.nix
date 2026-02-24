@@ -13,6 +13,8 @@ let
 
     shell-integration = none
     app-notifications = no-clipboard-copy
+    clipboard-read = allow
+    clipboard-write = allow
 
     # Window
     title = term
@@ -66,9 +68,9 @@ let
   '';
 in
 {
-  # Use home-manager's file management to create the config on Darwin
-  xdg.configFile = lib.mkIf isDarwin {
-    "ghostty/config".text = ghosttyConfig;
+  # Ghostty on macOS looks in ~/Library/Application Support/com.mitchellh.ghostty/
+  home.file = lib.mkIf isDarwin {
+    "Library/Application Support/com.mitchellh.ghostty/config".text = ghosttyConfig;
   };
 
   # Use the ghostty program module on non-Darwin systems
@@ -84,6 +86,8 @@ in
 
       shell-integration = "none";
       app-notifications = "no-clipboard-copy";
+      clipboard-read = "allow";
+      clipboard-write = "allow";
 
       # Window
       title = "term";
