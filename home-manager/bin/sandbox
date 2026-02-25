@@ -22,6 +22,12 @@ for hm_path in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER"; do
   fi
 done
 
+# Git global config (home-manager symlinks into /nix/store)
+git_config_args=()
+if [[ -d "$HOME/.config/git" ]]; then
+  git_config_args+=("--ro-bind" "$HOME/.config/git" "$HOME/.config/git")
+fi
+
 # Git submodule/worktree support - bind the actual git dir if .git is a file
 git_args=()
 if [[ -f "$PROJECT_DIR/.git" ]]; then
@@ -67,6 +73,7 @@ exec bwrap \
   --tmpfs /tmp \
   --tmpfs "$HOME" \
   "${hm_args[@]}" \
+  "${git_config_args[@]}" \
   --bind "$HOME/.claude" "$HOME/.claude" \
   --bind "$HOME/.claude.json" "$HOME/.claude.json" \
   --bind "$PROJECT_DIR" "$PROJECT_DIR" \
