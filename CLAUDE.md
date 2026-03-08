@@ -1,6 +1,7 @@
 # Nix Configuration Repository Guide
 
 ## Build Commands
+
 - `./bin/darwin-rebuild`: Rebuild macOS configurations
 - `./bin/nixos-rebuild`: Rebuild NixOS configurations
 - `./bin/home-rebuild`: Rebuild home-manager configurations
@@ -9,6 +10,7 @@
 - `nix flake lock --update-input <input>`: Update specific flake input
 
 ## Formatting/Style Guide
+
 - Use 2-space indentation in Nix files
 - Follow declarative Nix programming style
 - Group related configurations in separate modules
@@ -20,6 +22,7 @@
 - Format lists consistently with one item per line
 
 ## Project Structure
+
 - flake.nix: Central configuration defining inputs/outputs
 - nixos/: NixOS-specific configurations
 - darwin/: macOS-specific configurations
@@ -28,6 +31,6 @@
 - bin/: Utility scripts for common operations
 
 ## Git Commit Format
-- Use format: `[🤖][component] description` (robot emoji in brackets at front)
-- Do NOT include author attribution (no "Co-Authored-By" or "Generated with Claude Code")
-- Example: `[🤖][nixos] use user variable instead of hardcoded username`
+
+- Use format: `[component] description`
+
