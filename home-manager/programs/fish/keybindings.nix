@@ -8,9 +8,17 @@
   bind -M default v edit_command_buffer
   bind -M visual v edit_command_buffer
 
-  # emacs-style bindings in insert mode
-  bind -M insert \cp up-or-search
-  bind -M insert \cn down-or-search
+  # session-local history navigation in insert mode
+  bind -M insert \cp __session_history_up
+  bind -M insert \cn __session_history_down
+  bind -M insert up __session_history_up
+  bind -M insert down __session_history_down
+
+  # session-local history navigation in normal (default) mode
+  bind -M default k __session_history_up
+  bind -M default j __session_history_down
+  bind -M default up __session_history_up
+  bind -M default down __session_history_down
   bind -M insert \ca beginning-of-line
   bind -M insert \ce end-of-line
   bind -M insert \cw backward-kill-word

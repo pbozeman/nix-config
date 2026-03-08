@@ -35,6 +35,7 @@
     '';
 
     interactiveShellInit = ''
+      ${import ./session-history.nix { }}
       ${import ./keybindings.nix { }}
       ${import ./functions.nix { }}
       ${import ./prompt-refresh.nix { }}
