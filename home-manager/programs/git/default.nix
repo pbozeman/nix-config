@@ -16,6 +16,7 @@
       };
       alias = {
         co = "checkout";
+        br = "!git for-each-ref refs/heads --sort=-committerdate --format='%(if)%(HEAD)%(then)*%(else) %(end)|%(refname:short)|%(committerdate:format:%Y-%m-%d %H:%M:%S)' | column -t -s '|'";
       };
       color.ui = true;
       core = {
