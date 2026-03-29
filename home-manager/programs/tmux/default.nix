@@ -43,6 +43,9 @@ in
       set -g base-index 1
       setw -g pane-base-index 1
 
+      # disable space (next-layout) to avoid accidental relayout
+      unbind Space
+
       # use better mnemonics for horizontal/vertical splits
       bind - split-window -v -c "#{pane_current_path}"
       bind _ split-window -v -c "#{pane_current_path}"
