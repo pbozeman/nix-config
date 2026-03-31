@@ -34,19 +34,18 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      hardware,
-      nix-darwin,
-      home-manager,
-      nixcats,
-      nixos-wsl,
-      claude-code,
-      codex,
-      nix-vivado,
-      ...
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , hardware
+    , nix-darwin
+    , home-manager
+    , nixcats
+    , nixos-wsl
+    , claude-code
+    , codex
+    , nix-vivado
+    , ...
     }@inputs:
     let
       secrets = import ./secrets;
@@ -149,8 +148,8 @@
         };
 
       mkHomeConfiguration =
-        {
-          system ? "x86_64-linux",
+        { system ? "x86_64-linux"
+        ,
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
@@ -173,6 +172,7 @@
         dev = mkNixosSystem "dev";
         fw = mkNixosSystem "fw";
         fwd = mkNixosSystem "fwd";
+        t14s = mkNixosSystem "t14s";
         tp = mkNixosSystem "tp";
         wsl = mkNixosSystem "wsl";
       };

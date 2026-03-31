@@ -1,0 +1,68 @@
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.kernelParams = [
+    "resume=UUID=a739fd88-0229-45be-8950-86b67ff22e9b"
+  ];
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "thunderbolt"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  # FIXME: nvidia 580.119.02 doesn't compile against 6.19 (missing dma_map_ops.map_resource)
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelModules = [
+    "kvm-amd"
+    "usbmon"
+  ];
+  boot.extraModulePackages = [ ];
+
+  boot.resumeDevice = "/dev/disk/by-uuid/a739fd88-0229-45be-8950-86b67ff22e9b";
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/6225c3d4-c088-4df2-a6f6-d8531854bb4b";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/83F1-B5C4";
+    fsType = "vfat";
+  };
+
+  fileSystems."/sys/kernel/debug" = {
+    fsType = "debugfs";
+    device = "debugfs";
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/a739fd88-0229-45be-8950-86b67ff22e9b"; }
+  ];
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+}
