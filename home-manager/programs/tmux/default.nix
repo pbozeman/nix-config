@@ -34,6 +34,16 @@ in
       set -s set-clipboard on
       set -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
 
+      # Under WSL, Windows binaries are not on PATH in this config, so use the
+      # explicit clip.exe path when it is available. This makes tmux copy-mode
+      # selections reach the Windows clipboard instead of relying on OSC 52.
+      if-shell 'test -x /mnt/c/Windows/System32/clip.exe' {
+        set -s copy-command '/mnt/c/Windows/System32/clip.exe'
+        bind -T copy-mode-vi Enter send -X copy-pipe-and-cancel
+        bind -T copy-mode-vi y send -X copy-pipe-and-cancel
+        bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel
+      }
+
       # Disable italics (render as normal text instead of reverse video)
       set -as terminal-overrides ',*:sitm=:ritm=:smso=:rmso='
 
