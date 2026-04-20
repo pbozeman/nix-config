@@ -8,6 +8,10 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    config.global = {
+      hide_env_diff = true;
+      log_filter = ".*";
+    };
   };
 
   programs.fzf = {
@@ -61,6 +65,5 @@
     HOMEBREW_NO_AUTO_UPDATE = "1";
     OPENAI_API_KEY = secrets.openAIKey;
     CLAUDE_CODE_MAX_OUTPUT_TOKENS = "64000";
-    DIRENV_LOG_FORMAT = "";
   };
 }
