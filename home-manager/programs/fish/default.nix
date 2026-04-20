@@ -61,5 +61,6 @@
     HOMEBREW_NO_AUTO_UPDATE = "1";
     OPENAI_API_KEY = secrets.openAIKey;
     CLAUDE_CODE_MAX_OUTPUT_TOKENS = "64000";
+    DIRENV_LOG_FORMAT = "";
   };
 }
