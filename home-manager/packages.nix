@@ -37,6 +37,7 @@ with pkgs;
   killall
   openssh
   pandoc
+  sox
   wget
   zip
 
