@@ -12,7 +12,9 @@
     (import ./kicad.nix {
       inherit inputs nixpkgs;
     })
-    (import ./tmux.nix { })
+    (import ./tmux.nix {
+      inherit inputs nixpkgs;
+    })
     (import ./vivado.nix {
       inherit inputs nixpkgs;
     })
