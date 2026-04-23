@@ -27,7 +27,7 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  # FIXME: nvidia 580.119.02 doesn't compile against 6.19 (missing dma_map_ops.map_resource)
+  # Pinned: 7.x crashes; 6.18 was last known good. Revisit.
   boot.kernelPackages = pkgs.linuxPackages_6_18;
   boot.kernelModules = [
     "kvm-amd"
