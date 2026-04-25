@@ -53,8 +53,8 @@ in
       set -g base-index 1
       setw -g pane-base-index 1
 
-      # disable space (next-layout) to avoid accidental relayout
-      unbind Space
+      # enter scrollback/copy mode with prefix-space
+      bind Space copy-mode
 
       # use better mnemonics for horizontal/vertical splits
       bind - split-window -v -c "#{pane_current_path}"
@@ -88,6 +88,7 @@ in
       bind -T copy-mode-vi 'C-j' if-shell -F '#{pane_at_bottom}' {} { select-pane -D }
       bind -T copy-mode-vi 'C-l' if-shell -F '#{pane_at_right}'  {} { select-pane -R }
       bind -T copy-mode-vi 'C-k' if-shell -F '#{pane_at_top}'    {} { select-pane -U }
+      bind -T copy-mode-vi v send -X begin-selection
 
       # dim inactive panes
       # Note: these have to be coordinated with the terminal and tmux style.
