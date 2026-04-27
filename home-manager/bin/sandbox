@@ -76,6 +76,7 @@ exec bwrap \
   "${git_config_args[@]}" \
   --bind "$HOME/.claude" "$HOME/.claude" \
   --bind "$HOME/.claude.json" "$HOME/.claude.json" \
+  --bind "$HOME/.codex" "$HOME/.codex" \
   --bind "$PROJECT_DIR" "$PROJECT_DIR" \
   "${git_args[@]}" \
   --chdir "$PROJECT_DIR" \
