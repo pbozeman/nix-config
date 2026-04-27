@@ -28,13 +28,14 @@ with pkgs;
   bat
   btop
   coreutils
+  difftastic
   direnv
-  fswatch
-  nix-direnv
-  fd
-  fzf
   duf
+  fd
+  fswatch
+  fzf
   killall
+  nix-direnv
   openssh
   pandoc
   sox
