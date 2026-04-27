@@ -26,7 +26,8 @@
     tml = "tmux ls";
     trw = "set -gx TMUX_WN_MANUAL 1; and tmux rename-window";
     d = "dev-tmux";
-    sc = "sandbox claude --allow-dangerously-skip-permissions --permission-mode plan";
+    scl = "sandbox claude --allow-dangerously-skip-permissions --permission-mode plan";
+    sco = "sandbox codex --dangerously-bypass-approvals-and-sandbox";
 
     # utils
     calc = "kalker";

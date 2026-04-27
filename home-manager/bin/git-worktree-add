@@ -46,9 +46,9 @@ done
 # Retry submodule update now that dev commits are fetched
 git -C "$dest" submodule update --recursive
 
-# Copy .claude settings if they exist in current repo
-if [[ -d "$src_root/.claude" ]]; then
-  cp -r "$src_root/.claude" "$dest/"
+# Copy .codex settings if they exist in current repo
+if [[ -d "$src_root/.codex" ]]; then
+  cp -r "$src_root/.codex" "$dest/"
 fi
 
 cd "$dest"
