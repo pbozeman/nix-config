@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+cols=${COLUMNS:-}
+case "$cols" in
+  ''|*[!0-9]*)
+    cols=$(tput cols 2>/dev/null || echo 80)
+    ;;
+esac
+
+if [ "$cols" -lt 120 ]; then
+  exec difft --display=inline "$@"
+else
+  exec difft --display=side-by-side "$@"
+fi
