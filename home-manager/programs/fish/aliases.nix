@@ -55,6 +55,11 @@
     # git
     g = "git";
     ga = "git add";
+    gbb = "git bisect bad";
+    gbe = "git bisect reset (git bisect log | awk '/^# first bad commit: \\[[0-9a-f]+\\]/ { bad = $5; gsub(/[][]/, \"\", bad) } /^# bad: \\[[0-9a-f]+\\]/ { bad = $3; gsub(/[][]/, \"\", bad) } END { if (bad != \"\") print bad; else print \"__missing_bad_commit__\" }')";
+    gbg = "git bisect good";
+    gbr = "git bisect run";
+    gbs = "git bisect start";
     gc = "git commit";
     gca = "git commit --amend";
     gcm = "git commit -m";
