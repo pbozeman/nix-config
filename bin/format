@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$(readlink -f "$0")")/.."
+
+nixfmt_rfc_style() {
+  nix --experimental-features 'nix-command flakes' run --inputs-from . nixpkgs#nixfmt-rfc-style -- "$@"
+}
+
+if [ "$#" -gt 0 ]; then
+  nixfmt_rfc_style "$@"
+else
+  git ls-files -z '*.nix' | xargs -0 nix --experimental-features 'nix-command flakes' run --inputs-from . nixpkgs#nixfmt-rfc-style --
+fi
