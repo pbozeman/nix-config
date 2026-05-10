@@ -1,10 +1,11 @@
-{ inputs
-, pkgs
-, lib
-, user
-, fullname
-, email
-, ...
+{
+  inputs,
+  pkgs,
+  lib,
+  user,
+  fullname,
+  email,
+  ...
 }:
 
 {
@@ -30,18 +31,17 @@
 
     stateVersion = "23.05";
     username = "${user}";
-    homeDirectory =
-      if pkgs.stdenvNoCC.isDarwin
-      then "/Users/${user}"
-      else "/home/${user}";
+    homeDirectory = if pkgs.stdenvNoCC.isDarwin then "/Users/${user}" else "/home/${user}";
 
     # TODO: make nixcats show up in packages (with an overlay? )
-    packages = with pkgs; let
-      additionalPackages = [
-        inputs.nixcats.packages.${pkgs.stdenv.hostPlatform.system}.nvim
-      ];
-    in
-    (import ./packages.nix { inherit pkgs lib; }) ++ additionalPackages;
+    packages =
+      with pkgs;
+      let
+        additionalPackages = [
+          inputs.nixcats.packages.${pkgs.stdenv.hostPlatform.system}.nvim
+        ];
+      in
+      (import ./packages.nix { inherit pkgs lib; }) ++ additionalPackages;
 
     activation.linkBinFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       src="${./bin}"

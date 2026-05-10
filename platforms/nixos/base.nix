@@ -1,11 +1,13 @@
-{ config
-, pkgs
-, secrets
-, hostname
-, user
-, fullname
-, ...
-}: {
+{
+  config,
+  pkgs,
+  secrets,
+  hostname,
+  user,
+  fullname,
+  ...
+}:
+{
   system.stateVersion = "23.11";
 
   networking.hostName = "${hostname}";
@@ -39,7 +41,10 @@
   };
 
   environment = {
-    shells = [ pkgs.bashInteractive pkgs.fish ];
+    shells = [
+      pkgs.bashInteractive
+      pkgs.fish
+    ];
 
     # Note: these vars are pam environment so set on login globally
     # as part of parent to shells. Starting new shells doesn't get the

@@ -1,8 +1,10 @@
-{ pkgs
-, secrets
-, user
-, ...
-}: {
+{
+  pkgs,
+  secrets,
+  user,
+  ...
+}:
+{
   system.stateVersion = 4;
   system.primaryUser = user;
 
@@ -24,7 +26,10 @@
 
   programs.fish.enable = true;
 
-  environment.shells = [ pkgs.bashInteractive pkgs.fish ];
+  environment.shells = [
+    pkgs.bashInteractive
+    pkgs.fish
+  ];
 
   users.users.${user} = {
     # See https://github.com/nix-community/home-manager/issues/4026

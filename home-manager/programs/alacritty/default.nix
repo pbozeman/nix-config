@@ -10,10 +10,26 @@
       };
       keyboard = {
         bindings = [
-          { key = "v"; mods = "Control"; action = "Paste"; }
-          { key = "Enter"; mods = "Alt"; action = "ToggleFullscreen"; }
-          { key = "Enter"; mods = "Command"; action = "ToggleFullscreen"; }
-          { key = "Enter"; mods = "Shift"; chars = "\\u001b\\r"; }
+          {
+            key = "v";
+            mods = "Control";
+            action = "Paste";
+          }
+          {
+            key = "Enter";
+            mods = "Alt";
+            action = "ToggleFullscreen";
+          }
+          {
+            key = "Enter";
+            mods = "Command";
+            action = "ToggleFullscreen";
+          }
+          {
+            key = "Enter";
+            mods = "Shift";
+            chars = "\\u001b\\r";
+          }
         ];
       };
       mouse = {

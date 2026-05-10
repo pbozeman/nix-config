@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.gnome.gnome-remote-desktop.enable = true;
 
   # RDP uses port 3389

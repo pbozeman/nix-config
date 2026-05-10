@@ -13,7 +13,10 @@ let
     exec = "${vivado-launcher}/bin/vivado-wrapped";
     icon = ../media/vivado.png;
     comment = "Xilinx Vivado Design Suite";
-    categories = [ "Development" "Electronics" ];
+    categories = [
+      "Development"
+      "Electronics"
+    ];
     terminal = false;
   };
 in

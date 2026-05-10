@@ -1,4 +1,5 @@
-{ pkgs, user, ... }: {
+{ pkgs, user, ... }:
+{
   system.primaryUser = user;
   imports = [
     ./pam.nix

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./eternal-terminal.nix
     ./fwupd.nix

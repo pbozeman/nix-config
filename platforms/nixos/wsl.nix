@@ -1,11 +1,13 @@
-{ config
-, pkgs
-, secrets
-, hostname
-, user
-, fullname
-, ...
-}: {
+{
+  config,
+  pkgs,
+  secrets,
+  hostname,
+  user,
+  fullname,
+  ...
+}:
+{
   wsl = {
     enable = true;
     wslConf.automount.root = "/mnt";

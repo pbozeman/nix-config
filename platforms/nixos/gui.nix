@@ -11,23 +11,26 @@
   services.desktopManager.gnome.enable = true;
 
   # Exclude unwanted GNOME packages
-  environment.gnome.excludePackages = (with pkgs; [
-    atomix
-    cheese
-    epiphany
-    geary
-    gedit
-    gnome-characters
-    gnome-contacts
-    gnome-initial-setup
-    gnome-music
-    gnome-photos
-    gnome-tour
-    hitori
-    iagno
-    tali
-    yelp
-  ]);
+  environment.gnome.excludePackages = (
+    with pkgs;
+    [
+      atomix
+      cheese
+      epiphany
+      geary
+      gedit
+      gnome-characters
+      gnome-contacts
+      gnome-initial-setup
+      gnome-music
+      gnome-photos
+      gnome-tour
+      hitori
+      iagno
+      tali
+      yelp
+    ]
+  );
 
   # === Input Configuration ===
   # Keyboard layout and behavior

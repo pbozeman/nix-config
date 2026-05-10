@@ -1,9 +1,11 @@
-{ pkgs
-, home
-, lib
-, user
-, ...
-}: {
+{
+  pkgs,
+  home,
+  lib,
+  user,
+  ...
+}:
+{
   home.packages = [ pkgs.dockutil ];
 
   home.activation.dockutil = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
