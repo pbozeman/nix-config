@@ -68,6 +68,7 @@
     gdc = "git diff --cached";
     gf = "git absorb";
     gfr = "git absorb --and-rebase";
+    gsh = "git rev-parse --short";
     gl = "git log";
     gr = "git rebase -i --autosquash";
     grs = "git restore --staged";
