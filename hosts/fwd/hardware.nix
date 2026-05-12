@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -23,6 +24,8 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
+  # Pinned: 7.x crashes; 6.18 was last known good. Revisit.
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
