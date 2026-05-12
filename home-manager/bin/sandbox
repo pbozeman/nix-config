@@ -16,7 +16,7 @@ done < <(env -0)
 
 # Home-manager paths to bind (read-only)
 hm_args=()
-for hm_path in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER"; do
+for hm_path in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER" "$HOME/bin"; do
   if [[ -e "$hm_path" ]]; then
     hm_args+=("--ro-bind" "$hm_path" "$hm_path")
   fi
