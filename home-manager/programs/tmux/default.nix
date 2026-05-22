@@ -30,9 +30,17 @@ in
       set -sg escape-time 0
       set-option -g focus-events on
 
+      # Mosh 1.4 forwards OSC 52, but only accepts the clipboard target form
+      # (`52;c;`). tmux copy-mode can call `Ms` with an empty %p1 selector, so
+      # fall back to `c` when %p1 is empty and otherwise preserve %p1.
       # https://github.com/mobile-shell/mosh/pull/1054
       set -s set-clipboard on
-      set -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
+      set -as terminal-overrides ",xterm*:Ms=\\E]52;%?%p1%l%{0}%=%tc%e%p1%s%;;%p2%s\\7"
+      set -as terminal-overrides ",ghostty*:Ms=\\E]52;%?%p1%l%{0}%=%tc%e%p1%s%;;%p2%s\\7"
+      set -as terminal-overrides ",alacritty*:Ms=\\E]52;%?%p1%l%{0}%=%tc%e%p1%s%;;%p2%s\\7"
+      set -as terminal-overrides ",wezterm*:Ms=\\E]52;%?%p1%l%{0}%=%tc%e%p1%s%;;%p2%s\\7"
+      set -as terminal-overrides ",tmux*:Ms=\\E]52;%?%p1%l%{0}%=%tc%e%p1%s%;;%p2%s\\7"
+      set -as terminal-overrides ",screen*:Ms=\\E]52;%?%p1%l%{0}%=%tc%e%p1%s%;;%p2%s\\7"
 
       # Under WSL, Windows binaries are not on PATH in this config, so use the
       # explicit clip.exe path when it is available. This makes tmux copy-mode
