@@ -28,6 +28,11 @@ if [[ -d "$HOME/.config/git" ]]; then
   git_config_args+=("--ro-bind" "$HOME/.config/git" "$HOME/.config/git")
 fi
 
+# Tool cache/state paths that need to be writable inside the sandbox.
+cache_args=()
+mkdir -p "$HOME/.cache/bazel"
+cache_args+=("--bind" "$HOME/.cache/bazel" "$HOME/.cache/bazel")
+
 # Git submodule/worktree support - bind the actual git dir if .git is a file
 git_args=()
 if [[ -f "$PROJECT_DIR/.git" ]]; then
@@ -74,6 +79,7 @@ exec bwrap \
   --tmpfs "$HOME" \
   "${hm_args[@]}" \
   "${git_config_args[@]}" \
+  "${cache_args[@]}" \
   --bind "$HOME/.claude" "$HOME/.claude" \
   --bind "$HOME/.claude.json" "$HOME/.claude.json" \
   --bind "$HOME/.codex" "$HOME/.codex" \
