@@ -35,6 +35,7 @@ with pkgs;
   fswatch
   fzf
   killall
+  mosh
   nix-direnv
   openssh
   pandoc

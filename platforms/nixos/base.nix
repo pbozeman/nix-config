@@ -33,6 +33,7 @@
   '';
 
   programs.fish.enable = true;
+  programs.mosh.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
