@@ -33,8 +33,8 @@ let
 
     # Normal colors
     palette = 0=#3B4252
-    palette = 1=#BF616A
-    palette = 2=#A3BE8C
+    palette = 1=#9C4C53
+    palette = 2=#3F6F46
     palette = 3=#EBCB8B
     palette = 4=#81A1C1
     palette = 5=#B48EAD
@@ -42,8 +42,8 @@ let
     palette = 7=#E5E9F0
     # Bright colors
     palette = 8=#4C566A
-    palette = 9=#BF616A
-    palette = 10=#A3BE8C
+    palette = 9=#9C4C53
+    palette = 10=#3F6F46
     palette = 11=#EBCB8B
     palette = 12=#81A1C1
     palette = 13=#B48EAD
@@ -106,8 +106,8 @@ in
       # Normal colors
       palette = [
         "0=#3B4252" # black
-        "1=#BF616A" # red
-        "2=#A3BE8C" # green
+        "1=#9C4C53" # red
+        "2=#3F6F46" # green
         "3=#EBCB8B" # yellow
         "4=#81A1C1" # blue
         "5=#B48EAD" # magenta
@@ -115,8 +115,8 @@ in
         "7=#E5E9F0" # white
         # Bright colors
         "8=#4C566A" # bright black
-        "9=#BF616A" # bright red
-        "10=#A3BE8C" # bright green
+        "9=#9C4C53" # bright red
+        "10=#3F6F46" # bright green
         "11=#EBCB8B" # bright yellow
         "12=#81A1C1" # bright blue
         "13=#B48EAD" # bright magenta
