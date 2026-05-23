@@ -3,6 +3,31 @@ set -e
 
 PROJECT_DIR="$(pwd)"
 
+# Extra mount points: CLI flags and SANDBOX_EXTRA_BINDS env var.
+#   -b/--bind DIR     mount DIR read-write at the same path inside the sandbox
+#   --ro-bind DIR     mount DIR read-only
+#   --                end of sandbox flags; remainder is the command
+# SANDBOX_EXTRA_BINDS is a colon-separated list of rw paths (use $HOME/...,
+# not ~, since callers like direnv do not expand tildes).
+extra_binds=()
+add_bind()    { [[ -e "$1" ]] && extra_binds+=("--bind"    "$1" "$1") || echo "sandbox: skipping missing $1" >&2; }
+add_ro_bind() { [[ -e "$1" ]] && extra_binds+=("--ro-bind" "$1" "$1") || echo "sandbox: skipping missing $1" >&2; }
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -b|--bind)  [[ -n "${2:-}" ]] || { echo "sandbox: $1 requires a path" >&2; exit 2; }; add_bind    "$2"; shift 2 ;;
+    --ro-bind)  [[ -n "${2:-}" ]] || { echo "sandbox: $1 requires a path" >&2; exit 2; }; add_ro_bind "$2"; shift 2 ;;
+    --)         shift; break ;;
+    -*)         echo "sandbox: unknown flag $1" >&2; exit 2 ;;
+    *)          break ;;
+  esac
+done
+
+if [[ -n "${SANDBOX_EXTRA_BINDS:-}" ]]; then
+  IFS=: read -ra _env_binds <<<"$SANDBOX_EXTRA_BINDS"
+  for d in "${_env_binds[@]}"; do [[ -n "$d" ]] && add_bind "$d"; done
+fi
+
 # Build env args from current environment
 env_args=()
 while IFS='=' read -r -d '' name value; do
@@ -85,6 +110,7 @@ exec bwrap \
   --bind "$HOME/.codex" "$HOME/.codex" \
   --bind "$PROJECT_DIR" "$PROJECT_DIR" \
   "${git_args[@]}" \
+  "${extra_binds[@]}" \
   --chdir "$PROJECT_DIR" \
   --die-with-parent \
   "${env_args[@]}" \
