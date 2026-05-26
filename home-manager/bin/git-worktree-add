@@ -51,6 +51,12 @@ if [[ -d "$src_root/.codex" ]]; then
   cp -r "$src_root/.codex" "$dest/"
 fi
 
+for file in .envrc.local user.bazelrc; do
+  if [[ -f "$src_root/$file" ]]; then
+    cp "$src_root/$file" "$dest/$file"
+  fi
+done
+
 cd "$dest"
 direnv allow
 
