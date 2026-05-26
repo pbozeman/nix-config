@@ -26,6 +26,7 @@
       };
       diff.external = "~/bin/ddifft";
       init.defaultBranch = "main";
+      merge.ff = "only";
       pull.rebase = true;
       rebase.autoStash = true;
     };
