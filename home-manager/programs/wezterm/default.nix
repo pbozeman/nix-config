@@ -82,7 +82,7 @@
         },
         colors = {
           foreground = "#D8DEE9",
-          background = "#000000",
+          background = "#111318",
           cursor_bg = "#D8DEE9",
           cursor_border = "#D8DEE9",
           cursor_fg = "#2E3440",

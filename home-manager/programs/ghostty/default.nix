@@ -25,7 +25,7 @@ let
 
     # Colors (matching Alacritty config)
     foreground = D8DEE9
-    background = 000000
+    background = 111318
     cursor-color = D8DEE9
     cursor-text = 2E3440
     selection-foreground = D8DEE9
@@ -97,7 +97,7 @@ in
 
       # Colors (matching Alacritty config)
       foreground = "#D8DEE9";
-      background = "#000000";
+      background = "#111318";
       cursor-color = "#D8DEE9";
       cursor-text = "#2E3440";
       selection-foreground = "#D8DEE9";

@@ -47,7 +47,7 @@
       };
       colors = {
         primary.foreground = "#D8DEE9";
-        primary.background = "#000000";
+        primary.background = "#111318";
         cursor.text = "#2E3440";
         cursor.cursor = "#D8DEE9";
         selection.text = "#D8DEE9";
