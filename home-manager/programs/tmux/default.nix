@@ -100,10 +100,10 @@ in
 
       # dim inactive panes
       # Note: these have to be coordinated with the terminal and tmux style.
-      set -g window-style 'fg=#939cac,bg=#161922'
-      set -g window-active-style 'fg=#dcdfe4,bg=#111318'
-      set -g pane-border-style 'fg=#292e42,bg=#161922'
-      set -g pane-active-border-style 'fg=#434c5e,bg=#111318'
+      set -g window-style 'fg=#939cac,bg=#151821'
+      set -g window-active-style 'fg=#dcdfe4,bg=#141720'
+      set -g pane-border-style 'fg=#292e42,bg=#151821'
+      set -g pane-active-border-style 'fg=#434c5e,bg=#141720'
 
       # override status bar to remove seconds from clock
       #
