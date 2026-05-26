@@ -12,17 +12,19 @@
     };
     global.brewfile = true;
 
-    masApps = {
-      # "1Password" = 1333542190;
-      "Amphetamine" = 937984704;
-      "BetterSnapTool" = 417375580;
-      "BlueSee" = 1336679524;
-      # "Noteplan" = 1505432629;
-      # "Parallels" = 1085114709;
-      "PdfScanner" = 410968114;
-      "Tailscale" = 1475387142;
-      "Xcode" = 497799835;
-    };
+    # FIXME: Re-enable MAS management once `mas list` no longer hangs or triggers
+    # repeated macOS auth prompts during nix-darwin activation.
+    masApps = { };
+    # App Store IDs kept here as a reference for manual installs:
+    # "1Password" = 1333542190;
+    # "Amphetamine" = 937984704;
+    # "BetterSnapTool" = 417375580;
+    # "BlueSee" = 1336679524;
+    # "Noteplan" = 1505432629;
+    # "Parallels" = 1085114709;
+    # "PdfScanner" = 410968114;
+    # "Tailscale" = 1475387142;
+    # "Xcode" = 497799835;
 
     # TODO: move to homemanager version of wezeterm once it installs into the apps dir
     casks = [
