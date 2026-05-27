@@ -54,8 +54,8 @@
         selection.background = "#4C566A";
         normal = {
           black = "#3B4252";
-          red = "#9C4C53";
-          green = "#3F6F46";
+          red = "#BF616A";
+          green = "#A3BE8C";
           yellow = "#EBCB8B";
           blue = "#81A1C1";
           magenta = "#B48EAD";
@@ -64,8 +64,8 @@
         };
         bright = {
           black = "#4C566A";
-          red = "#9C4C53";
-          green = "#3F6F46";
+          red = "#BF616A";
+          green = "#A3BE8C";
           yellow = "#EBCB8B";
           blue = "#81A1C1";
           magenta = "#B48EAD";

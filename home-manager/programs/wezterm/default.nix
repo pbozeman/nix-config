@@ -89,8 +89,8 @@
           selection_bg = "#4C566A",
           selection_fg = "#D8DEE9",
 
-          ansi = {"#3B4252", "#9C4C53", "#3F6F46", "#EBCB8B", "#81A1C1", "#B48EAD", "#88C0D0", "#E5E9F0"},
-          brights = {"#4C566A", "#9C4C53", "#3F6F46", "#EBCB8B", "#81A1C1", "#B48EAD", "#8FBCBB", "#ECEFF4"},
+          ansi = {"#3B4252", "#BF616A", "#A3BE8C", "#EBCB8B", "#81A1C1", "#B48EAD", "#88C0D0", "#E5E9F0"},
+          brights = {"#4C566A", "#BF616A", "#A3BE8C", "#EBCB8B", "#81A1C1", "#B48EAD", "#8FBCBB", "#ECEFF4"},
 
           tab_bar = {
             background = "#2E3440",
