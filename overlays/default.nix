@@ -11,6 +11,9 @@
     (import ./codex.nix {
       inherit inputs nixpkgs;
     })
+    (import ./ccusage.nix {
+      inherit inputs nixpkgs;
+    })
     (import ./kicad.nix {
       inherit inputs nixpkgs;
     })

@@ -53,6 +53,7 @@ with pkgs;
   # agents
   claude-code
   codex
+  ccusage
 
   # Sigrok
   # pulseview
