@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# mosh-clean — kill every mosh-server session except the one backing the
+# terminal you run this from.
+#
+# Why this is fiddly: mosh-server daemonizes (PPID 1) and persists across
+# client reboots, and each connection runs `tmux attach`. So after a reboot the
+# old session's inner `tmux attach` process stays connected and tmux still sees
+# it as an *attached* client. "Attached" therefore can't tell a live session
+# from a stale one. The only reliable "this one is mine" signal is the tmux
+# client you're currently typing in:
+#   mosh-server -> login shell -> tmux client (== this terminal)
+# Outside tmux, the current shell ($$) sits directly under mosh-server.
+
+set -euo pipefail
+
+signal=TERM
+dry=0
+case "${1:-}" in
+  -n|--dry-run) dry=1 ;;
+  -9|--kill)    signal=KILL ;;
+  -h|--help)    echo "usage: mosh-clean [-n|--dry-run] [-9|--kill]"; exit 0 ;;
+  "")           ;;
+  *)            echo "mosh-clean: unknown arg: $1" >&2; exit 2 ;;
+esac
+
+# Anchor for "my" session: the tmux client running this command, or $$ when
+# not in tmux.
+anchor=""
+if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+  anchor=$(tmux display-message -p '#{client_pid}' 2>/dev/null | head -n1 | tr -d ' ')
+fi
+[ -n "$anchor" ] || anchor=$$
+
+# Walk up the PPID chain from the anchor to find my mosh-server.
+mine=""
+pid="$anchor"
+while [ -n "$pid" ] && [ "$pid" -gt 1 ] 2>/dev/null; do
+  comm=$(ps -o comm= -p "$pid" 2>/dev/null | tr -d ' ')
+  if [ "$comm" = "mosh-server" ]; then
+    mine="$pid"
+    break
+  fi
+  pid=$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')
+  [ -n "$pid" ] || break
+done
+
+mapfile -t all_mosh < <(pgrep -x -u "$(id -u)" mosh-server 2>/dev/null || true)
+[ "${#all_mosh[@]}" -eq 0 ] && { echo "no mosh-server processes found"; exit 0; }
+
+# Never kill blindly: if we can't pin down our own session, bail out.
+if [ -z "$mine" ]; then
+  echo "mosh-clean: could not identify the mosh-server for the current session; refusing to kill anything" >&2
+  echo "(run this from inside your live mosh session)" >&2
+  exit 1
+fi
+
+kill_list=()
+for pid in "${all_mosh[@]}"; do
+  [ "$pid" = "$mine" ] || kill_list+=("$pid")
+done
+
+echo "keeping (current): $mine"
+if [ "${#kill_list[@]}" -eq 0 ]; then
+  echo "nothing to clean up"
+  exit 0
+fi
+
+for pid in "${kill_list[@]}"; do
+  if [ "$dry" -eq 1 ]; then
+    echo "would kill mosh-server $pid"
+  else
+    echo "killing mosh-server $pid (SIG$signal)"
+    kill -"$signal" "$pid" 2>/dev/null || true
+  fi
+done
