@@ -12,6 +12,7 @@
   imports = [
     ./programs/alacritty
     ./programs/autoraise
+    ./programs/bazel
     ./programs/codex
     ./programs/fish
     ./programs/ghostty
