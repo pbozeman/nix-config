@@ -19,8 +19,11 @@
 
     nixcats = {
       url = "github:pbozeman/nixcats";
-      # don't follow: nixcats' own nixos-25.11 pin still has nodePackages,
-      # which was removed in 26.05 (the LSPs in nixcats reference it).
+      # TODO: refactor correctly — drop the `nodePackages.` prefixes in the
+      # pbozeman/nixcats repo (those LSPs are now top-level pkgs in 26.05),
+      # then restore the follows below so nixcats shares the system nixpkgs.
+      # For now we don't follow: nixcats' own nixos-25.11 pin still has
+      # nodePackages, which 26.05 removed (the LSPs in nixcats reference it).
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 

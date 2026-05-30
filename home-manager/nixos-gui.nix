@@ -65,7 +65,10 @@
       name = "Nordic";
       package = pkgs.nordic;
     };
-    # keep legacy default: apply the same theme to GTK4 apps
+    # TODO: refactor correctly — this just pins the pre-26.05 legacy default
+    # (apply the same theme to GTK4 apps). When home.stateVersion is bumped to
+    # >= 26.05, decide whether to keep this or adopt the new default (drop the
+    # line, i.e. gtk4.theme = null) and remove this workaround.
     gtk4.theme = config.gtk.theme;
     cursorTheme = {
       name = "Adwaita";
