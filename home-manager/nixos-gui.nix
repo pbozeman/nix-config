@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   home,
   lib,
@@ -44,7 +45,7 @@
     gnomeExtensions.hide-top-bar
     xsel
 
-    xorg.xhost
+    xhost
 
     # TODO: this is sort of a hack in that we want verible support on all but darwin
     # since there isn't an arm version of the verible build. Dropping this in the gui
@@ -64,6 +65,8 @@
       name = "Nordic";
       package = pkgs.nordic;
     };
+    # keep legacy default: apply the same theme to GTK4 apps
+    gtk4.theme = config.gtk.theme;
     cursorTheme = {
       name = "Adwaita";
       # package = pkgs.adwaita-cursor-theme;
