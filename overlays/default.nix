@@ -17,6 +17,9 @@
     (import ./kicad.nix {
       inherit inputs nixpkgs;
     })
+    (import ./libfyaml.nix {
+      inherit inputs nixpkgs;
+    })
     (import ./tmux.nix {
       inherit inputs nixpkgs;
     })
