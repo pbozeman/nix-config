@@ -39,9 +39,11 @@ while IFS='=' read -r -d '' name value; do
   env_args+=("--setenv" "$name" "$value")
 done < <(env -0)
 
-# Home-manager paths to bind (read-only)
+# Home-manager paths to bind (read-only).
+# ~/.bazelrc is the home rc that sets --disk_cache; without it bazel inside
+# the sandbox never reads the (bound) disk cache, so builds don't share it.
 hm_args=()
-for hm_path in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER" "$HOME/bin"; do
+for hm_path in "$HOME/.nix-profile" "/etc/profiles/per-user/$USER" "$HOME/bin" "$HOME/.bazelrc"; do
   if [[ -e "$hm_path" ]]; then
     hm_args+=("--ro-bind" "$hm_path" "$hm_path")
   fi
@@ -55,8 +57,10 @@ fi
 
 # Tool cache/state paths that need to be writable inside the sandbox.
 cache_args=()
-mkdir -p "$HOME/.cache/bazel"
-cache_args+=("--bind" "$HOME/.cache/bazel" "$HOME/.cache/bazel")
+for cache_dir in "$HOME/.cache/bazel" "$HOME/.cache/bazel-disk" "$HOME/.local/share/direnv"; do
+  mkdir -p "$cache_dir"
+  cache_args+=("--bind" "$cache_dir" "$cache_dir")
+done
 
 # Git submodule/worktree support - bind the actual git dir if .git is a file
 git_args=()
