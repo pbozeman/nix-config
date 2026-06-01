@@ -3,15 +3,35 @@
 set -e
 
 if [ -z "$1" ]; then
-  echo "usage: tma <session-name>"
+  echo "usage: tma <session-name> [grouped-session-name]"
   exit 1
 fi
 
 session="$1"
+group="$2"
 
-# If session exists, just attach
-if tmux has-session -t "$session" 2>/dev/null; then
-  exec tmux attach -t "$session"
+# Two-arg form: tma <name> <grouped-name>
+# Create/attach a session grouped with <name>. A grouped session shares <name>'s
+# window list but keeps its own current-window pointer, so two clients can view
+# different windows of the same session. The base <name> must already exist.
+if [ -n "$group" ]; then
+  if ! tmux has-session -t "=$session" 2>/dev/null; then
+    echo "$session doesn't exist"
+    exit 1
+  fi
+
+  # If the grouped session already exists, just attach
+  if tmux has-session -t "=$group" 2>/dev/null; then
+    exec tmux attach -t "=$group"
+  fi
+
+  # Otherwise create it grouped with the base session
+  exec tmux new-session -t "$session" -s "$group"
+fi
+
+# One-arg form: if the session exists, just attach
+if tmux has-session -t "=$session" 2>/dev/null; then
+  exec tmux attach -t "=$session"
 fi
 
 # Create new session - use systemd-run on Linux
