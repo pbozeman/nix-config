@@ -17,15 +17,15 @@
       alias = {
         co = "checkout";
         br = "!git for-each-ref refs/heads --sort=committerdate --format='%(if)%(HEAD)%(then)*%(else) %(end)|%(refname:short)|%(committerdate:format:%Y-%m-%d %H:%M:%S)' | column -t -s '|'";
-        showd = "show --ext-diff";
+        showd = "!git -c diff.external=~/bin/ddifft show --ext-diff";
       };
       color.ui = true;
       core = {
         editor = "nvim";
         autocrlf = "input";
       };
-      diff.external = "~/bin/ddifft";
       init.defaultBranch = "main";
+      log.follow = true;
       merge.ff = "only";
       pull.rebase = true;
       rebase.autoStash = true;

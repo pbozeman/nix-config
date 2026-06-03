@@ -64,8 +64,8 @@
     gca = "git commit --amend";
     gcm = "git commit -m";
     gco = "git checkout";
-    gd = "git diff";
-    gdc = "git diff --cached";
+    gd = "git -c diff.external=$HOME/bin/ddifft diff";
+    gdc = "git -c diff.external=$HOME/bin/ddifft diff --cached";
     gf = "git absorb";
     gfr = "git absorb --and-rebase";
     gl = "git log";
