@@ -13,6 +13,7 @@
     ./programs/alacritty
     ./programs/autoraise
     ./programs/bazel
+    ./programs/btop
     ./programs/codex
     ./programs/fish
     ./programs/ghostty

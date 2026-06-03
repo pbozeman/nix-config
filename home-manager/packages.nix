@@ -26,7 +26,6 @@ with pkgs;
   autojump
   bash-completion
   bat
-  btop
   coreutils
   difftastic
   direnv
