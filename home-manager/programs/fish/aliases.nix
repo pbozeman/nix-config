@@ -33,6 +33,9 @@
     calc = "kalker";
     df = "duf";
 
+    # kanban-md
+    k = "kanban-md";
+
     # clang format
     cf = "git -C (git rev-parse --show-toplevel) status --porcelain | awk '{print $2}' | grep -E '\\.(h|cpp)$' | sed \"s|^|(git rev-parse --show-toplevel)/|\" | xargs -r clang-format -i";
 
@@ -92,7 +95,7 @@
     tfd = "tf plan";
 
     # k8s
-    k = "kubecolor";
+    kc = "kubecolor";
     hfa = "hf apply";
     hfd = "hf diff";
     hfaa = "hf apply -f helmfile.d/30-home-automation.yaml";

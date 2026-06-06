@@ -53,6 +53,7 @@ with pkgs;
   claude-code
   codex
   ccusage
+  (callPackage ./kanban-md.nix { })
 
   # Sigrok
   # pulseview
