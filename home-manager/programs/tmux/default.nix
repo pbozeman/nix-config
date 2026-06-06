@@ -67,7 +67,7 @@ in
       # use better mnemonics for horizontal/vertical splits
       bind - split-window -v -c "#{pane_current_path}"
       bind _ split-window -v -c "#{pane_current_path}"
-      bind | split-window -h -c "#{pane_current_path}"
+      bind | split-window -h -b -c "#{pane_current_path}"
 
       # navigate panes with vi like movement (raw, dumb version)
       bind h select-pane -L
