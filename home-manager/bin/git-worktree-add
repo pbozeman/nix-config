@@ -68,6 +68,3 @@ done
 
 cd "$dest"
 direnv allow
-
-tmux new-window -c "$dest"
-dev-tmux "$name"
