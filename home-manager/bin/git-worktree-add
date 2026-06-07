@@ -57,9 +57,11 @@ for file in .envrc.local user.bazelrc; do
   fi
 done
 
-# Copy gitignored paths that git worktree won't carry (e.g. private formal IP).
-# Space-separated list of repo-relative paths, supplied per-repo via .envrc.
-for path in ${WORKTREE_EXTRA_COPY:-}; do
+# Copy gitignored paths that git worktree won't carry
+# Semicolon-separated list of repo-relative paths, supplied per-repo via .envrc.
+IFS=';' read -r -a extra_copy_paths <<<"${WORKTREE_EXTRA_COPY:-}"
+for path in "${extra_copy_paths[@]}"; do
+  [[ -n "$path" ]] || continue
   if [[ -e "$src_root/$path" ]]; then
     mkdir -p "$dest/$(dirname "$path")"
     cp -r "$src_root/$path" "$dest/$path"
