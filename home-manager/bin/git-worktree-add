@@ -11,40 +11,106 @@ name="$1"
 dest="$HOME/src/$name"
 src_root=$(git rev-parse --show-toplevel)
 
-git worktree add "$dest"
-git push -u dev "$name" --no-verify
+source_submodules() {
+  git -C "$src_root" submodule foreach --recursive --quiet \
+    'printf "%s\t%s\t%s\t%s\n" "$displaypath" "$sm_path" "$toplevel" "$name"' 2>/dev/null || true
+}
 
-# Clone submodules (may fail for commits that only exist on dev)
-git -C "$dest" submodule update --init --recursive || true
+copy_submodule_remotes() {
+  local display_path="$1"
+  local src_sub="$2"
+  local dest_sub="$3"
+  local remote
+  local url
 
-# For pbozeman submodules, copy all remotes from source and fetch
-# so commits only on dev become available
-git submodule foreach --quiet 'echo "$sm_path"' 2>/dev/null | while IFS= read -r sm_path; do
-  [[ -z "$sm_path" ]] && continue
-  src_sub="$src_root/$sm_path"
-  dest_sub="$dest/$sm_path"
-
-  [[ -d "$dest_sub" ]] || continue
-  git -C "$src_sub" remote -v 2>/dev/null | grep -q "pbozeman" || continue
-
-  # Fetch from source submodule's local repo to get unpushed commits
-  git -C "$dest_sub" fetch "$src_sub" 2>/dev/null || true
-
-  # Add all remotes from source submodule
   for remote in $(git -C "$src_sub" remote 2>/dev/null); do
     url=$(git -C "$src_sub" remote get-url "$remote" 2>/dev/null || true)
     [[ -n "$url" ]] || continue
-    git -C "$dest_sub" remote add "$remote" "$url" 2>/dev/null || true
-  done
 
-  # Fetch all remotes in dest submodule
-  for remote in $(git -C "$dest_sub" remote 2>/dev/null); do
-    git -C "$dest_sub" fetch "$remote" 2>/dev/null || true
+    if git -C "$dest_sub" remote get-url "$remote" >/dev/null 2>&1; then
+      git -C "$dest_sub" remote set-url "$remote" "$url"
+    else
+      git -C "$dest_sub" remote add "$remote" "$url"
+    fi
   done
-done
+}
 
-# Retry submodule update now that dev commits are fetched
-git -C "$dest" submodule update --recursive
+fetch_pbozeman_submodules() {
+  while IFS=$'\t' read -r display_path _sm_path _src_parent _submodule_name; do
+    [[ -z "$display_path" ]] && continue
+    src_sub="$src_root/$display_path"
+    dest_sub="$dest/$display_path"
+
+    if [[ ! -d "$dest_sub" ]]; then
+      continue
+    fi
+    if ! git -C "$src_sub" remote -v 2>/dev/null | grep -q "pbozeman"; then
+      continue
+    fi
+
+    # Fetch from source submodule's local repo to get unpushed commits.
+    git -C "$dest_sub" fetch "$src_sub" 2>/dev/null || true
+
+    for remote in $(git -C "$dest_sub" remote 2>/dev/null); do
+      git -C "$dest_sub" fetch "$remote" 2>/dev/null || true
+    done
+  done <<<"$source_submodule_list"
+}
+
+git worktree add "$dest"
+git push -u dev "$name" --no-verify
+
+source_submodule_list=$(source_submodules)
+
+# Clone matching source submodules one at a time so --reference points at the
+# same submodule repo, not the superproject.
+while IFS=$'\t' read -r display_path sm_path src_parent submodule_name; do
+  [[ -z "$display_path" || -z "$sm_path" || -z "$src_parent" || -z "$submodule_name" ]] && continue
+  src_sub="$src_root/$display_path"
+  if ! git -C "$src_sub" rev-parse --git-dir >/dev/null 2>&1; then
+    continue
+  fi
+
+  if [[ "$src_parent" == "$src_root" ]]; then
+    dest_parent="$dest"
+  else
+    src_parent_rel="${src_parent#"$src_root"/}"
+    if [[ "$src_parent_rel" == "$src_parent" ]]; then
+      continue
+    fi
+    dest_parent="$dest/$src_parent_rel"
+  fi
+
+  if [[ ! -d "$dest_parent" ]]; then
+    continue
+  fi
+
+  git -c protocol.file.allow=always -c "submodule.$submodule_name.url=$src_sub" \
+    -C "$dest_parent" submodule update --init --reference "$src_sub" -- "$sm_path" || true
+done <<<"$source_submodule_list"
+
+# Clone any remaining submodules (may fail for commits that only exist on dev).
+git -C "$dest" submodule update --init --recursive || true
+
+# Local reference updates temporarily clone from the source submodule. Restore
+# destination remotes from the source checkout without fetching them.
+while IFS=$'\t' read -r display_path _sm_path _src_parent _submodule_name; do
+  [[ -z "$display_path" ]] && continue
+  src_sub="$src_root/$display_path"
+  dest_sub="$dest/$display_path"
+
+  if [[ ! -d "$dest_sub" ]]; then
+    continue
+  fi
+  copy_submodule_remotes "$display_path" "$src_sub" "$dest_sub"
+done <<<"$source_submodule_list"
+
+# Retry submodule update. If commits are still missing, fetch pbozeman remotes
+# and retry once more.
+if ! git -C "$dest" submodule update --recursive; then
+  fetch_pbozeman_submodules
+  git -C "$dest" submodule update --recursive
+fi
 
 # Copy .codex settings if they exist in current repo
 if [[ -d "$src_root/.codex" ]]; then
