@@ -15,5 +15,5 @@ git-worktree-add "$@"
 
 # Dev env: open a tmux window in the worktree, then lay out nvim / agent / shell.
 cd "$dest"
-tmux new-window -c "$dest"
+tmux new-window -a -c "$dest"
 dev-tmux "$name"
