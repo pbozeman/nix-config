@@ -1,5 +1,7 @@
 gui:
   # Use the mocha catppuccin theme
+  authorColors:
+    '*': '#cdd6f4'
   theme:
     activeBorderColor:
       - '#89b4fa'
@@ -22,3 +24,5 @@ gui:
       - '#cdd6f4'
     searchingActiveBorderColor:
       - '#f9e2af'
+os:
+  copyToClipboardCmd: 'printf "\033]52;c;$(printf %s {{text}} | base64 -w 0)\a" > /dev/tty'
